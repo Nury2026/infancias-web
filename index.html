@@ -231,10 +231,41 @@
         font-size: .95rem;
         text-align: center;
         display: -webkit-box;
-        -webkit-line-clamp: 20;      /* limita a 5 líneas para que todo quede parejo */
+        -webkit-line-clamp: 5;      /* limita a 5 líneas para que todo quede parejo */
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
+
+      /* === BIO EXPANDIBLE (Leer más) === */
+      .bio-short{ margin:0; }
+
+      .moreBtn{
+        margin-top: .55rem;
+        width: 100%;
+        border: 1px solid rgba(109,40,217,.22);
+        background: rgba(109,40,217,.08);
+        color: var(--accent);
+        font-weight: 750;
+        padding: .55rem .7rem;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .moreBtn:hover{
+        transform: translateY(-1px);
+        background: rgba(109,40,217,.12);
+        border-color: rgba(109,40,217,.30);
+      }
+
+      .bio-long{
+        margin-top: .6rem;
+        border-top: 1px dashed rgba(31,41,55,.18);
+        padding-top: .6rem;
+        color: var(--muted);
+        font-size: .95rem;
+        text-align: left;
+      }
+      .bio-long p{ margin: 0; }
+
 
       /* Escenarios */
       .tabs{
@@ -407,6 +438,196 @@
         .panel{ opacity:1 !important; transform:none !important; }
       }
 
+      /* ===== MODAL ELEGANTE (Nosotros) ===== */
+      .modalBackdrop{
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        padding: 1rem;
+        background: rgba(17,24,39,.45);
+        backdrop-filter: blur(8px);
+        z-index: 2000;
+      }
+
+      .modalBackdrop.open{
+        display: grid;
+      }
+
+      .modalCard{
+        width: min(920px, 100%);
+        background: rgba(255,255,255,.86);
+        border: 1px solid rgba(31,41,55,.12);
+        border-radius: 22px;
+        box-shadow: 0 28px 70px rgba(17,24,39,.25);
+        overflow: hidden;
+        transform: translateY(22px);
+        opacity: 0;
+        animation: modalIn .22s ease forwards;
+        position: relative;
+      }
+
+      @keyframes modalIn{
+          from { transform: translateY(22px); opacity: 0; }
+          to   { transform: translateY(0); opacity: 1; }
+      }
+
+      .modalClose{
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        border: 1px solid rgba(31,41,55,.12);
+        background: rgba(255,255,255,.9);
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .modalClose:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(17,24,39,.10);
+      }
+
+      .modalHeader{
+        padding: 1.1rem 1.2rem .2rem;
+        border-bottom: 1px solid rgba(31,41,55,.10);
+      }
+
+      .modalHeader h3{
+        margin: 0;
+        font-size: 1.35rem;
+        letter-spacing: -.2px;
+      }
+
+      .modalRole{
+        margin: .25rem 0 .7rem;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      .modalContent{
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 1rem;
+        padding: 1.1rem 1.2rem 1.3rem;
+      }
+
+      .modalPhoto{
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(31,41,55,.10);
+        background: linear-gradient(135deg, rgba(109,40,217,.12), rgba(198,161,91,.10));
+        aspect-ratio: 1/1;
+      }
+
+      .modalPhoto img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .modalText{
+        color: var(--text);
+      }
+
+      .modalText p{
+        margin: 0;
+        color: rgba(31,41,55,.78);
+        line-height: 1.65;
+      }
+
+      /* Botón “Leer más” en tarjetas */
+      .moreBtn{
+        margin-top: .55rem;
+        width: 100%;
+        border: 1px solid rgba(109,40,217,.22);
+        background: rgba(109,40,217,.08);
+        color: var(--accent);
+        font-weight: 750;
+        padding: .55rem .7rem;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .moreBtn:hover{
+        transform: translateY(-1px);
+        background: rgba(109,40,217,.12);
+        border-color: rgba(109,40,217,.30);
+        box-shadow: 0 10px 20px rgba(17,24,39,.08);
+      }
+
+      /* Responsive modal */
+      @media (max-width: 820px){
+        .modalContent{ grid-template-columns: 1fr; }
+        .modalPhoto{ max-width: 320px; }
+      }
+
+      /* Evita que el header sticky tape el contenido al ir a anclas */
+      section{ scroll-margin-top: 90px; }
+
+      /* ===== Menú hamburguesa (mobile) ===== */
+      .hamburger{
+        display: none;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.70);
+        border-radius: 12px;
+        padding: .45rem .7rem;
+        font-size: 1.1rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .hamburger:hover{
+        box-shadow: 0 10px 20px rgba(17,24,39,.10);
+        transform: translateY(-1px);
+      }
+
+      /* Mobile menu hidden by default */
+      @media (max-width: 820px){
+        .hamburger{ display: inline-flex; align-items:center; justify-content:center; }
+
+        .menu{
+          display: none;
+          position: absolute;
+          right: 1rem;
+          top: 64px;
+          width: min(260px, calc(100vw - 2rem));
+          flex-direction: column;
+          gap: .25rem;
+          padding: .6rem;
+          background: rgba(247,243,238,.96);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: 0 18px 40px rgba(17,24,39,.14);
+        }
+
+        .menu.open{ display: flex; }
+
+        .menu a{
+          display: block;
+          width: 100%;
+          padding: .65rem .75rem;
+          border-radius: 12px;
+          background: rgba(255,255,255,.70);
+          border: 1px solid rgba(31,41,55,.10);
+        }
+      }
+
+      /* Hero más cómodo en móviles */
+      @media (max-width: 820px){
+        .hero{
+          padding-top: 1.4rem;
+          gap: .9rem;
+        }
+        .heroCard{ padding: .9rem; }
+        .kpiItem{ padding: .6rem; }
+        .nav{ position: relative; } /* para que el menú desplegable se ubique bien */
+      }
+
     </style>
   </head>
 
@@ -420,7 +641,11 @@
       <span>Construcción Histórica de las Infancias</span>
     </a>
 
-    <div class="menu">
+    <button class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+      ☰
+    </button>
+
+    <div class="menu" id="mobileMenu">
       <a href="#nosotros">Nosotros</a>
       <a href="#escenarios">Escenarios</a>
       <a href="#contacto">Contacto</a>
@@ -504,8 +729,20 @@
               <img src="img/foto1.jpg" alt="Foto de Janeth Andrea Montalvo">
             </span>
           </div>
-          <h3>Janeth Andrea Montalvo</h3>
-          <p>Breve descripción (2–3 líneas). ¿Qué te interesa de las infancias? ¿Qué aportas al proyecto?</p>
+          <h3>Jineth Andrea Montalvo Mesa</h3>
+          <p class="bio-short">
+            Estudiante de Licenciatura en Educación Infantil (UNAD). Asumo el rol de evaluadora, observando el proceso y aportando recomendaciones para
+            fortalecer el trabajo colaborativo.
+          </p>
+          <button
+            class="moreBtn"
+            type="button"
+            data-name="Jineth Andrea Montalvo Mesa"
+            data-role="Rol: Evaluadora"
+            data-img="img/foto1.jpg"
+            data-full="Actualmente estudiante de Licenciatura en Educación Infantil de la UNAD. En esta actividad cumplo el rol de evaluadora: observo el desarrollo del trabajo y, cuando es necesario, propongo recomendaciones para apoyar el proceso colaborativo.">
+            Leer más
+          </button>
         </article>
 
         <article class="member">
@@ -515,7 +752,15 @@
             </span>
           </div>
           <h3>Nury Constanza Cobos Torres</h3>
-          <p>Tengo 42 años, soy madre comunitaria del municipio Salento y estudio LICENCIATURA EN EDUCACIÓN INFANTIL de la UNAD centro UDR la Tebaida, me considero una persona respetuosa, honesta y trabajadora, además lo más bonito de mi es que soy muy perseverante, alegre y sencilla.</p>
+          <p>Madre comunitaria en Salento y estudiante de Licenciatura en Educación Infantil (UNAD UDR La Tebaida). Soy perseverante y alegre. Como 
+            relatora, organizo y comunico para que el equipo avance con claridad.</p>
+            <button class="moreBtn" type="button"
+              data-name="Nury Constanza Cobos Torres"
+              data-role="Rol: Relatora"
+              data-img="img/foto2.jpg"
+              data-full="Soy madre comunitaria del municipio Salento y estudio Licenciatura en Educación Infantil en la UNAD UDR La Tebaida. Me considero respetuosa, honesta y trabajadora; lo más bonito de mí es que soy perseverante, alegre y sencilla. Como relatora, apoyo al equipo comunicando y organizando para que el grupo no se disperse y el trabajo avance con claridad.">
+              Leer más
+            </button>
         </article>
 
         <article class="member">
@@ -525,7 +770,15 @@
             </span>
           </div>
           <h3>Luisa Fernanda Londoño Marulanda</h3>
-          <p>Breve descripción (2–3 líneas). Interés académico o experiencia.</p>
+          <p>Vivo en La Tebaida y soy estudiante UNAD. Me dedico al crochet y amigurumis, lo que potencia mi creatividad. Como veedora de autenticidad, 
+            cuido la originalidad y el cumplimiento de normas académicas.</p>
+          <button class="moreBtn" type="button"
+            data-name="Luiza Fernanda Londoño Marulanda"
+            data-role="Rol: Veedora de autenticidad"
+            data-img="img/foto3.jpg"
+            data-full="Tengo 21 años, vivo en La Tebaida y hago tejidos en crochet, especialmente amigurumis, porque me permite ser creativa. Actualmente estudio en la UNAD (UDR La Tebaida). En el desarrollo de la actividad asumí el rol de veedora de autenticidad: estuve pendiente de que los aportes fueran originales y que, si se utilizaba información de alguna fuente, estuviera bien citada, buscando responsabilidad y cumplimiento de las normas académicas.">
+            Leer más
+          </button>
         </article>
 
         <article class="member">
@@ -534,8 +787,16 @@
                 <img src="img/foto4.jpg" alt="Foto de Diana Milena Tabares Arán">
             </span>
           </div>
-          <h3>Diana Milena Tabares Arán</h3>
-          <p>Breve descripción (2–3 líneas). Aporte al diseño o investigación.</p>
+          <h3>Diana Milena Tabares Arango</h3>
+          <p>Estudiante de Licenciatura en Educación Infantil (UNAD UDR La Tebaida). En el rol de utilera, organizo y dispongo recursos e información
+            para facilitar el trabajo en equipo y el logro de objetivos.</p>
+          <button class="moreBtn" type="button"
+            data-name="Diana Milena Tabares Arango"
+            data-role="Rol: Utilera"
+            data-img="img/foto4.jpg"
+            data-full="Tengo 35 años y soy estudiante de Licenciatura en Educación Infantil en la UNAD (UDR La Tebaida). En el trabajo asumí el rol de utilera: apoyé la organización y disposición de los recursos necesarios para construir la actividad, facilitando el acceso a materiales y aportes del equipo. Procuré mantener el orden y la disponibilidad de la información para avanzar en el trabajo colaborativo y lograr los objetivos propuestos.">
+            Leer más
+          </button>
         </article>
 
         <article class="member">
@@ -543,7 +804,15 @@
             <img src="img/foto5.jpg" alt="Foto de José de Jesús Franco Duque">
           </div>
           <h3>José de Jesús Franco Duque</h3>
-          <p>Breve descripción (2–3 líneas). ¿Qué aprendiste en el escenario?</p>
+          <p>Soy de Santa Rosa de Cabal, tengo 24 años y dos hijos. La carrera me ha ayudado a comprender el desarrollo infantil y a acompañar mejor a 
+            mis hijos. Como dinamizador, coordino tareas y aseguro el avance del grupo.</p>
+          <button class="moreBtn" type="button"
+            data-name="José de Jesús Franco Duque"
+            data-role="Rol: Dinamizador"
+            data-img="img/foto5.jpg"
+            data-full="Tengo 24 años, soy de Santa Rosa de Cabal (Risaralda) y tengo dos hijos. Estoy muy feliz de pertenecer a la Licenciatura en Educación Infantil porque me ha ayudado a comprender el desarrollo de cada niño, cómo vivieron su infancia y su transformación a lo largo de la historia; también me ha permitido entender mejor el crecimiento de mis hijos. Mi rol como dinamizador es apoyar la estructura del trabajo, validar que cada persona cumpla su labor y coordinar tareas para lograr un proceso eficaz y exitoso.">
+            Leer más
+          </button>
         </article>
       </div>
     </div>
@@ -616,14 +885,14 @@
             <!-- <p class="hint" style="margin:0;">Si no se ve, abre el enlace directamente.</p> -->
             <!-- OPCIÓN B: link directo por si no tienes embed -->
             <p style="margin:.85rem 0 0;color:var(--muted);">
-              Si no se ve el video: <a href="https://youtu.be/4B6tEK49WhI" target="_blank" rel="noopener">Haz clic aquí.</a>
+              Si no se ve el video: <a href="https://youtu.be/7zRcJd8TPXY" target="_blank" rel="noopener">Haz clic aquí.</a>
             </p>
           </div>
 
           <!-- OPCIÓN A: incrustar video (YouTube / Drive / Vimeo) -->
           <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,.55);">
             <iframe
-              src="https://www.youtube.com/embed/4B6tEK49WhI"
+              src="https://www.youtube.com/embed/7zRcJd8TPXY"
               title="Video: El lugar de las infancias"
               loading="lazy"
               style="position:absolute;inset:0;width:100%;height:100%;border:0;"
@@ -684,7 +953,7 @@
 
     <div class="card">
       <p style="margin:0;">
-        <b>Correo del grupo:</b> <span style="color:var(--muted);">tu-correo@ejemplo.com</span><br />
+        <b>Correo de contacto:</b> <span style="color:var(--muted);"><a href="mailto:nury@gmail.com">nury@gmail.com</a></span><br />
         <b>Curso:</b> Infancias: Historias y Perspectivas
       </p>
     </div>
@@ -695,6 +964,27 @@
 <footer>
   <small>© <span id="year"></span> — Construcción histórica de las infancias · Proyecto universitario</small>
 </footer>
+
+<!-- MODAL (una sola vez) -->
+<div class="modalBackdrop" id="teamModal" aria-hidden="true">
+  <div class="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
+    <button class="modalClose" id="modalCloseBtn" type="button" aria-label="Cerrar ventana">✕</button>
+
+    <div class="modalHeader">
+      <h3 id="modalTitle">Título</h3>
+      <p id="modalRole" class="modalRole">Rol</p>
+    </div>
+
+    <div class="modalContent">
+      <div class="modalPhoto" aria-hidden="true">
+        <img id="modalImg" alt="">
+      </div>
+      <div class="modalText">
+        <p id="modalBody"></p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   // Año automático
@@ -730,26 +1020,141 @@
       //if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length);
     //});
   //});
-  function activateTab(index){
+  function activateTab(index, shouldFocus = false){
     tabs.forEach((t,i)=>{
       const selected = i === index;
       t.setAttribute('aria-selected', selected ? 'true' : 'false');
       panels[i].classList.toggle('active', selected);
     });
-    tabs[index].focus();
+    if (shouldFocus) tabs[index].focus();
   }
 
   // Click + teclado
   tabs.forEach((btn, i)=>{
-    btn.addEventListener('click', ()=> activateTab(i));
+    btn.addEventListener('click', ()=> activateTab(i, true));
     btn.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowRight') { e.preventDefault(); activateTab((i+1)%tabs.length); tabs[(i+1)%tabs.length].focus(); }
-      if(e.key === 'ArrowLeft')  { e.preventDefault(); activateTab((i-1+tabs.length)%tabs.length); tabs[(i-1+tabs.length)%tabs.length].focus(); }
+      if(e.key === 'ArrowRight') { e.preventDefault(); activateTab((i+1)%tabs.length, true); }
+      if(e.key === 'ArrowLeft')  { e.preventDefault(); activateTab((i-1+tabs.length)%tabs.length, true); }
     });
   });
 
   // Asegura que SIEMPRE haya un panel activo al cargar
   activateTab(0);
+
+  // Leer más / Leer menos (Nosotros)
+  document.querySelectorAll('.moreBtn').forEach((btn)=>{
+    btn.addEventListener('click', ()=>{
+      const member = btn.closest('.member');
+      const longBox = member.querySelector('.bio-long');
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      btn.textContent = expanded ? 'Leer más' : 'Leer menos';
+
+      if(expanded){
+        longBox.hidden = true;
+      } else {
+        longBox.hidden = false;
+      }
+    });
+  });
+
+  // ===== MODAL: Nosotros (Leer más) =====
+  const modal = document.getElementById('teamModal');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalRole = document.getElementById('modalRole');
+  const modalBody = document.getElementById('modalBody');
+  const modalImg = document.getElementById('modalImg');
+
+  let lastFocusedBtn = null;
+
+  function openModalFromButton(btn){
+    lastFocusedBtn = btn;
+
+    modalTitle.textContent = btn.dataset.name || 'Integrante';
+    modalRole.textContent = btn.dataset.role || '';
+    modalBody.textContent = btn.dataset.full || '';
+    const imgSrc = btn.dataset.img || '';
+    modalImg.src = imgSrc;
+    modalImg.alt = `Foto de ${btn.dataset.name || 'integrante'}`;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+
+    // Evita scroll del fondo
+    document.body.style.overflow = 'hidden';
+
+    // Mueve foco al botón de cerrar (accesible)
+    modalCloseBtn.focus();
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Devuelve foco al botón que abrió el modal
+    if(lastFocusedBtn) lastFocusedBtn.textContent = 'Leer más';
+    if(lastFocusedBtn) lastFocusedBtn.focus();
+  }
+
+  // Abrir modal
+  document.querySelectorAll('.moreBtn').forEach((btn)=>{
+    btn.addEventListener('click', ()=> openModalFromButton(btn));
+  });
+
+  // Cerrar con X
+  modalCloseBtn.addEventListener('click', closeModal);
+
+  // Cerrar con click fuera de la tarjeta
+  modal.addEventListener('click', (e)=>{
+    if(e.target === modal) closeModal();
+  });
+
+  // Cerrar con ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // Forzar inicio al recargar, incluso si hay #hash (ej. #video-infografia)
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  });
+
+  // Menú hamburguesa (mobile)
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      hamburger.textContent = isOpen ? '✕' : '☰';
+    });
+
+    // Cierra el menú al hacer clic en un enlace
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.textContent = '☰';
+      });
+    });
+
+    // Cierra si haces clic fuera
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.textContent = '☰';
+      }
+    });
+  }
+
 </script>
 </body>
 </html>
