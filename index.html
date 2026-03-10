@@ -1,296 +1,414 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Construcción histórica de las infancias</title>
-  <meta name="description" content="Página web del curso Infancias: Historias y Perspectivas. Escenario 1: El lugar de las infancias." />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Construcción Histórica de las Infancias</title>
+    <meta name="description" content="Página web del curso Infancias: Historias y Perspectivas. Escenario 1: El lugar de las infancias." />
 
-  <style>
-    :root{
-      /* Paleta (igual a tu video) */
-      --bg: #F7F3EE;        /* marfil */
-      --text: #1F2937;      /* grafito */
-      --accent: #6D28D9;    /* morado */
-      --gold: #C6A15B;      /* dorado suave */
-      --card: #FFFFFF;      /* blanco */
-      --muted: rgba(31,41,55,.72);
-      --border: rgba(31,41,55,.10);
-      --shadow: 0 14px 30px rgba(17,24,39,.08);
-      --radius: 18px;
-      --maxw: 1100px;
-    }
+    <style>
+      :root{
+        /* Paleta (igual a tu video) */
+        --bg: #F7F3EE;        /* marfil */
+        --text: #1F2937;      /* grafito */
+        --accent: #6D28D9;    /* morado */
+        --gold: #C6A15B;      /* dorado suave */
+        --card: #FFFFFF;      /* blanco */
+        --muted: rgba(31,41,55,.72);
+        --border: rgba(31,41,55,.10);
+        --shadow: 0 14px 30px rgba(17,24,39,.08);
+        --radius: 18px;
+        --maxw: 1100px;
+      }
 
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 600px at 10% -10%, rgba(109,40,217,.14), transparent 60%),
-                  radial-gradient(900px 500px at 90% 10%, rgba(198,161,91,.14), transparent 55%),
-                  var(--bg);
-      line-height:1.6;
-    }
+      *{ box-sizing:border-box; }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+        color:var(--text);
+        background: radial-gradient(1200px 600px at 10% -10%, rgba(109,40,217,.14), transparent 60%),
+                    radial-gradient(900px 500px at 90% 10%, rgba(198,161,91,.14), transparent 55%),
+                    var(--bg);
+        line-height:1.6;
+      }
 
-    /* Accesibilidad: foco visible */
-    a, button { outline: none; }
-    a:focus-visible, button:focus-visible, .skip:focus-visible{
-      outline: 3px solid rgba(109,40,217,.45);
-      outline-offset: 3px;
-      border-radius: 10px;
-    }
+      /* Accesibilidad: foco visible */
+      a, button { outline: none; }
+      a:focus-visible, button:focus-visible, .skip:focus-visible{
+        outline: 3px solid rgba(109,40,217,.45);
+        outline-offset: 3px;
+        border-radius: 10px;
+      }
 
-    /* Skip link */
-    .skip{
-      position:absolute;
-      left:-999px;
-      top:10px;
-      background:var(--card);
-      padding:.6rem .9rem;
-      border:1px solid var(--border);
-      box-shadow: var(--shadow);
-      z-index:9999;
-    }
-    .skip:focus-visible{ left:10px; }
+      /* Skip link */
+      .skip{
+        position:absolute;
+        left:-999px;
+        top:10px;
+        background:var(--card);
+        padding:.6rem .9rem;
+        border:1px solid var(--border);
+        box-shadow: var(--shadow);
+        z-index:9999;
+      }
+      .skip:focus-visible{ left:10px; }
 
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      background: rgba(247,243,238,.72);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: .85rem 1rem;
-      display:flex;
-      gap: 1rem;
-      align-items:center;
-      justify-content: space-between;
-    }
-    .brand{
-      display:flex;
-      gap:.7rem;
-      align-items:center;
-      text-decoration:none;
-      color:inherit;
-      min-width: 220px;
-    }
-    .logo{
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
-        linear-gradient(135deg, var(--accent), rgba(198,161,91,.85));
-      box-shadow: 0 10px 22px rgba(109,40,217,.18);
-    }
-    .brand span{
-      font-weight: 750;
-      letter-spacing: .2px;
-    }
-    .menu{
-      display:flex;
-      gap:.45rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .menu a{
-      text-decoration:none;
-      color: var(--text);
-      font-weight: 600;
-      font-size: .93rem;
-      padding: .45rem .65rem;
-      border-radius: 12px;
-      border: 1px solid transparent;
-    }
-    .menu a:hover{
-      border-color: var(--border);
-      background: rgba(255,255,255,.55);
-    }
+      header{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        background: rgba(247,243,238,.72);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav{
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: .85rem 1rem;
+        display:flex;
+        gap: 1rem;
+        align-items:center;
+        justify-content: space-between;
+      }
+      .brand{
+        display:flex;
+        gap:.7rem;
+        align-items:center;
+        text-decoration:none;
+        color:inherit;
+        min-width: 220px;
+      }
+      .logo{
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
+          linear-gradient(135deg, var(--accent), rgba(198,161,91,.85));
+        box-shadow: 0 10px 22px rgba(109,40,217,.18);
+      }
+      .brand span{
+        font-weight: 750;
+        letter-spacing: .2px;
+      }
+      .menu{
+        display:flex;
+        gap:.45rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .menu a{
+        text-decoration:none;
+        color: var(--text);
+        font-weight: 600;
+        font-size: .93rem;
+        padding: .45rem .65rem;
+        border-radius: 12px;
+        border: 1px solid transparent;
+      }
+      .menu a:hover{
+        border-color: var(--border);
+        background: rgba(255,255,255,.55);
+      }
 
-    main{ max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 1rem 3.2rem; }
+      main{ max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 1rem 3.2rem; }
 
-    .hero{
-      padding: 2.1rem 0 1.2rem;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 1.1rem;
-      align-items: center;
-    }
-    .hero h1{
-      font-size: clamp(2rem, 3.8vw, 3.2rem);
-      line-height: 1.1;
-      margin: 0 0 .6rem;
-      letter-spacing: -.6px;
-    }
-    .hero p{ margin: 0 0 1rem; color: var(--muted); font-size: 1.06rem; }
-    .chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
-    .chip{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.6);
-      padding: .35rem .6rem;
-      border-radius: 999px;
-      font-weight: 650;
-      font-size: .88rem;
-    }
-    .heroCard{
-      background: rgba(255,255,255,.66);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1rem;
-    }
-    .heroCard .kpi{
-      display:grid;
-      gap:.7rem;
-    }
-    .kpiItem{
-      display:flex; gap:.75rem; align-items:flex-start;
-      padding:.65rem .7rem;
-      background: rgba(255,255,255,.65);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-    }
-    .icon{
-      width: 38px; height: 38px; border-radius: 14px;
-      background: rgba(109,40,217,.12);
-      border: 1px solid rgba(109,40,217,.18);
-      display:grid; place-items:center;
-      flex: 0 0 auto;
-    }
-    .icon svg{ width: 22px; height: 22px; stroke: var(--accent); }
-    .kpiItem b{ display:block; }
-    .kpiItem span{ color: var(--muted); font-size: .95rem; display:block; margin-top:.1rem; }
+      .hero{
+        padding: 2.1rem 0 1.2rem;
+        display:grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 1.1rem;
+        align-items: center;
+      }
+      .hero h1{
+        font-size: clamp(2rem, 3.8vw, 3.2rem);
+        line-height: 1.1;
+        margin: 0 0 .6rem;
+        letter-spacing: -.6px;
+      }
+      .hero p{ margin: 0 0 1rem; color: var(--muted); font-size: 1.06rem; }
+      .chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
+      .chip{
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.6);
+        padding: .35rem .6rem;
+        border-radius: 999px;
+        font-weight: 650;
+        font-size: .88rem;
+      }
+      .heroCard{
+        background: rgba(255,255,255,.66);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1rem;
+      }
+      .heroCard .kpi{
+        display:grid;
+        gap:.7rem;
+      }
+      .kpiItem{
+        display:flex; gap:.75rem; align-items:flex-start;
+        padding:.65rem .7rem;
+        background: rgba(255,255,255,.65);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+      .icon{
+        width: 38px; height: 38px; border-radius: 14px;
+        background: rgba(109,40,217,.12);
+        border: 1px solid rgba(109,40,217,.18);
+        display:grid; place-items:center;
+        flex: 0 0 auto;
+      }
+      .icon svg{ width: 22px; height: 22px; stroke: var(--accent); }
+      .kpiItem b{ display:block; }
+      .kpiItem span{ color: var(--muted); font-size: .95rem; display:block; margin-top:.1rem; }
 
-    section{ margin-top: 1.8rem; }
-    .sectionTitle{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap: 1rem;
-      margin-bottom: .85rem;
-    }
-    .sectionTitle h2{
-      margin:0;
-      font-size: 1.55rem;
-      letter-spacing: -.2px;
-    }
-    .sectionTitle .hint{
-      color: var(--muted);
-      font-size: .95rem;
-      margin: 0;
-    }
+      section{ margin-top: 1.8rem; }
+      .sectionTitle{
+        display:flex; align-items:flex-end; justify-content:space-between;
+        gap: 1rem;
+        margin-bottom: .85rem;
+      }
+      .sectionTitle h2{
+        margin:0;
+        font-size: 1.55rem;
+        letter-spacing: -.2px;
+      }
+      .sectionTitle .hint{
+        color: var(--muted);
+        font-size: .95rem;
+        margin: 0;
+      }
 
-    .card{
-      background: rgba(255,255,255,.70);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.1rem;
-    }
+      .card{
+        background: rgba(255,255,255,.70);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.1rem;
+      }
 
-    /* Nosotros */
-    .teamGrid{
-      display:grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: .85rem;
-    }
-    .member{
-      background: rgba(255,255,255,.72);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: .85rem;
-      display:flex;
-      flex-direction: column;
-      gap: .65rem;
-      height: 100%;
-    }
-    .avatar{
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(109,40,217,.18), rgba(198,161,91,.18));
-      border: 1px dashed rgba(31,41,55,.25);
-      display:grid; place-items:center;
-      overflow:hidden;
-    }
-    .avatar img{
-      width:100%; height:100%; object-fit: cover;
-    }
-    .member h3{ margin:0; font-size: 1.05rem; }
-    .member p{ margin:0; color: var(--muted); font-size: .95rem; }
+      /* Nosotros */
+      .teamGrid{
+        display:grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: .85rem;
+      }
+      .member{
+        background: rgba(255,255,255,.72);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: .85rem;
+        display:flex;
+        flex-direction: column;
+        gap: .65rem;
+        height: 100%;
+      }
+      .avatar{
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(109,40,217,.18), rgba(198,161,91,.18));
+        border: 1px dashed rgba(31,41,55,.25);
+        display:grid; place-items:center;
+        overflow:hidden;
+      }
+      .avatar img{
+        width:100%; height:100%; object-fit: cover;
+      }
+      .member h3{
+        margin:0;
+        font-size: 1.05rem;
+        text-align: center;
+        line-height: 1.25;
+      }
+      .member p{
+        margin:0;
+        color: var(--muted);
+        font-size: .95rem;
+        text-align: center;
+        display: -webkit-box;
+        -webkit-line-clamp: 20;      /* limita a 5 líneas para que todo quede parejo */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
 
-    /* Escenarios */
-    .tabs{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: .6rem;
-      margin-bottom: .85rem;
-    }
-    .tabBtn{
-      cursor:pointer;
-      padding: .75rem .8rem;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.65);
-      font-weight: 750;
-      text-align: center;
-      color: var(--text);
-    }
-    .tabBtn[aria-selected="true"]{
-      background: rgba(109,40,217,.12);
-      border-color: rgba(109,40,217,.25);
-      color: var(--accent);
-    }
-    .panel{
-      display:none;
-    }
-    .panel.active{
-      display:block;
-    }
+      /* Escenarios */
+      .tabs{
+        display:grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .6rem;
+        margin-bottom: .85rem;
+      }
+      .tabBtn{
+        cursor:pointer;
+        padding: .75rem .8rem;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.65);
+        font-weight: 750;
+        text-align: center;
+        color: var(--text);
+      }
+      .tabBtn[aria-selected="true"]{
+        background: rgba(109,40,217,.12);
+        border-color: rgba(109,40,217,.25);
+        color: var(--accent);
+      }
+      /*.panel{
+          display: block;            
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(6px);
+          transition: opacity .25s ease, transform .25s ease, max-height .35s ease;
+      }*/
+      /* ====== ESCENARIOS (TABS) con transición SIN perder texto ====== */
+      .panel{
+        display: none;               /* solo se ocultan los no activos */
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      /*.panel.active{
+          display: block;
+          max-height: 2000px;         
+          opacity: 1;
+          transform: translateY(0);
+      }*/
+      .panel.active{
+        display: block;              /* el activo sí se muestra */
+        animation: panelIn .25s ease forwards;
+      }
+      @keyframes panelIn{
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
 
-    /* Caja “contenido listo” */
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .85rem;
-      margin-top: .85rem;
-    }
-    .miniCard{
-      background: rgba(255,255,255,.72);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: .9rem;
-    }
-    .miniCard h4{ margin:.1rem 0 .4rem; color: var(--accent); }
-    .miniCard ul{ margin:.4rem 0 0 1rem; padding:0; }
-    .miniCard li{ margin:.28rem 0; }
+      /* Caja “contenido listo” */
+      .grid3{
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .85rem;
+        margin-top: .85rem;
+      }
+      .miniCard{
+        background: rgba(255,255,255,.72);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: .9rem;
+      }
+      .miniCard h4{ margin:.1rem 0 .4rem; color: var(--accent); }
+      .miniCard ul{ margin:.4rem 0 0 1rem; padding:0;   display: grid; gap: .35rem;}
+      .miniCard li{ margin:0; }
 
-    /* Footer */
-    footer{
-      margin-top: 2.4rem;
-      padding: 1.2rem 1rem 2rem;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      text-align: center;
-    }
+      /* Footer */
+      footer{
+        margin-top: 2.4rem;
+        padding: 1.2rem 1rem 2rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        text-align: center;
+      }
 
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; }
-      .teamGrid{ grid-template-columns: repeat(2, 1fr); }
-      .tabs{ grid-template-columns: 1fr 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .brand{ min-width: unset; }
-    }
-    @media (max-width: 520px){
-      .teamGrid{ grid-template-columns: 1fr; }
-      .menu a{ font-size: .9rem; padding: .4rem .55rem; }
-    }
-  </style>
-</head>
+      /* Responsive */
+      @media (max-width: 980px){
+        .hero{ grid-template-columns: 1fr; }
+        .teamGrid{ grid-template-columns: repeat(2, 1fr); }
+        .tabs{ grid-template-columns: 1fr 1fr; }
+        .grid3{ grid-template-columns: 1fr; }
+        .brand{ min-width: unset; }
+      }
+      @media (max-width: 520px){
+        .teamGrid{ grid-template-columns: 1fr; }
+        .menu a{ font-size: .9rem; padding: .4rem .55rem; }
+      }
+
+      /* ==== EFECTOS PRO (hover + micro-animaciones) ==== */
+
+      /* Suaviza animaciones (ligero) */
+      * { transition: background-color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+
+      /* Cards: elevación suave al pasar */
+      .card:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 18px 38px rgba(17,24,39,.10);
+      }
+
+      /* Foto miembro: hover elegante */
+      .member{
+        position: relative;
+        overflow: hidden;
+      }
+      .member:hover{
+        transform: translateY(-4px);
+        box-shadow: 0 18px 38px rgba(17,24,39,.12);
+      }
+      .member .avatar{
+        position: relative;
+      }
+      .member .avatar::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        /*background: radial-gradient(700px 240px at 30% 20%, rgba(109,40,217,.22), transparent 55%),
+                    radial-gradient(700px 240px at 80% 80%, rgba(198,161,91,.18), transparent 60%); */
+        background: linear-gradient(135deg, rgba(109,40,217,.08), rgba(198,161,91,.06));
+        opacity: 0;
+        mix-blend-mode: soft-light;   /* clave: no “tinta” la foto */
+        transition: opacity .25s ease;
+      }
+      .member:hover .avatar::after{ opacity: .35; }
+      .member:hover .avatar img{ transform: scale(1.04); }
+
+      /* Chip clickable: que se note */
+      .chip{
+        cursor: default;
+        user-select: none;
+      }
+      .chip.linkChip{
+        cursor: pointer;
+      }
+      .chip.linkChip:hover{
+        transform: translateY(-2px);
+        background: rgba(109,40,217,.10);
+        border-color: rgba(109,40,217,.25);
+      }
+
+      /* Tab buttons: hover + selected */
+      .tabBtn:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(17,24,39,.08);
+      }
+
+      /* Transición de panel (escenarios) */
+      .panel{
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity .25s ease, transform .25s ease;
+      }
+      .panel.active{
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mini cards (escenario 1): hover */
+      .miniCard:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 16px 34px rgba(17,24,39,.10);
+        border-color: rgba(109,40,217,.18);
+      }
+
+      /* Reduce animación para personas con sensibilidad */
+      @media (prefers-reduced-motion: reduce){
+        *{ transition:none !important; }
+        .panel{ opacity:1 !important; transform:none !important; }
+      }
+
+    </style>
+  </head>
 
 <body>
 <a class="skip" href="#contenido">Saltar al contenido principal</a>
@@ -299,7 +417,7 @@
   <nav class="nav" aria-label="Navegación principal">
     <a class="brand" href="#inicio">
       <div class="logo" aria-hidden="true"></div>
-      <span>Construcción histórica de las infancias</span>
+      <span>Construcción Histórica de las Infancias</span>
     </a>
 
     <div class="menu">
@@ -314,16 +432,13 @@
   <!-- HERO -->
   <section id="inicio" class="hero" aria-label="Portada">
     <div>
-      <h1>Construcción histórica de las infancias</h1>
+      <h1>Construcción Histórica de las Infancias</h1>
       <p>
         Recurso digital del curso <b>Infancias: Historias y Perspectivas</b>.
-        Aquí presentamos nuestra construcción inicial y, en este escenario, el contenido de <b>“El lugar de las infancias”</b>.
+        Aquí presentamos nuestra construcción del contenido de <b>“El lugar de las infancias”</b>.
       </p>
       <div class="chips" aria-label="Etiquetas del proyecto">
-        <span class="chip">Infografía + Línea de tiempo</span>
-        <span class="chip">Diseño elegante</span>
-        <span class="chip">Responsive</span>
-        <span class="chip">Accesible</span>
+        <a class="chip linkChip" href="#video-infografia" >Infografía + Línea de tiempo</a>
       </div>
     </div>
 
@@ -341,18 +456,7 @@
           </div>
           <div>
             <b>Estructura por escenarios</b>
-            <span>4 secciones del curso, listas para completar.</span>
-          </div>
-        </div>
-        <div class="kpiItem">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M12 21s7-4.5 7-10a4 4 0 0 0-7-2 4 4 0 0 0-7 2c0 5.5 7 10 7 10z"></path>
-            </svg>
-          </div>
-          <div>
-            <b>Diseño coherente con el video</b>
-            <span>Paleta marfil, morado y dorado, estilo outline minimalista.</span>
+            <span>Tendrás a dispocisión las 4 secciones del curso.</span>
           </div>
         </div>
         <div class="kpiItem">
@@ -364,9 +468,21 @@
             </svg>
           </div>
           <div>
-            <b>Listo para socializar en el foro</b>
-            <span>Solo actualiza fotos y nombres del equipo.</span>
+            <b>El recorrido</b>
+            <span>Encontrarás los insumos para comprender como se han modificado conceptos asociados a la niñez con el paso del tiempo.</span>
           </div>
+        </div>
+        <div class="kpiItem">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M12 21s7-4.5 7-10a4 4 0 0 0-7-2 4 4 0 0 0-7 2c0 5.5 7 10 7 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <b>La web</b>
+            <span>Este espacio más que ser un paso en el curso, es un producto hecho con el corazón.</span>
+          </div>
+        </div>
         </div>
       </div>
     </aside>
@@ -376,7 +492,7 @@
   <section id="nosotros" aria-label="Sección Nosotros">
     <div class="sectionTitle">
       <h2>Nosotros</h2>
-      <p class="hint">Agrega foto + una breve presentación de cada integrante (5).</p>
+      <p class="hint">Conoce un poco del equipo.</p>
     </div>
 
     <div class="card">
@@ -384,41 +500,49 @@
         <!-- Reemplaza img src y los textos -->
         <article class="member">
           <div class="avatar">
-            <span style="color:rgba(31,41,55,.55);font-weight:700;">Foto 1</span>
+            <span style="color:rgba(31,41,55,.55);font-weight:700;">
+              <img src="img/foto1.jpg" alt="Foto de Janeth Andrea Montalvo">
+            </span>
           </div>
-          <h3>Integrante 1 (Nombre)</h3>
+          <h3>Janeth Andrea Montalvo</h3>
           <p>Breve descripción (2–3 líneas). ¿Qué te interesa de las infancias? ¿Qué aportas al proyecto?</p>
         </article>
 
         <article class="member">
           <div class="avatar">
-            <span style="color:rgba(31,41,55,.55);font-weight:700;">Foto 2</span>
+            <span style="color:rgba(31,41,55,.55);font-weight:700;">
+              <img src="img/foto2.jpg" alt="Foto de Nury Constanza Cobos Torres">
+            </span>
           </div>
-          <h3>Integrante 2 (Nombre)</h3>
-          <p>Breve descripción (2–3 líneas). Rol o aporte en el trabajo.</p>
+          <h3>Nury Constanza Cobos Torres</h3>
+          <p>Tengo 42 años, soy madre comunitaria del municipio Salento y estudio LICENCIATURA EN EDUCACIÓN INFANTIL de la UNAD centro UDR la Tebaida, me considero una persona respetuosa, honesta y trabajadora, además lo más bonito de mi es que soy muy perseverante, alegre y sencilla.</p>
         </article>
 
         <article class="member">
           <div class="avatar">
-            <span style="color:rgba(31,41,55,.55);font-weight:700;">Foto 3</span>
+            <span style="color:rgba(31,41,55,.55);font-weight:700;">
+                <img src="img/foto3.jpg" alt="Foto de Luisa Fernanda Londoño Marulanda">
+            </span>
           </div>
-          <h3>Integrante 3 (Nombre)</h3>
+          <h3>Luisa Fernanda Londoño Marulanda</h3>
           <p>Breve descripción (2–3 líneas). Interés académico o experiencia.</p>
         </article>
 
         <article class="member">
           <div class="avatar">
-            <span style="color:rgba(31,41,55,.55);font-weight:700;">Foto 4</span>
+            <span style="color:rgba(31,41,55,.55);font-weight:700;">
+                <img src="img/foto4.jpg" alt="Foto de Diana Milena Tabares Arán">
+            </span>
           </div>
-          <h3>Integrante 4 (Nombre)</h3>
+          <h3>Diana Milena Tabares Arán</h3>
           <p>Breve descripción (2–3 líneas). Aporte al diseño o investigación.</p>
         </article>
 
         <article class="member">
           <div class="avatar">
-            <span style="color:rgba(31,41,55,.55);font-weight:700;">Foto 5</span>
+            <img src="img/foto5.jpg" alt="Foto de José de Jesús Franco Duque">
           </div>
-          <h3>Integrante 5 (Nombre)</h3>
+          <h3>José de Jesús Franco Duque</h3>
           <p>Breve descripción (2–3 líneas). ¿Qué aprendiste en el escenario?</p>
         </article>
       </div>
@@ -429,16 +553,16 @@
   <section id="escenarios" aria-label="Escenarios del curso">
     <div class="sectionTitle">
       <h2>Escenarios del curso</h2>
-      <p class="hint">En este escenario solo se consigna información en “El lugar de las infancias”.</p>
+      <p class="hint">En este apartado encontrarás la información de cada escenario.</p>
     </div>
 
     <div class="card">
       <!-- Tabs -->
       <div class="tabs" role="tablist" aria-label="Pestañas de escenarios">
-        <button class="tabBtn" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">1. El lugar de las infancias</button>
-        <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">2. Trayectos históricos</button>
-        <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">3. Transformación de las realidades</button>
-        <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4">4. Desafíos para la acción</button>
+        <button class="tabBtn" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">1. El Lugar de las Infancias</button>
+        <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">2. Trayectos Históricos</button>
+        <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">3. Transformación de las Realidades</button>
+        <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4">4. Desafíos Para la Acción</button>
       </div>
 
       <!-- Panel 1: contenido -->
@@ -484,14 +608,57 @@
             </p>
           </div>
         </div>
-      </div>
+
+        <!-- VIDEO (ancla para el chip) -->
+        <div id="video-infografia" class="card" style="margin-top:1rem;">
+          <div class="sectionTitle" style="margin:0 0 .6rem;">
+            <h2 style="font-size:1.25rem;margin:0;">Video: El Lugar de las Infancias.</h2>
+            <!-- <p class="hint" style="margin:0;">Si no se ve, abre el enlace directamente.</p> -->
+            <!-- OPCIÓN B: link directo por si no tienes embed -->
+            <p style="margin:.85rem 0 0;color:var(--muted);">
+              Si no se ve el video: <a href="https://youtu.be/4B6tEK49WhI" target="_blank" rel="noopener">Haz clic aquí.</a>
+            </p>
+          </div>
+
+          <!-- OPCIÓN A: incrustar video (YouTube / Drive / Vimeo) -->
+          <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,.55);">
+            <iframe
+              src="https://www.youtube.com/embed/4B6tEK49WhI"
+              title="Video: El lugar de las infancias"
+              loading="lazy"
+              style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div> <!-- /iframe wrapper -->
+
+        </div> <!-- /#video-infografia -->
+
+      </div> <!-- /#panel-1 -->
 
       <!-- Panel 2-4: placeholder -->
       <div id="panel-2" class="panel" role="tabpanel" aria-labelledby="tab-2">
         <p style="margin:0;color:var(--muted);">
           Este espacio se desarrollará en el <b>Escenario 3</b>: Trayectos históricos.
         </p>
+
+        <div class="grid3" aria-label="Bloques de contenido del escenario 1">
+          <div class="miniCard">
+            <h4>Edad Antigua (3000 a. C.–476 d. C.)</h4>
+            <ul>
+              <li><b>Concepciones:</b> niño como “adulto pequeño”; Esparta: futuros soldados; propiedad del padre.</li>
+              <li><b>Contexto social:</b> alta mortalidad infantil; esclavitud; abandono en algunos lugares.</li>
+              <li><b>Contexto cultural:</b> sin protección institucional; formación para guerra/trabajo; infanticidio/abandono aceptados por algunas culturas.</li>
+            </ul>
+            <p style="margin:.6rem 0 0;color:var(--muted);font-size:.92rem;">
+              <b>Referentes (según matriz):</b> familia, autoridad paterna, jerarquías.
+            </p>
+          </div>
+        </div>
+
       </div>
+
+
 
       <div id="panel-3" class="panel" role="tabpanel" aria-labelledby="tab-3">
         <p style="margin:0;color:var(--muted);">
@@ -512,7 +679,7 @@
   <section id="contacto" aria-label="Contacto">
     <div class="sectionTitle">
       <h2>Contacto</h2>
-      <p class="hint">Opcional, para que se vea más profesional (puede ser correo del grupo).</p>
+      <p class="hint">Si quieres conocer un poco más, contáctanos.</p>
     </div>
 
     <div class="card">
@@ -537,6 +704,32 @@
   const tabs = Array.from(document.querySelectorAll('.tabBtn'));
   const panels = Array.from(document.querySelectorAll('.panel'));
 
+  //function activateTab(index){
+    //tabs.forEach((t,i)=>{
+      //const selected = i === index;
+      //t.setAttribute('aria-selected', selected ? 'true' : 'false');
+      //panels[i].classList.toggle('active', selected);
+      // Quita y pone active para que corra la transición
+      //panels[i].classList.remove('active');
+      //if(selected){
+        //requestAnimationFrame(()=> panels[i].classList.add('active'));
+      //}
+        //if(selected){
+          //panels[i].classList.add('active');
+        //} else {
+          //panels[i].classList.remove('active');
+        //}
+    //});
+    //tabs[index].focus();
+  //}
+
+  //tabs.forEach((btn, i)=>{
+    //btn.addEventListener('click', ()=> activateTab(i));
+    //btn.addEventListener('keydown', (e)=>{
+      //if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length);
+      //if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length);
+    //});
+  //});
   function activateTab(index){
     tabs.forEach((t,i)=>{
       const selected = i === index;
@@ -546,13 +739,17 @@
     tabs[index].focus();
   }
 
+  // Click + teclado
   tabs.forEach((btn, i)=>{
     btn.addEventListener('click', ()=> activateTab(i));
     btn.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length);
-      if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length);
+      if(e.key === 'ArrowRight') { e.preventDefault(); activateTab((i+1)%tabs.length); tabs[(i+1)%tabs.length].focus(); }
+      if(e.key === 'ArrowLeft')  { e.preventDefault(); activateTab((i-1+tabs.length)%tabs.length); tabs[(i-1+tabs.length)%tabs.length].focus(); }
     });
   });
+
+  // Asegura que SIEMPRE haya un panel activo al cargar
+  activateTab(0);
 </script>
 </body>
 </html>
