@@ -628,6 +628,200 @@
         .nav{ position: relative; } /* para que el menú desplegable se ubique bien */
       }
 
+      /* ===== MATRIZ (preview centrado) ===== */
+      .matrixBlock{
+        margin-top: 1rem;
+      }
+      .matrixHeader h3{
+        margin: 0;
+        font-size: 1.2rem;
+        letter-spacing: -.2px;
+      }
+      .matrixHeader p{
+        margin: .25rem 0 .75rem;
+        color: var(--muted);
+      }
+
+      .matrixPreview{
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.68);
+        border-radius: 16px;
+        padding: .75rem;
+        cursor: zoom-in;
+        box-shadow: var(--shadow);
+        display: grid;
+        place-items: center;
+      }
+
+      .matrixPreview img{
+        width: min(980px, 100%);
+        height: auto;
+        border-radius: 12px;
+        display: block;
+      }
+
+      /* ===== MODAL IMAGEN (zoom + arrastre) ===== */
+      .imgModalBackdrop{
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        padding: 1rem;
+        background: rgba(17,24,39,.50);
+        backdrop-filter: blur(8px);
+        z-index: 3000;
+      }
+      .imgModalBackdrop.open{ display: grid; }
+
+      .imgModalCard{
+        width: min(1100px, 100%);
+        background: rgba(255,255,255,.90);
+        border: 1px solid rgba(31,41,55,.12);
+        border-radius: 22px;
+        box-shadow: 0 28px 70px rgba(17,24,39,.25);
+        overflow: hidden;
+        animation: imgSlideUp .22s ease forwards;
+      }
+      @keyframes imgSlideUp{
+        from { transform: translateY(22px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+      }
+
+      .imgModalTop{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: .8rem;
+        padding: .8rem .9rem;
+        border-bottom: 1px solid rgba(31,41,55,.10);
+      }
+      .imgModalTitle{
+        font-weight: 800;
+        color: var(--text);
+      }
+      .imgModalControls{
+        display:flex;
+        gap: .4rem;
+        flex-wrap: wrap;
+      }
+      .imgBtn{
+        border: 1px solid rgba(31,41,55,.14);
+        background: rgba(255,255,255,.92);
+        border-radius: 12px;
+        padding: .45rem .6rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .imgBtn:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(17,24,39,.10);
+      }
+      .imgBtn.close{
+        border-color: rgba(109,40,217,.25);
+        color: var(--accent);
+      }
+
+      .imgViewport{
+        height: min(72vh, 760px);
+        background: rgba(247,243,238,.65);
+        overflow: hidden;
+        cursor: grab;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .imgViewport:active{ cursor: grabbing; }
+
+      .imgViewport img{
+        user-select: none;
+        -webkit-user-drag: none;
+        transform-origin: 0 0;
+        will-change: transform;
+        display: block;
+        max-width: none;          /* importante para que el scale funcione */
+        height: auto;
+      }
+
+      .imgHint{
+        padding: .6rem .9rem .9rem;
+        color: var(--muted);
+        font-size: .92rem;
+      }
+
+      /* Mobile */
+      @media (max-width: 520px){
+        .imgViewport{ 
+          height: 60vh;
+          touch-action: none;
+        }
+        
+      }
+
+      /* ===== Subtítulos con vida (morado + detalle) ===== */
+      .subTitleRow{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: .75rem;
+        flex-wrap: wrap;
+        margin-top: .4rem;
+      }
+      .subTitle{
+        margin: 0;
+        font-size: 1.25rem;
+        letter-spacing: -.2px;
+        color: var(--accent);
+        position: relative;
+        padding-left: .65rem;
+      }
+      .subTitle::before{
+        content:"";
+        position:absolute;
+        left:0; top:.2rem;
+        width: 4px; height: 1.15rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--accent), rgba(198,161,91,.95));
+      }
+      .subBadge{
+        font-size: .85rem;
+        font-weight: 750;
+        padding: .25rem .55rem;
+        border-radius: 999px;
+        border: 1px solid rgba(109,40,217,.20);
+        background: rgba(109,40,217,.08);
+        color: var(--accent);
+      }
+      .subHint{
+        margin: .35rem 0 .75rem;
+        color: var(--muted);
+      }
+
+      /* ===== MATRIZ: vista previa elegante y contenida ===== */
+      .matrixPreview{
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.68);
+        border-radius: 16px;
+        padding: .9rem;
+        cursor: zoom-in;
+        box-shadow: var(--shadow);
+        display: grid;
+        place-items: center;
+      }
+
+      .matrixPreview img{
+        width: 100%;
+        max-width: 980px;
+        max-height: 520px;        /* CLAVE: evita que “se coma” la pantalla */
+        height: auto;
+        object-fit: contain;       /* mantiene proporción */
+        border-radius: 12px;
+        display: block;
+        border: 1px solid rgba(31,41,55,.08);
+      }
+
     </style>
   </head>
 
@@ -840,6 +1034,21 @@
           A continuación se presenta la evolución de los conceptos de niño-niña-niñez e infancia desde la Edad Antigua, Media y Moderna.
         </p>
 
+        <!-- MATRIZ PNG (vista previa centrada + clic para ampliar) -->
+        <div class="matrixBlock" aria-label="Matriz de revisión histórica">
+          <div class="subTitleRow">
+            <h3 class="subTitle">Matriz de revisión histórica</h3>
+            <span class="subBadge">Actividad 1 • Escenario 1</span>
+          </div>
+          <p class="subHint">Haz clic para ampliar. Se abrirá ajustada a la pantalla con zoom y arrastre.</p>
+
+          <button class="matrixPreview" type="button"
+                  data-img="img/matriz_escenario1.webp"
+                  aria-label="Abrir matriz en pantalla completa">
+            <img src="img/matriz_escenario1.webp" alt="Matriz de revisión histórica del escenario 1" loading="lazy">
+          </button>
+        </div>
+
         <div class="grid3" aria-label="Bloques de contenido del escenario 1">
           <div class="miniCard">
             <h4>Edad Antigua (3000 a. C.–476 d. C.)</h4>
@@ -880,8 +1089,13 @@
 
         <!-- VIDEO (ancla para el chip) -->
         <div id="video-infografia" class="card" style="margin-top:1rem;">
-          <div class="sectionTitle" style="margin:0 0 .6rem;">
-            <h2 style="font-size:1.25rem;margin:0;">Video: El Lugar de las Infancias.</h2>
+          <div class="subTitleRow" style="margin:0 0 .25rem;">
+            <h3 class="subTitle">Video animado • El Lugar de las Infancias</h3>
+            <span class="subBadge">Producto audiovisual</span>
+          </div>
+          <p class="subHint" style="margin-top:.1rem;">
+            Recurso de apoyo para comprender la evolución de los conceptos en las edades Antigua, Media y Moderna.
+          </p>
             <!-- <p class="hint" style="margin:0;">Si no se ve, abre el enlace directamente.</p> -->
             <!-- OPCIÓN B: link directo por si no tienes embed -->
             <p style="margin:.85rem 0 0;color:var(--muted);">
@@ -911,29 +1125,13 @@
           Este espacio se desarrollará en el <b>Escenario 3</b>: Trayectos históricos.
         </p>
 
-        <div class="grid3" aria-label="Bloques de contenido del escenario 1">
-          <div class="miniCard">
-            <h4>Edad Antigua (3000 a. C.–476 d. C.)</h4>
-            <ul>
-              <li><b>Concepciones:</b> niño como “adulto pequeño”; Esparta: futuros soldados; propiedad del padre.</li>
-              <li><b>Contexto social:</b> alta mortalidad infantil; esclavitud; abandono en algunos lugares.</li>
-              <li><b>Contexto cultural:</b> sin protección institucional; formación para guerra/trabajo; infanticidio/abandono aceptados por algunas culturas.</li>
-            </ul>
-            <p style="margin:.6rem 0 0;color:var(--muted);font-size:.92rem;">
-              <b>Referentes (según matriz):</b> familia, autoridad paterna, jerarquías.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-
 
       <div id="panel-3" class="panel" role="tabpanel" aria-labelledby="tab-3">
         <p style="margin:0;color:var(--muted);">
           Este espacio se desarrollará en el <b>Escenario 4</b>: Transformación de las realidades.
         </p>
       </div>
+
 
       <div id="panel-4" class="panel" role="tabpanel" aria-labelledby="tab-4">
         <p style="margin:0;color:var(--muted);">
@@ -982,6 +1180,29 @@
       <div class="modalText">
         <p id="modalBody"></p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MATRIZ (zoom + arrastre) -->
+<div class="imgModalBackdrop" id="imgModal" aria-hidden="true">
+  <div class="imgModalCard" role="dialog" aria-modal="true" aria-label="Vista ampliada de la matriz">
+    <div class="imgModalTop">
+      <div class="imgModalTitle">Matriz de revisión histórica</div>
+      <div class="imgModalControls">
+        <button type="button" class="imgBtn" id="zoomOut" aria-label="Reducir zoom">−</button>
+        <button type="button" class="imgBtn" id="zoomIn" aria-label="Aumentar zoom">+</button>
+        <button type="button" class="imgBtn" id="zoomReset" aria-label="Reiniciar zoom">⟲</button>
+        <button type="button" class="imgBtn close" id="imgClose" aria-label="Cerrar">✕</button>
+      </div>
+    </div>
+
+    <div class="imgViewport" id="imgViewport">
+      <img id="imgModalEl" alt="">
+    </div>
+
+    <div class="imgHint">
+      Tip: usa <b>+</b>/<b>−</b> para zoom, arrastra para moverte, y presiona <b>ESC</b> para cerrar.
     </div>
   </div>
 </div>
@@ -1154,6 +1375,195 @@
       }
     });
   }
+
+  // ===== MATRIZ PNG: modal con zoom y arrastre =====
+  document.addEventListener('DOMContentLoaded', () => {
+    // ===== MATRIZ PNG: modal con zoom + arrastre + pinch =====
+    const imgModal = document.getElementById('imgModal');
+    const imgClose = document.getElementById('imgClose');
+    const imgEl = document.getElementById('imgModalEl');
+    const viewport = document.getElementById('imgViewport');
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+    const zoomResetBtn = document.getElementById('zoomReset');
+
+    if (!imgModal || !imgClose || !imgEl || !viewport || !zoomInBtn || !zoomOutBtn || !zoomResetBtn) {
+      console.warn('Modal de imagen: faltan elementos. Revisa IDs imgModal/imgClose/imgModalEl/imgViewport/zoomIn/zoomOut/zoomReset');
+      return;
+    }
+
+    let scale = 1;
+    let x = 0, y = 0;
+
+    // Mouse pan
+    let isPanning = false;
+    let startX = 0, startY = 0;
+
+    // Touch pinch
+    let isPinching = false;
+    let startDist = 0;
+    let startScale = 1;
+
+    function applyTransform() {
+      imgEl.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+    }
+
+    function clampScale(v) {
+      return Math.min(Math.max(v, 0.5), 4);
+    }
+
+    function fitImageToViewport() {
+      const vw = viewport.clientWidth;
+      const vh = viewport.clientHeight;
+
+      const iw = imgEl.naturalWidth;
+      const ih = imgEl.naturalHeight;
+      if (!iw || !ih) return;
+
+      const scaleX = vw / iw;
+      const scaleY = vh / ih;
+      scale = Math.min(scaleX, scaleY, 1);
+
+      x = Math.max(10, (vw - iw * scale) / 2);
+      y = Math.max(10, (vh - ih * scale) / 2);
+      applyTransform();
+    }
+
+    function openImageModal(src, alt) {
+      imgEl.src = src;
+      imgEl.alt = alt || 'Imagen ampliada';
+
+      imgModal.classList.add('open');
+      imgModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // reset
+      scale = 1; x = 0; y = 0;
+      applyTransform();
+
+      imgEl.onload = () => fitImageToViewport();
+      imgClose.focus();
+    }
+
+    function closeImageModal() {
+      imgModal.classList.remove('open');
+      imgModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Abrir desde preview
+    document.querySelectorAll('.matrixPreview').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.img;
+        const alt = btn.querySelector('img')?.alt || 'Matriz';
+        openImageModal(src, alt);
+      });
+    });
+
+    // Botones zoom
+    zoomInBtn.addEventListener('click', () => {
+      scale = clampScale(scale + 0.25);
+      applyTransform();
+    });
+
+    zoomOutBtn.addEventListener('click', () => {
+      scale = clampScale(scale - 0.25);
+      applyTransform();
+    });
+
+    zoomResetBtn.addEventListener('click', () => {
+      fitImageToViewport();
+    });
+
+    // Mouse wheel zoom (desktop)
+    viewport.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = Math.sign(e.deltaY);
+      const next = delta > 0 ? scale - 0.15 : scale + 0.15;
+      scale = clampScale(next);
+      applyTransform();
+    }, { passive: false });
+
+    // Mouse drag pan (desktop)
+    viewport.addEventListener('mousedown', (e) => {
+      isPanning = true;
+      startX = e.clientX - x;
+      startY = e.clientY - y;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      x = e.clientX - startX;
+      y = e.clientY - startY;
+      applyTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isPanning = false;
+    });
+
+    // === Touch: pan 1 dedo + pinch 2 dedos (mobile) ===
+    function distance(t1, t2) {
+      const dx = t2.clientX - t1.clientX;
+      const dy = t2.clientY - t1.clientY;
+      return Math.hypot(dx, dy);
+    }
+
+    viewport.addEventListener('touchstart', (e) => {
+      if (!imgModal.classList.contains('open')) return;
+
+      if (e.touches.length === 1) {
+        isPanning = true;
+        isPinching = false;
+        startX = e.touches[0].clientX - x;
+        startY = e.touches[0].clientY - y;
+      }
+
+      if (e.touches.length === 2) {
+        isPanning = false;
+        isPinching = true;
+        startDist = distance(e.touches[0], e.touches[1]);
+        startScale = scale;
+      }
+    }, { passive: false });
+
+    viewport.addEventListener('touchmove', (e) => {
+      if (!imgModal.classList.contains('open')) return;
+
+      // Evita scroll mientras interactúas
+      e.preventDefault();
+
+      if (isPanning && e.touches.length === 1) {
+        x = e.touches[0].clientX - startX;
+        y = e.touches[0].clientY - startY;
+        applyTransform();
+      }
+
+      if (isPinching && e.touches.length === 2) {
+        const newDist = distance(e.touches[0], e.touches[1]);
+        const ratio = newDist / startDist;
+        scale = clampScale(startScale * ratio);
+        applyTransform();
+      }
+    }, { passive: false });
+
+    viewport.addEventListener('touchend', () => {
+      isPanning = false;
+      isPinching = false;
+    });
+
+    // Cerrar modal
+    imgClose.addEventListener('click', closeImageModal);
+
+    imgModal.addEventListener('click', (e) => {
+      if (e.target === imgModal) closeImageModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && imgModal.classList.contains('open')) closeImageModal();
+    });
+  });
+  
 
 </script>
 </body>
