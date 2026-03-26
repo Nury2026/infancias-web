@@ -1,0 +1,2578 @@
+/* Extracted from original index.html */
+:root{
+        /* Paleta (igual a tu video) */
+        --bg: #F7F3EE;        /* marfil */
+        --text: #1F2937;      /* grafito */
+        --accent: #6D28D9;    /* morado */
+        --gold: #C6A15B;      /* dorado suave */
+        --card: #FFFFFF;      /* blanco */
+        --muted: rgba(31,41,55,.72);
+        --border: rgba(31,41,55,.10);
+        --shadow: 0 14px 30px rgba(17,24,39,.08);
+        --radius: 18px;
+        --maxw: 1100px;
+      }
+
+      *{ box-sizing:border-box; }
+      html{ scroll-behavior:smooth; }
+      body{
+        margin:0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+        color:var(--text);
+        background: radial-gradient(1200px 600px at 10% -10%, rgba(109,40,217,.14), transparent 60%),
+                    radial-gradient(900px 500px at 90% 10%, rgba(198,161,91,.14), transparent 55%),
+                    var(--bg);
+        line-height:1.6;
+      }
+
+      /* Accesibilidad: foco visible */
+      a, button { outline: none; }
+      a:focus-visible, button:focus-visible, .skip:focus-visible{
+        outline: 3px solid rgba(109,40,217,.45);
+        outline-offset: 3px;
+        border-radius: 10px;
+      }
+
+      /* Skip link */
+      .skip{
+        position:absolute;
+        left:-999px;
+        top:10px;
+        background:var(--card);
+        padding:.6rem .9rem;
+        border:1px solid var(--border);
+        box-shadow: var(--shadow);
+        z-index:9999;
+      }
+      .skip:focus-visible{ left:10px; }
+
+      header{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        background: rgba(247,243,238,.72);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav{
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: .85rem 1rem;
+        display:flex;
+        gap: 1rem;
+        align-items:center;
+        justify-content: space-between;
+      }
+      .brand{
+        display:flex;
+        gap:.7rem;
+        align-items:center;
+        text-decoration:none;
+        color:inherit;
+        min-width: 220px;
+      }
+      .logo{
+        background: rgba(109,40,217,.10) !important;
+        border: 1px solid rgba(109,40,217,.22) !important;
+        box-shadow: none !important;
+        display:grid; place-items:center;
+      }
+      .logoSvg{ width:22px; height:22px; stroke: var(--accent); }
+      .brand span{
+        font-weight: 750;
+        letter-spacing: .2px;
+      }
+      /* Dark mode contrast for chips and icons */
+      @media (prefers-color-scheme: dark){
+        .chip{ color: rgba(255,255,255,.92) !important; background: rgba(255,255,255,.10) !important; border-color: rgba(255,255,255,.16) !important; }
+        .chipIcon svg{ stroke: rgba(198,161,91,.95) !important; }
+        .logo{ background: rgba(255,255,255,.08) !important; border-color: rgba(255,255,255,.16) !important; }
+        .logoSvg{ stroke: rgba(198,161,91,.95) !important; }
+      }
+
+      html.force-dark{ color-scheme: dark; }
+      html.force-light{ color-scheme: light; }
+
+
+
+      /* ===== Fix layout: hero banner above everything ===== */
+      .hero.heroStack{
+        display: block !important;
+      }
+      .hero.heroStack > *{
+        width: 100%;
+      }
+
+      /* Banner occupies full width of main container */
+      .heroBanner{
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      /* Dashboard card below banner, full width */
+      .heroDashFull{
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      /* Banner decorative sparkles/constellation overlay */
+      .heroBanner::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          radial-gradient(circle at 20% 30%, rgba(255,255,255,.22), transparent 40%),
+          radial-gradient(circle at 70% 20%, rgba(198,161,91,.20), transparent 45%),
+          radial-gradient(circle at 80% 70%, rgba(255,255,255,.12), transparent 45%);
+        mix-blend-mode: soft-light;
+        pointer-events:none;
+      }
+      .heroBanner::after{
+        content:"";
+        position:absolute;
+        inset:-20px;
+        background:
+          radial-gradient(1200px 520px at 10% 10%, rgba(109,40,217,.10), transparent 60%),
+          radial-gradient(1200px 520px at 90% 30%, rgba(198,161,91,.10), transparent 60%);
+        pointer-events:none;
+        opacity:.75;
+      }
+
+
+      .menu{
+        display:flex;
+        gap:.45rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .menu a{
+        text-decoration:none;
+        color: var(--text);
+        font-weight: 600;
+        font-size: .93rem;
+        padding: .45rem .65rem;
+        border-radius: 12px;
+        border: 1px solid transparent;
+      }
+      .menu a:hover{
+        border-color: var(--border);
+        background: rgba(255,255,255,.55);
+      }
+
+      main{ max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 1rem 3.2rem; }
+
+      .hero{
+        padding: 2.1rem 0 1.2rem;
+        display:grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: 1.1rem;
+        align-items: center;
+      }
+      .hero h1{
+        font-size: clamp(2rem, 3.8vw, 3.2rem);
+        line-height: 1.1;
+        margin: 0 0 .6rem;
+        letter-spacing: -.6px;
+      }
+      .hero p{ margin: 0 0 1rem; color: var(--muted); font-size: 1.06rem; }
+      .chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
+      .chip{
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.6);
+        padding: .35rem .6rem;
+        border-radius: 999px;
+        font-weight: 650;
+        font-size: .88rem;
+      }
+      .heroCard{
+        background: rgba(255,255,255,.66);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1rem;
+      }
+      .heroCard .kpi{
+        display:grid;
+        gap:.7rem;
+      }
+      .kpiItem{
+        display:flex; gap:.75rem; align-items:flex-start;
+        padding:.65rem .7rem;
+        background: rgba(255,255,255,.65);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+      .icon{
+        width: 38px; height: 38px; border-radius: 14px;
+        background: rgba(109,40,217,.12);
+        border: 1px solid rgba(109,40,217,.18);
+        display:grid; place-items:center;
+        flex: 0 0 auto;
+      }
+      .icon svg{ width: 22px; height: 22px; stroke: var(--accent); }
+      .kpiItem b{ display:block; }
+      .kpiItem span{ color: var(--muted); font-size: .95rem; display:block; margin-top:.1rem; }
+
+      section{ margin-top: 1.8rem; }
+      .sectionTitle{
+        display:flex; align-items:flex-end; justify-content:space-between;
+        gap: 1rem;
+        margin-bottom: .85rem;
+      }
+      .sectionTitle h2{
+        margin:0;
+        font-size: 1.55rem;
+        letter-spacing: -.2px;
+      }
+      .sectionTitle .hint{
+        color: var(--muted);
+        font-size: .95rem;
+        margin: 0;
+      }
+
+      .card{
+        background: rgba(255,255,255,.70);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.1rem;
+      }
+
+      /* Nosotros */
+      .teamGrid{
+        display:grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: .85rem;
+      }
+      .member{
+        background: rgba(255,255,255,.72);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: .85rem;
+        display:flex;
+        flex-direction: column;
+        gap: .65rem;
+        height: 100%;
+      }
+      .avatar{
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(109,40,217,.18), rgba(198,161,91,.18));
+        border: 1px dashed rgba(31,41,55,.25);
+        display:grid; place-items:center;
+        overflow:hidden;
+      }
+      .avatar img{
+        width:100%; height:100%; object-fit: cover;
+      }
+      .member h3{
+        margin:0;
+        font-size: 1.05rem;
+        text-align: center;
+        line-height: 1.25;
+      }
+      .member p{
+        margin:0;
+        color: var(--muted);
+        font-size: .95rem;
+        text-align: center;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;      /* limita a 5 líneas para que todo quede parejo */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* === BIO EXPANDIBLE (Leer más) === */
+      .bio-short{ margin:0; }
+
+      .moreBtn{
+        margin-top: .55rem;
+        width: 100%;
+        border: 1px solid rgba(109,40,217,.22);
+        background: rgba(109,40,217,.08);
+        color: var(--accent);
+        font-weight: 750;
+        padding: .55rem .7rem;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .moreBtn:hover{
+        transform: translateY(-1px);
+        background: rgba(109,40,217,.12);
+        border-color: rgba(109,40,217,.30);
+      }
+
+      .bio-long{
+        margin-top: .6rem;
+        border-top: 1px dashed rgba(31,41,55,.18);
+        padding-top: .6rem;
+        color: var(--muted);
+        font-size: .95rem;
+        text-align: left;
+      }
+      .bio-long p{ margin: 0; }
+
+
+      /* Escenarios */
+      .tabs{
+        display:grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .6rem;
+        margin-bottom: .85rem;
+      }
+      .tabBtn{
+        cursor:pointer;
+        padding: .75rem .8rem;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.65);
+        font-weight: 750;
+        text-align: center;
+        color: var(--text);
+      }
+      .tabBtn[aria-selected="true"]{
+        background: rgba(109,40,217,.12);
+        border-color: rgba(109,40,217,.25);
+        color: var(--accent);
+      }
+      /*.panel{
+          display: block;            
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(6px);
+          transition: opacity .25s ease, transform .25s ease, max-height .35s ease;
+      }*/
+      /* ====== ESCENARIOS (TABS) con transición SIN perder texto ====== */
+      .panel{
+        display: none;               /* solo se ocultan los no activos */
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      /*.panel.active{
+          display: block;
+          max-height: 2000px;         
+          opacity: 1;
+          transform: translateY(0);
+      }*/
+      .panel.active{
+        display: block;              /* el activo sí se muestra */
+        animation: panelIn .25s ease forwards;
+      }
+      @keyframes panelIn{
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Caja “contenido listo” */
+      .grid3{
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: .85rem;
+        margin-top: .85rem;
+      }
+      .miniCard{
+        background: rgba(255,255,255,.72);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: .9rem;
+      }
+      .miniCard h4{ margin:.1rem 0 .4rem; color: var(--accent); }
+      .miniCard ul{ margin:.4rem 0 0 1rem; padding:0;   display: grid; gap: .35rem;}
+      .miniCard li{ margin:0; }
+
+      /* Footer */
+      footer{
+        margin-top: 2.4rem;
+        padding: 1.2rem 1rem 2rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 980px){
+        .hero{ grid-template-columns: 1fr; }
+        .teamGrid{ grid-template-columns: repeat(2, 1fr); }
+        .tabs{ grid-template-columns: 1fr 1fr; }
+        .grid3{ grid-template-columns: 1fr; }
+        .brand{ min-width: unset; }
+      }
+      @media (max-width: 520px){
+        .teamGrid{ grid-template-columns: 1fr; }
+        .menu a{ font-size: .9rem; padding: .4rem .55rem; }
+      }
+
+      /* ==== EFECTOS PRO (hover + micro-animaciones) ==== */
+
+      /* Suaviza animaciones (ligero) */
+      * { transition: background-color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+
+      /* Cards: elevación suave al pasar */
+      .card:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 18px 38px rgba(17,24,39,.10);
+      }
+
+      /* Foto miembro: hover elegante */
+      .member{
+        position: relative;
+        overflow: hidden;
+      }
+      .member:hover{
+        transform: translateY(-4px);
+        box-shadow: 0 18px 38px rgba(17,24,39,.12);
+      }
+      .member .avatar{
+        position: relative;
+      }
+      .member .avatar::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        /*background: radial-gradient(700px 240px at 30% 20%, rgba(109,40,217,.22), transparent 55%),
+                    radial-gradient(700px 240px at 80% 80%, rgba(198,161,91,.18), transparent 60%); */
+        background: linear-gradient(135deg, rgba(109,40,217,.08), rgba(198,161,91,.06));
+        opacity: 0;
+        mix-blend-mode: soft-light;   /* clave: no “tinta” la foto */
+        transition: opacity .25s ease;
+      }
+      .member:hover .avatar::after{ opacity: .35; }
+      .member:hover .avatar img{ transform: scale(1.04); }
+
+      /* Chip clickable: que se note */
+      .chip{
+        cursor: default;
+        user-select: none;
+      }
+      .chip.linkChip{
+        cursor: pointer;
+      }
+      .chip.linkChip:hover{
+        transform: translateY(-2px);
+        background: rgba(109,40,217,.10);
+        border-color: rgba(109,40,217,.25);
+      }
+
+      /* Tab buttons: hover + selected */
+      .tabBtn:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(17,24,39,.08);
+      }
+
+      /* Transición de panel (escenarios) */
+      .panel{
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity .25s ease, transform .25s ease;
+      }
+      .panel.active{
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mini cards (escenario 1): hover */
+      .miniCard:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 16px 34px rgba(17,24,39,.10);
+        border-color: rgba(109,40,217,.18);
+      }
+
+      /* Reduce animación para personas con sensibilidad */
+      @media (prefers-reduced-motion: reduce){
+        *{ transition:none !important; }
+        .panel{ opacity:1 !important; transform:none !important; }
+      }
+
+      /* ===== MODAL ELEGANTE (Nosotros) ===== */
+      .modalBackdrop{
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        padding: 1rem;
+        background: rgba(17,24,39,.45);
+        backdrop-filter: blur(8px);
+        z-index: 2000;
+      }
+
+      .modalBackdrop.open{
+        display: grid;
+      }
+
+      .modalCard{
+        width: min(920px, 100%);
+        background: rgba(255,255,255,.86);
+        border: 1px solid rgba(31,41,55,.12);
+        border-radius: 22px;
+        box-shadow: 0 28px 70px rgba(17,24,39,.25);
+        overflow: hidden;
+        transform: translateY(22px);
+        opacity: 0;
+        animation: modalIn .22s ease forwards;
+        position: relative;
+      }
+
+      @keyframes modalIn{
+          from { transform: translateY(22px); opacity: 0; }
+          to   { transform: translateY(0); opacity: 1; }
+      }
+
+      .modalClose{
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        border: 1px solid rgba(31,41,55,.12);
+        background: rgba(255,255,255,.9);
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .modalClose:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(17,24,39,.10);
+      }
+
+      .modalHeader{
+        padding: 1.1rem 1.2rem .2rem;
+        border-bottom: 1px solid rgba(31,41,55,.10);
+      }
+
+      .modalHeader h3{
+        margin: 0;
+        font-size: 1.35rem;
+        letter-spacing: -.2px;
+      }
+
+      .modalRole{
+        margin: .25rem 0 .7rem;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      .modalContent{
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 1rem;
+        padding: 1.1rem 1.2rem 1.3rem;
+      }
+
+      .modalPhoto{
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(31,41,55,.10);
+        background: linear-gradient(135deg, rgba(109,40,217,.12), rgba(198,161,91,.10));
+        aspect-ratio: 1/1;
+      }
+
+      .modalPhoto img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .modalText{
+        color: var(--text);
+      }
+
+      .modalText p{
+        margin: 0;
+        color: rgba(31,41,55,.78);
+        line-height: 1.65;
+      }
+
+      /* Botón “Leer más” en tarjetas */
+      .moreBtn{
+        margin-top: .55rem;
+        width: 100%;
+        border: 1px solid rgba(109,40,217,.22);
+        background: rgba(109,40,217,.08);
+        color: var(--accent);
+        font-weight: 750;
+        padding: .55rem .7rem;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .moreBtn:hover{
+        transform: translateY(-1px);
+        background: rgba(109,40,217,.12);
+        border-color: rgba(109,40,217,.30);
+        box-shadow: 0 10px 20px rgba(17,24,39,.08);
+      }
+
+      /* Responsive modal */
+      @media (max-width: 820px){
+        .modalContent{ grid-template-columns: 1fr; }
+        .modalPhoto{ max-width: 320px; }
+      }
+
+      /* Evita que el header sticky tape el contenido al ir a anclas */
+      section{ scroll-margin-top: 90px; }
+
+      /* ===== Menú hamburguesa (mobile) ===== */
+      .hamburger{
+        display: none;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.70);
+        border-radius: 12px;
+        padding: .45rem .7rem;
+        font-size: 1.1rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .hamburger:hover{
+        box-shadow: 0 10px 20px rgba(17,24,39,.10);
+        transform: translateY(-1px);
+      }
+
+      /* Mobile menu hidden by default */
+      @media (max-width: 820px){
+        .hamburger{ display: inline-flex; align-items:center; justify-content:center; }
+
+        .menu{
+          display: none;
+          position: absolute;
+          right: 1rem;
+          top: 64px;
+          width: min(260px, calc(100vw - 2rem));
+          flex-direction: column;
+          gap: .25rem;
+          padding: .6rem;
+          background: rgba(247,243,238,.96);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          box-shadow: 0 18px 40px rgba(17,24,39,.14);
+        }
+
+        .menu.open{ display: flex; }
+
+        .menu a{
+          display: block;
+          width: 100%;
+          padding: .65rem .75rem;
+          border-radius: 12px;
+          background: rgba(255,255,255,.70);
+          border: 1px solid rgba(31,41,55,.10);
+        }
+      }
+
+      /* Hero más cómodo en móviles */
+      @media (max-width: 820px){
+        .hero{
+          padding-top: 1.4rem;
+          gap: .9rem;
+        }
+        .heroCard{ padding: .9rem; }
+        .kpiItem{ padding: .6rem; }
+        .nav{ position: relative; } /* para que el menú desplegable se ubique bien */
+      }
+
+      /* ===== MATRIZ (preview centrado) ===== */
+      .matrixBlock{
+        margin-top: 1rem;
+      }
+      .matrixHeader h3{
+        margin: 0;
+        font-size: 1.2rem;
+        letter-spacing: -.2px;
+      }
+      .matrixHeader p{
+        margin: .25rem 0 .75rem;
+        color: var(--muted);
+      }
+
+      .matrixPreview{
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.68);
+        border-radius: 16px;
+        padding: .75rem;
+        cursor: zoom-in;
+        box-shadow: var(--shadow);
+        display: grid;
+        place-items: center;
+      }
+
+      .matrixPreview img{
+        width: min(980px, 100%);
+        height: auto;
+        border-radius: 12px;
+        display: block;
+      }
+
+      /* ===== MODAL IMAGEN (zoom + arrastre) ===== */
+      .imgModalBackdrop{
+        position: fixed;
+        inset: 0;
+        display: none;
+        place-items: center;
+        padding: 1rem;
+        background: rgba(17,24,39,.50);
+        backdrop-filter: blur(8px);
+        z-index: 3000;
+      }
+      .imgModalBackdrop.open{ display: grid; }
+
+      .imgModalCard{
+        width: min(1100px, 100%);
+        background: rgba(255,255,255,.90);
+        border: 1px solid rgba(31,41,55,.12);
+        border-radius: 22px;
+        box-shadow: 0 28px 70px rgba(17,24,39,.25);
+        overflow: hidden;
+        animation: imgSlideUp .22s ease forwards;
+      }
+      @keyframes imgSlideUp{
+        from { transform: translateY(22px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+      }
+
+      .imgModalTop{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: .8rem;
+        padding: .8rem .9rem;
+        border-bottom: 1px solid rgba(31,41,55,.10);
+      }
+      .imgModalTitle{
+        font-weight: 800;
+        color: var(--text);
+      }
+      .imgModalControls{
+        display:flex;
+        gap: .4rem;
+        flex-wrap: wrap;
+      }
+      .imgBtn{
+        border: 1px solid rgba(31,41,55,.14);
+        background: rgba(255,255,255,.92);
+        border-radius: 12px;
+        padding: .45rem .6rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .imgBtn:hover{
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(17,24,39,.10);
+      }
+      .imgBtn.close{
+        border-color: rgba(109,40,217,.25);
+        color: var(--accent);
+      }
+
+      .imgViewport{
+        height: min(72vh, 760px);
+        background: rgba(247,243,238,.65);
+        overflow: hidden;
+        cursor: grab;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .imgViewport:active{ cursor: grabbing; }
+
+      .imgViewport img{
+        user-select: none;
+        -webkit-user-drag: none;
+        transform-origin: 0 0;
+        will-change: transform;
+        display: block;
+        max-width: none;          /* importante para que el scale funcione */
+        height: auto;
+      }
+
+      .imgHint{
+        padding: .6rem .9rem .9rem;
+        color: var(--muted);
+        font-size: .92rem;
+      }
+
+      /* Mobile */
+      @media (max-width: 520px){
+        .imgViewport{ 
+          height: 60vh;
+          touch-action: none;
+        }
+        
+      }
+
+      /* ===== Subtítulos con vida (morado + detalle) ===== */
+      .subTitleRow{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: .75rem;
+        flex-wrap: wrap;
+        margin-top: .4rem;
+      }
+      .subTitle{
+        margin: 0;
+        font-size: 1.25rem;
+        letter-spacing: -.2px;
+        color: var(--accent);
+        position: relative;
+        padding-left: .65rem;
+      }
+      .subTitle::before{
+        content:"";
+        position:absolute;
+        left:0; top:.2rem;
+        width: 4px; height: 1.15rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--accent), rgba(198,161,91,.95));
+      }
+      .subBadge{
+        font-size: .85rem;
+        font-weight: 750;
+        padding: .25rem .55rem;
+        border-radius: 999px;
+        border: 1px solid rgba(109,40,217,.20);
+        background: rgba(109,40,217,.08);
+        color: var(--accent);
+      }
+      .subHint{
+        margin: .35rem 0 .75rem;
+        color: var(--muted);
+      }
+
+      /* ===== MATRIZ: vista previa elegante y contenida ===== */
+      .matrixPreview{
+        width: 100%;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,.68);
+        border-radius: 16px;
+        padding: .9rem;
+        cursor: zoom-in;
+        box-shadow: var(--shadow);
+        display: grid;
+        place-items: center;
+      }
+
+      .matrixPreview img{
+        width: 100%;
+        max-width: 980px;
+        max-height: 520px;        /* CLAVE: evita que “se coma” la pantalla */
+        height: auto;
+        object-fit: contain;       /* mantiene proporción */
+        border-radius: 12px;
+        display: block;
+        border: 1px solid rgba(31,41,55,.08);
+      }
+
+
+/* ===== Enhancements (non-breaking) ===== */
+/* Better typography hierarchy */
+h1, h2, h3 { letter-spacing: -0.2px; }
+.sectionTitle h2, .blockTitle { color: var(--text); }
+.titleWithIcon .titleIcon svg, .blockIcon svg { stroke: var(--accent); }
+.blockTitle { font-weight: 800; }
+.mutedText, .hint, .blockHint { line-height: 1.55; }
+
+/* Remove any decorative gradient bars on h3 if present (keeps icons) */
+.subTitle::before { content: none !important; }
+
+/* Improve icon consistency */
+svg { stroke-linecap: round; stroke-linejoin: round; }
+
+/* Improve spacing on mobile for hero */
+@media (max-width: 520px){
+  .hero{ padding-top: 1.2rem; }
+}
+
+
+
+/* =========================================================
+   REDISEÑO UI (inspiración "Antique Parian" / glassmorphism)
+   - Mantiene paleta: marfil + morado + dorado
+   - Auto dark mode: se adapta a la preferencia del sistema
+========================================================= */
+
+:root{
+  --bg: #F7F3EE;
+  --text: #1F2937;
+  --muted: rgba(31,41,55,.72);
+  --accent: #6D28D9;
+  --gold: #C6A15B;
+
+  --glass: rgba(255,255,255,.68);
+  --glass-strong: rgba(255,255,255,.78);
+  --glass-border: rgba(31,41,55,.14);
+  --shadow-glass: 0 22px 60px rgba(17,24,39,.14);
+  --shadow-soft: 0 12px 30px rgba(17,24,39,.10);
+
+  --radius-lg: 26px;
+  --radius-md: 18px;
+
+  --orb-1: rgba(109,40,217,.22);
+  --orb-2: rgba(198,161,91,.20);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #0B1220;
+    --text: rgba(255,255,255,.92);
+    --muted: rgba(255,255,255,.72);
+
+    --glass: rgba(255,255,255,.08);
+    --glass-strong: rgba(255,255,255,.12);
+    --glass-border: rgba(255,255,255,.14);
+    --shadow-glass: 0 26px 80px rgba(0,0,0,.45);
+    --shadow-soft: 0 16px 44px rgba(0,0,0,.35);
+
+    --orb-1: rgba(109,40,217,.24);
+    --orb-2: rgba(198,161,91,.18);
+  }
+
+  header{
+    background: rgba(11,18,32,.68);
+  }
+  .menu a{ color: var(--text); }
+}
+
+body{
+  background:
+    radial-gradient(900px 520px at 10% -10%, var(--orb-1), transparent 60%),
+    radial-gradient(860px 520px at 90% 12%, var(--orb-2), transparent 58%),
+    radial-gradient(820px 520px at 50% 110%, rgba(109,40,217,.10), transparent 55%),
+    var(--bg);
+}
+
+header{
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
+}
+
+.card, .heroCard, .member, .miniCard, .matrixPreview, .placeholder{
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+}
+
+.card:hover, .member:hover, .miniCard:hover, .matrixPreview:hover{
+  box-shadow: var(--shadow-glass);
+  transform: translateY(-3px);
+}
+
+.hero{
+  padding: 2.4rem 0 1.6rem;
+  gap: 1.25rem;
+  align-items: center;
+  position: relative;
+}
+
+.titleIcon{
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  display:grid;
+  place-items:center;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.titleWithIcon{
+  gap: .65rem;
+  letter-spacing: -0.02em;
+}
+
+.blockIcon{
+  width: 30px;
+  height: 30px;
+  border-radius: 12px;
+  display:grid;
+  place-items:center;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.blockTitle{
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+
+.pill{
+  border-radius: 999px;
+  padding: .3rem .6rem;
+  font-weight: 850;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.miniCard h4{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+
+/* quitar el punto anterior si existe */
+.miniCard h4::before{ content: none !important; }
+
+/* icono por época */
+.miniCard h4::before{
+  content:"";
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-mask: var(--mini-icon) no-repeat center / contain;
+          mask: var(--mini-icon) no-repeat center / contain;
+}
+
+.miniCard[data-era="antigua"]{ --mini-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox=\"0 0 24 24\"><path d=\"M6 21V9l6-6 6 6v12\" fill=\"black\"/><path d=\"M9 21v-7h6v7\" fill=\"black\"/></svg>'); }
+.miniCard[data-era="media"]{ --mini-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox=\"0 0 24 24\"><path d=\"M6 3h10a2 2 0 0 1 2 2v16H8a2 2 0 0 0-2 2V3z\" fill=\"black\"/><path d=\"M8 7h8\" stroke=\"black\" stroke-width=\"2\"/><path d=\"M8 11h8\" stroke=\"black\" stroke-width=\"2\"/></svg>'); }
+.miniCard[data-era="moderna"]{ --mini-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox=\"0 0 24 24\"><path d=\"M12 2l2.2 6.2L21 10l-6.8 1.8L12 18l-2.2-6.2L3 10l6.8-1.8L12 2z\" fill=\"black\"/></svg>'); }
+
+/* Reveal */
+.reveal{ opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+.reveal.is-visible{ opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+@media (max-width: 520px){
+  .hero{ padding-top: 1.4rem; }
+}
+
+
+
+/* =========================================================
+   HERO DASHBOARD + DECORACIONES (inspiración Antique Parian)
+========================================================= */
+.hero{
+  position: relative;
+  overflow: hidden;
+  padding: 2.6rem 0 1.8rem;
+}
+
+.heroDecor{
+  position:absolute;
+  inset:-40px -20px auto -20px;
+  height: 520px;
+  pointer-events:none;
+  color: color-mix(in srgb, var(--accent) 35%, var(--gold) 18%);
+}
+
+.heroOrbits{
+  width:100%;
+  height:100%;
+}
+
+.heroDash{
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 1.35rem 1.35rem;
+  border-radius: 30px;
+  background: color-mix(in srgb, var(--glass-strong) 92%, transparent);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Make hero inner layout nicer inside dashboard */
+.heroDash > div{
+  padding-right: .2rem;
+}
+.heroDash h1{
+  margin-top: .2rem;
+}
+.heroDash .heroCard{
+  background: color-mix(in srgb, var(--glass) 92%, transparent);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+.heroDash .heroCard:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Tabs: inactive looks “dim”, active pops */
+.tabBtn{
+  background: color-mix(in srgb, var(--glass) 88%, transparent);
+}
+.tabBtn[aria-selected="true"]{
+  background: color-mix(in srgb, var(--accent) 14%, var(--glass) 82%);
+}
+.panel{
+  background: transparent;
+}
+
+/* Dark mode: fix contrast aggressively */
+@media (prefers-color-scheme: dark){
+  body{
+    background:
+      radial-gradient(900px 520px at 10% -10%, rgba(109,40,217,.28), transparent 60%),
+      radial-gradient(860px 520px at 90% 12%, rgba(198,161,91,.20), transparent 58%),
+      radial-gradient(820px 520px at 50% 110%, rgba(109,40,217,.16), transparent 55%),
+      #0B1220;
+  }
+
+  .card, .heroCard, .member, .miniCard, .matrixPreview, .placeholder{
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.14);
+    box-shadow: 0 26px 80px rgba(0,0,0,.45);
+  }
+
+  .heroDash{
+    background: rgba(255,255,255,.10);
+    border-color: rgba(255,255,255,.16);
+  }
+
+  .kpiItem{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.12);
+  }
+  .kpiItem span, .hint, .blockHint, .mutedText, .miniFoot, .imgHint, .modalRole{
+    color: rgba(255,255,255,.74) !important;
+  }
+  .menu{
+    background: rgba(11,18,32,.92);
+    border-color: rgba(255,255,255,.14);
+  }
+  .menu a:hover{
+    background: rgba(255,255,255,.08);
+  }
+
+  .tabBtn{
+    color: rgba(255,255,255,.88);
+    border-color: rgba(255,255,255,.14);
+  }
+  .tabBtn[aria-selected="true"]{
+    background: rgba(109,40,217,.22);
+    border-color: rgba(109,40,217,.35);
+    color: rgba(255,255,255,.95);
+  }
+
+  .titleIcon, .blockIcon{
+    background: rgba(109,40,217,.18);
+    border-color: rgba(109,40,217,.28);
+  }
+
+  a{ color: rgba(198,161,91,.92); }
+}
+
+/* Responsive: hero dashboard collapses gracefully */
+@media (max-width: 980px){
+  .heroDash{
+    padding: 1rem;
+  }
+  .heroDecor{
+    height: 460px;
+  }
+}
+@media (max-width: 520px){
+  .hero{
+    padding-top: 1.5rem;
+  }
+  .heroDecor{
+    height: 420px;
+  }
+}
+
+
+
+/* =========================================================
+   MEJORAS SORPRENDENTES (UI/UX)
+   - Barra de progreso de lectura
+   - Botón volver arriba
+   - Indicador animado de tabs
+   - Timeline interactiva
+   - Mejoras modo oscuro
+========================================================= */
+
+/* Progress bar */
+.readingProgress{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 2500;
+  background: transparent;
+}
+#readingProgress{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  box-shadow: 0 6px 16px rgba(109,40,217,.22);
+}
+
+/* Back to top */
+.backToTop{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  background: color-mix(in srgb, var(--glass) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+  font-weight: 900;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+.backToTop.show{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.backToTop:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Theme toggle button */
+.themeToggle{
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 90%, transparent);
+  border-radius: 14px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+.themeToggle:hover{ transform: translateY(-1px); }
+.themeIcon{ font-size: 16px; }
+
+/* Tabs indicator */
+.tabs{
+  position: relative;
+}
+.tabIndicator{
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 4px;
+  width: 120px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  box-shadow: 0 10px 22px rgba(109,40,217,.22);
+  transition: transform .25s ease, width .25s ease;
+}
+
+/* Inactive tab style (more contrast) */
+.tabBtn{
+  opacity: .84;
+}
+.tabBtn[aria-selected="true"]{
+  opacity: 1;
+}
+
+/* Timeline */
+.timeline{
+  margin-top: 1.1rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 86%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+.timelineHeader{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.timelineTrack{
+  margin-top: .8rem;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+.timelineNode{
+  text-align: left;
+  padding: .85rem .85rem;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 88%, transparent);
+  cursor: pointer;
+  display:grid;
+  grid-template-columns: 14px 1fr;
+  gap: .65rem;
+  align-items: start;
+}
+.timelineNode:hover{ transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.nodeDot{
+  width: 10px; height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  margin-top: .35rem;
+}
+.nodeTitle{ font-weight: 900; }
+.nodeMeta{ color: var(--muted); font-size: .9rem; grid-column: 2; }
+
+.timelinePanels{
+  margin-top: .8rem;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass-strong) 90%, transparent);
+  padding: .85rem;
+}
+.timelinePanel{ display:none; color: var(--muted); }
+.timelinePanel.active{ display:block; }
+
+@media (max-width: 820px){
+  .timelineTrack{ grid-template-columns: 1fr; }
+}
+
+/* Sitemap links */
+.siteMap{
+  display:flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+.siteLink{
+  text-decoration:none;
+  padding: .55rem .7rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 86%, transparent);
+  color: var(--text);
+  font-weight: 800;
+}
+.siteLink:hover{ transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+
+/* Better dark mode contrast for multiple texts */
+@media (prefers-color-scheme: dark){
+  .heroDecor{ color: rgba(255,255,255,.65); }
+  .tabIndicator{ box-shadow: 0 10px 28px rgba(0,0,0,.55); }
+  .tabBtn{ background: rgba(255,255,255,.06); }
+  .panel{ color: rgba(255,255,255,.90); }
+  .timelinePanel, .nodeMeta{ color: rgba(255,255,255,.74); }
+  .siteLink{ color: rgba(255,255,255,.92); background: rgba(255,255,255,.06); }
+  .themeToggle{ background: rgba(255,255,255,.08); }
+}
+
+
+
+/* Manual theme override (when user chooses) */
+html.force-dark{
+  color-scheme: dark;
+}
+html.force-light{
+  color-scheme: light;
+}
+/* Force dark visuals if user sets dark (better than relying only on system) */
+html.force-dark body{ background: #0B1220; }
+html.force-dark .card, html.force-dark .heroCard, html.force-dark .member, html.force-dark .miniCard,
+html.force-dark .matrixPreview, html.force-dark .placeholder, html.force-dark .timeline,
+html.force-dark .timelinePanels{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+html.force-dark .kpiItem{ background: rgba(255,255,255,.06) !important; border-color: rgba(255,255,255,.12) !important; }
+html.force-dark .mutedText, html.force-dark .hint, html.force-dark .blockHint, html.force-dark .miniFoot,
+html.force-dark .kpiItem span{ color: rgba(255,255,255,.74) !important; }
+html.force-dark .tabBtn{ background: rgba(255,255,255,.06) !important; color: rgba(255,255,255,.88) !important; }
+html.force-dark .tabBtn[aria-selected="true"]{ background: rgba(109,40,217,.22) !important; border-color: rgba(109,40,217,.35) !important; }
+
+
+
+/* ==== Antique Parian background + Hero option B ==== */
+body.has-bg-image{
+  background:
+    linear-gradient(180deg, rgba(247,243,238,.84), rgba(247,243,238,.86)),
+    url("../img/background.webp") center/cover fixed no-repeat,
+    radial-gradient(900px 520px at 10% -10%, var(--orb-1), transparent 60%),
+    radial-gradient(860px 520px at 90% 12%, var(--orb-2), transparent 58%),
+    var(--bg);
+}
+.heroDash{
+  display: grid !important;
+  grid-template-columns: 1.15fr .85fr 1.1fr;
+  gap: 1.1rem;
+  align-items: center;
+}
+@media (max-width: 1100px){
+  .heroDash{ grid-template-columns: 1.15fr .85fr; }
+  .heroMedia{ grid-column: 1 / -1; }
+}
+@media (max-width: 980px){
+  .heroDash{ grid-template-columns: 1fr; }
+  .heroMedia{ order: 3; }
+}
+.heroMedia{
+  position: relative;
+  border-radius: 28px 28px 120px 28px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 92%, transparent);
+  box-shadow: var(--shadow-glass);
+  min-height: 260px;
+}
+.heroMedia img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  filter: saturate(1.02) contrast(1.02);
+}
+.heroMedia::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 420px at 30% 20%, rgba(255,255,255,.18), transparent 60%),
+    radial-gradient(900px 420px at 80% 80%, rgba(198,161,91,.14), transparent 62%),
+    linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.26));
+  mix-blend-mode: soft-light;
+  pointer-events:none;
+}
+.heroMediaGlow{
+  position:absolute;
+  inset:-40px -40px auto auto;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle at 30% 30%, rgba(198,161,91,.32), rgba(198,161,91,0) 70%);
+  filter: blur(8px);
+  pointer-events:none;
+}
+@media (prefers-reduced-motion: no-preference){
+  .heroMedia img{ transition: transform .55s ease; }
+  .heroMedia:hover img{ transform: scale(1.06); }
+}
+@media (prefers-color-scheme: dark){
+  body.has-bg-image{
+    background:
+      linear-gradient(180deg, rgba(11,18,32,.82), rgba(11,18,32,.88)),
+      url("../../assets/img/background.webp") center/cover fixed no-repeat,
+      radial-gradient(900px 520px at 10% -10%, rgba(109,40,217,.28), transparent 60%),
+      radial-gradient(860px 520px at 90% 12%, rgba(198,161,91,.18), transparent 58%),
+      #0B1220;
+  }
+  .heroMedia::after{
+    background:
+      radial-gradient(900px 420px at 30% 20%, rgba(255,255,255,.10), transparent 60%),
+      radial-gradient(900px 420px at 80% 80%, rgba(198,161,91,.10), transparent 62%),
+      linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.38));
+  }
+}
+
+/* =========================================================
+   HERO (según boceto): Carrusel + Dashboard + KPIs
+========================================================= */
+.heroLayout{
+  display:block;
+  margin-top: 1.1rem;
+}
+
+/* Carrusel */
+.heroCarousel{
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(31,41,55,.14);
+  box-shadow: 0 22px 60px rgba(17,24,39,.14);
+  background: rgba(255,255,255,.12);
+}
+
+.carouselViewport{ overflow:hidden; }
+
+/* ===== FIX Carrusel: cada slide ocupa 100% del viewport ===== */
+.carouselViewport{ overflow: hidden; }
+
+.carouselTrack{
+  display: flex;
+  width: 100%;                 /* <-- NO 300% */
+  transform: translateX(0);
+  transition: transform .5s ease;
+  will-change: transform;
+}
+
+.carouselSlide{
+  flex: 0 0 100%;              /* <-- clave */
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 16 / 6;
+  position: relative;
+}
+.carouselSlide img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  filter: saturate(1.03) contrast(1.02);
+}
+.carouselSlide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 420px at 30% 20%, rgba(255,255,255,.18), transparent 60%),
+    radial-gradient(900px 420px at 80% 80%, rgba(198,161,91,.16), transparent 62%),
+    linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.18));
+  pointer-events:none;
+}
+
+/* Flechas */
+.carouselBtn{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(31,41,55,.14);
+  background: rgba(255,255,255,.60);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(17,24,39,.10);
+  cursor:pointer;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+  display:grid;
+  place-items:center;
+  z-index: 2;
+}
+.carouselBtn.prev{ left: 12px; }
+.carouselBtn.next{ right: 12px; }
+.carouselBtn:hover{ transform: translateY(-50%) scale(1.03); }
+
+/* Puntos */
+.carouselDots{
+  position:absolute;
+  left:0; right:0;
+  bottom: 10px;
+  display:flex;
+  justify-content:center;
+  gap: 8px;
+  z-index:2;
+}
+.dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.30);
+  cursor:pointer;
+}
+.dot.is-active{
+  width: 26px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  border-color: rgba(255,255,255,.68);
+}
+
+/* Dashboard */
+.heroDashCard{
+  margin-top: 1rem;
+  border-radius: 28px;
+}
+
+.heroTop h1{
+  margin: 0 0 .35rem;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.04em;
+}
+.heroLead{
+  margin: 0 0 .9rem;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+.heroChips{
+  display:flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+
+.chipIcon{
+  display:inline-grid;
+  place-items:center;
+  width: 18px;
+  height: 18px;
+  margin-right: .35rem;
+}
+.chipIcon svg{
+  width:18px;
+  height:18px;
+  stroke: currentColor;
+}
+
+/* KPIs (3 tarjetas) */
+.heroKpis{
+  margin-top: 1rem;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .85rem;
+}
+.kpiCard{
+  display:flex;
+  gap: .75rem;
+  align-items:flex-start;
+  padding: .95rem;
+  border-radius: 22px;
+  border: 1px solid rgba(31,41,55,.14);
+  background: rgba(255,255,255,.55);
+}
+.kpiIcon{
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  border: 1px solid rgba(109,40,217,.18);
+  background: rgba(109,40,217,.10);
+  flex: 0 0 auto;
+}
+.kpiIcon svg{
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent);
+}
+.kpiCard h3{
+  margin: .1rem 0 .25rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.kpiCard p{
+  margin: 0;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .heroKpis{ grid-template-columns: 1fr; }
+  .carouselSlide{ aspect-ratio: 16 / 7; }
+}
+@media (max-width: 520px){
+  .carouselBtn{ display:none; }
+}
+
+/* Dark mode: contraste + dorado */
+@media (prefers-color-scheme: dark){
+  .carouselBtn{
+    background: rgba(255,255,255,.10);
+    border-color: rgba(255,255,255,.16);
+    color: rgba(255,255,255,.92);
+  }
+  .kpiCard{
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.14);
+  }
+  .kpiCard p, .heroLead{
+    color: rgba(255,255,255,.74) !important;
+  }
+  .chip{
+    color: rgba(255,255,255,.92) !important;
+    background: rgba(255,255,255,.10) !important;
+    border-color: rgba(255,255,255,.16) !important;
+  }
+  .kpiIcon{
+    background: rgba(198,161,91,.12);
+    border-color: rgba(198,161,91,.22);
+  }
+  .kpiIcon svg, .chipIcon svg{
+    stroke: rgba(198,161,91,.95) !important;
+  }
+}
+
+/* ===== Theme Switch (Header) ===== */
+.themeSwitch{
+  display:flex;
+  gap:.35rem;
+  padding:.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(31,41,55,.14);
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(17,24,39,.10);
+  align-items:center;
+}
+
+.themeOpt{
+  cursor:pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  padding: .42rem .65rem;
+  border-radius: 999px;
+  font-weight: 800;
+  display:flex;
+  gap:.35rem;
+  align-items:center;
+  line-height:1;
+}
+.themeOpt:hover{
+  background: rgba(109,40,217,.10);
+  border-color: rgba(109,40,217,.22);
+}
+.themeOpt.is-active{
+  background: rgba(198,161,91,.18);
+  border-color: rgba(198,161,91,.35);
+}
+
+.themeTxt{ font-size: .86rem; }
+
+/* En móvil, dejar solo iconos */
+@media (max-width: 520px){
+  .themeTxt{ display:none; }
+  .themeOpt{ padding: .45rem .55rem; }
+}
+
+/* Dark mode: contraste */
+@media (prefers-color-scheme: dark){
+  .themeSwitch{
+    border-color: rgba(255,255,255,.16);
+    background: rgba(255,255,255,.08);
+  }
+  .themeOpt{ color: rgba(255,255,255,.92); }
+  .themeOpt:hover{
+    background: rgba(198,161,91,.10);
+    border-color: rgba(198,161,91,.18);
+  }
+  .themeOpt.is-active{
+    background: rgba(198,161,91,.16);
+    border-color: rgba(198,161,91,.30);
+  }
+}
+
+/* Overrides manuales */
+html.force-dark{ color-scheme: dark; }
+html.force-light{ color-scheme: light; }
+
+/* ===== Carrusel PRO overlay ===== */
+.carouselSlide{ position: relative; }
+
+.slideOverlay{
+  position:absolute;
+  inset: 0;
+  padding: clamp(1rem, 2.4vw, 1.6rem);
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: .45rem;
+  color: #fff;
+}
+
+.slideOverlay::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 420px at 20% 30%, rgba(255,255,255,.12), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.58));
+  pointer-events:none;
+}
+.slideOverlay > *{ position: relative; z-index: 1; }
+
+.slideTag{
+  display:inline-flex;
+  width: fit-content;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.20);
+  backdrop-filter: blur(8px);
+  font-weight: 900;
+  letter-spacing: .02em;
+  margin: 0;
+}
+
+.slideTitle{
+  margin: 0;
+  font-size: clamp(1.35rem, 2.4vw, 2.1rem);
+  letter-spacing: -0.03em;
+}
+
+.slideText{
+  margin: 0;
+  max-width: 58ch;
+  color: rgba(255,255,255,.84);
+}
+
+.slideActions{
+  margin-top: .5rem;
+  display:flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+
+.slideBtn{
+  text-decoration:none;
+  border-radius: 999px;
+  padding: .55rem .85rem;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  font-weight: 900;
+  cursor:pointer;
+  backdrop-filter: blur(10px);
+}
+.slideBtn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.18);
+}
+.slideBtn.primary{
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  border-color: rgba(255,255,255,.26);
+}
+.slideBtn.ghost{
+  background: rgba(0,0,0,.18);
+}
+
+/* En móvil, texto más compacto */
+@media (max-width: 520px){
+  .slideText{ display:none; }
+}
+
+/* ===== Carrusel: botones estilo CHIP (sin gradiente) ===== */
+.slideBtn{
+  border: 1px solid rgba(31,41,55,.14) !important;
+  background: rgba(255,255,255,.60) !important;
+  color: var(--text) !important;
+  font-weight: 900;
+  box-shadow: 0 10px 24px rgba(17,24,39,.06);
+}
+
+.slideBtn:hover{
+  transform: translateY(-2px);
+  background: rgba(109,40,217,.10) !important;
+  border-color: rgba(109,40,217,.25) !important;
+  box-shadow: 0 14px 30px rgba(17,24,39,.10);
+}
+
+.slideBtn.primary{
+  /* ya no se usa gradiente; queda igual a los otros */
+  background: rgba(255,255,255,.60) !important;
+  border-color: rgba(31,41,55,.14) !important;
+}
+
+/* Dark: que sigan legibles */
+@media (prefers-color-scheme: dark){
+  .slideBtn{
+    background: rgba(255,255,255,.10) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    color: rgba(255,255,255,.92) !important;
+  }
+  .slideBtn:hover{
+    background: rgba(198,161,91,.12) !important;
+    border-color: rgba(198,161,91,.28) !important;
+  }
+}
+
+/* ===== Hover uniforme (chips / KPI / carrusel) ===== */
+.heroCarousel,
+.kpiCard{
+  transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease, border-color .22s ease;
+}
+
+.heroCarousel:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 24px 70px rgba(17,24,39,.14);
+  border-color: rgba(109,40,217,.18);
+}
+
+.kpiCard:hover{
+  transform: translateY(-2px);
+  background: rgba(109,40,217,.06);
+  border-color: rgba(109,40,217,.18);
+  box-shadow: 0 16px 34px rgba(17,24,39,.10);
+}
+
+@media (prefers-color-scheme: dark){
+  .heroCarousel:hover{
+    box-shadow: 0 26px 80px rgba(0,0,0,.45);
+    border-color: rgba(198,161,91,.22);
+  }
+  .kpiCard:hover{
+    background: rgba(198,161,91,.08);
+    border-color: rgba(198,161,91,.22);
+  }
+}
+
+/* =========================================================
+   THEME OVERRIDE REAL (manual gana sobre el sistema)
+========================================================= */
+html.force-light{
+  color-scheme: light;
+}
+html.force-dark{
+  color-scheme: dark;
+}
+
+/* Forzar Claro (aunque el sistema esté oscuro) */
+html.force-light body{
+  background: #F7F3EE !important;
+  color: #1F2937 !important;
+}
+html.force-light header{
+  background: rgba(247,243,238,.78) !important;
+  border-bottom-color: rgba(31,41,55,.14) !important;
+}
+html.force-light .card,
+html.force-light .heroDashCard,
+html.force-light .kpiCard,
+html.force-light .heroCarousel,
+html.force-light .miniCard,
+html.force-light .member,
+html.force-light .matrixPreview{
+  background: rgba(255,255,255,.70) !important;
+  border-color: rgba(31,41,55,.14) !important;
+  color: #1F2937 !important;
+}
+html.force-light .heroLead,
+html.force-light .kpiCard p{
+  color: rgba(31,41,55,.72) !important;
+}
+html.force-light .chip,
+html.force-light .slideBtn{
+  background: rgba(255,255,255,.60) !important;
+  border-color: rgba(31,41,55,.14) !important;
+  color: #1F2937 !important;
+}
+
+/* Forzar Oscuro (aunque el sistema esté claro) */
+html.force-dark body{
+  background: #0B1220 !important;
+  color: rgba(255,255,255,.92) !important;
+}
+html.force-dark header{
+  background: rgba(11,18,32,.72) !important;
+  border-bottom-color: rgba(255,255,255,.14) !important;
+}
+html.force-dark .card,
+html.force-dark .heroDashCard,
+html.force-dark .kpiCard,
+html.force-dark .heroCarousel,
+html.force-dark .miniCard,
+html.force-dark .member,
+html.force-dark .matrixPreview{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.14) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+html.force-dark .heroLead,
+html.force-dark .kpiCard p{
+  color: rgba(255,255,255,.74) !important;
+}
+html.force-dark .chip,
+html.force-dark .slideBtn{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.16) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+
+/* ===== HERO TYPO PRO ===== */
+.heroTop h1{
+  font-size: clamp(2.2rem, 4.3vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  font-weight: 900;
+  margin: 0 0 .45rem;
+  display: inline-block;
+  position: relative;
+  text-shadow: 0 10px 30px rgba(17,24,39,.10);
+}
+
+.heroTop h1:hover{
+  transform: translateY(-2px);
+  background: rgba(109,40,217,.06);
+  border-color: rgba(109,40,217,.18);
+  box-shadow: 0 16px 34px rgba(17,24,39,.10);
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .heroTop h1:hover::after{
+    opacity: .80;
+    transform: translateY(0);
+    width: 78%;
+  }
+}
+
+/* heroLead ocupa todo el ancho */
+.heroLead{
+  max-width: none !important;
+  width: 100%;
+}
+
+/* ===== FIX: textos blancos en modo claro manual ===== */
+html.force-light,
+html.force-light body{
+  color: #1F2937 !important;
+}
+
+/* Textos que suelen quedar blancos */
+html.force-light .slideOverlay,
+html.force-light .slideTitle,
+html.force-light .slideText,
+html.force-light .slideTag,
+html.force-light .menu a,
+html.force-light .tabBtn,
+html.force-light .kpiCard h3,
+html.force-light .sectionTitle h2,
+html.force-light .card h2,
+html.force-light .card h3,
+html.force-light .card h4{
+  color: #1F2937 !important;
+}
+
+/* Textos secundarios */
+html.force-light .hint,
+html.force-light .heroLead,
+html.force-light .kpiCard p,
+html.force-light .miniCard p,
+html.force-light .panel p{
+  color: rgba(31,41,55,.72) !important;
+}
+
+/* Overlay del carrusel: en modo claro no debe oscurecer tanto */
+html.force-light .slideOverlay::before{
+  background:
+    radial-gradient(900px 420px at 20% 30%, rgba(255,255,255,.18), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.55)) !important;
+}
+
+/* Botones del carrusel en modo claro */
+html.force-light .slideBtn{
+  color: #1F2937 !important;
+  background: rgba(255,255,255,.60) !important;
+  border-color: rgba(31,41,55,.14) !important;
+}
+
+/* =========================================================
+   FIX TEMA MANUAL (gana sobre el sistema)
+   - fuerza variables + modales + botón subir
+========================================================= */
+
+/* Forzar variables CLARO aunque el sistema esté oscuro */
+html.force-light{
+  --bg: #F7F3EE;
+  --text: #1F2937;
+  --muted: rgba(31,41,55,.72);
+  --border: rgba(31,41,55,.12);
+
+  --glass: rgba(255,255,255,.72);
+  --glass-strong: rgba(255,255,255,.82);
+  --glass-border: rgba(31,41,55,.14);
+
+  --shadow-glass: 0 22px 60px rgba(17,24,39,.14);
+  --shadow-soft: 0 12px 30px rgba(17,24,39,.10);
+}
+
+/* Forzar variables OSCURO aunque el sistema esté claro */
+html.force-dark{
+  --bg: #0B1220;
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.74);
+  --border: rgba(255,255,255,.14);
+
+  --glass: rgba(255,255,255,.08);
+  --glass-strong: rgba(255,255,255,.12);
+  --glass-border: rgba(255,255,255,.14);
+
+  --shadow-glass: 0 26px 80px rgba(0,0,0,.45);
+  --shadow-soft: 0 16px 44px rgba(0,0,0,.35);
+}
+
+/* Aplicación consistente del fondo (usa variables) */
+html.force-light body,
+html.force-dark body{
+  background:
+    radial-gradient(900px 520px at 10% -10%, var(--orb-1), transparent 60%),
+    radial-gradient(860px 520px at 90% 12%, var(--orb-2), transparent 58%),
+    radial-gradient(820px 520px at 50% 110%, rgba(109,40,217,.10), transparent 55%),
+    var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Cards coherentes */
+html.force-light .card,
+html.force-light .heroDashCard,
+html.force-light .kpiCard,
+html.force-light .heroCarousel,
+html.force-light .member,
+html.force-light .miniCard,
+html.force-light .matrixPreview,
+html.force-light .timeline,
+html.force-light .timelinePanels{
+  background: var(--glass) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+}
+
+html.force-dark .card,
+html.force-dark .heroDashCard,
+html.force-dark .kpiCard,
+html.force-dark .heroCarousel,
+html.force-dark .member,
+html.force-dark .miniCard,
+html.force-dark .matrixPreview,
+html.force-dark .timeline,
+html.force-dark .timelinePanels{
+  background: var(--glass) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+}
+
+/* Texto dorado en oscuro (como pediste) */
+html.force-dark a,
+html.force-dark .subTitle,
+html.force-dark .kpiIcon svg,
+html.force-dark .chipIcon svg,
+html.force-dark .logoSvg{
+  color: rgba(198,161,91,.95) !important;
+  stroke: rgba(198,161,91,.95) !important;
+}
+
+/* BOTÓN SUBIR (backToTop) coherente */
+html.force-dark .backToTop{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.16) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+html.force-light .backToTop{
+  background: rgba(255,255,255,.72) !important;
+  border-color: rgba(31,41,55,.14) !important;
+  color: #1F2937 !important;
+}
+
+/* MODALES coherentes (Nosotros + Matriz) */
+html.force-dark .modalCard,
+html.force-dark .imgModalCard{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+html.force-dark .modalHeader,
+html.force-dark .imgModalTop{
+  border-bottom-color: rgba(255,255,255,.14) !important;
+}
+html.force-dark .modalHeader h3,
+html.force-dark .imgModalTitle{
+  color: rgba(255,255,255,.95) !important;
+}
+html.force-dark .modalText p,
+html.force-dark #modalBody,
+html.force-dark .imgHint{
+  color: rgba(255,255,255,.78) !important;
+}
+html.force-dark .imgViewport{
+  background: rgba(255,255,255,.06) !important;
+}
+
+/* =========================================================
+   PATCH: Header + Mapa del sitio en tema manual
+   (Pegar AL FINAL del CSS)
+========================================================= */
+
+/* ---------- HEADER ---------- */
+html.force-light header{
+  background: rgba(247,243,238,.86) !important;
+  border-bottom: 1px solid rgba(31,41,55,.12) !important;
+  backdrop-filter: blur(12px);
+}
+
+html.force-light .brand,
+html.force-light .brand span,
+html.force-light .menu a{
+  color: #1F2937 !important;
+}
+
+html.force-light .menu a:hover{
+  background: rgba(109,40,217,.08) !important;
+  border-color: rgba(109,40,217,.16) !important;
+}
+
+html.force-light .hamburger{
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(31,41,55,.14) !important;
+  color: #1F2937 !important;
+}
+
+/* Menú desplegable móvil (modo claro forzado) */
+html.force-light .menu{
+  background: rgba(247,243,238,.96) !important;
+  border-color: rgba(31,41,55,.12) !important;
+  box-shadow: 0 18px 40px rgba(17,24,39,.14) !important;
+}
+
+/* ---------- MAPA DEL SITIO ---------- */
+html.force-light .siteMap{
+  background: rgba(255,255,255,.70) !important;
+  border: 1px solid rgba(31,41,55,.12) !important;
+  box-shadow: 0 18px 45px rgba(17,24,39,.10) !important;
+}
+
+html.force-light .siteLink{
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(31,41,55,.12) !important;
+  color: #1F2937 !important;
+}
+
+html.force-light .siteLink:hover{
+  background: rgba(109,40,217,.10) !important;
+  border-color: rgba(109,40,217,.18) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(17,24,39,.10);
+}
+
+/* Icono del título del mapa (modo claro) */
+html.force-light .titleIcon{
+  background: rgba(109,40,217,.10) !important;
+  border-color: rgba(109,40,217,.18) !important;
+}
+html.force-light .titleIcon svg{
+  stroke: var(--accent) !important;
+}
+
+/* =========================================================
+   AJUSTES FINALES: dorado en oscuro + header + mapa del sitio
+   (Pegar AL FINAL del CSS)
+========================================================= */
+
+/* 1) En modo oscuro: TODO lo “morado” -> dorado (texto + iconos) */
+/*html.force-dark{
+  /* No cambiamos tu --accent global para no afectar claro.
+     Solo en oscuro “redirigimos” el acento visual hacia dorado. */
+  /*--accent: rgba(198,161,91,.95);
+}*/
+
+/* Asegura que elementos que estaban morados queden dorados */
+html.force-dark .subTitle,
+html.force-dark .subBadge,
+html.force-dark .tabBtn[aria-selected="true"],
+html.force-dark .moreBtn,
+html.force-dark .imgBtn.close,
+html.force-dark .kpiCard h3,
+html.force-dark .miniCard h4{
+  color: rgba(198,161,91,.95) !important;
+}
+
+/* Iconos dorados (incluye los que se pintan por stroke) */
+html.force-dark .logoSvg,
+html.force-dark .chipIcon svg,
+html.force-dark .kpiIcon svg,
+html.force-dark .titleIcon svg,
+html.force-dark .blockIcon svg,
+html.force-dark .icon svg{
+  stroke: rgba(198,161,91,.95) !important;
+}
+
+/* Quita cualquier hover morado y cámbialo por dorado */
+html.force-dark .chip.linkChip:hover,
+html.force-dark .slideBtn:hover,
+html.force-dark .siteLink:hover{
+  background: rgba(198,161,91,.12) !important;
+  border-color: rgba(198,161,91,.28) !important;
+}
+
+/* Tabs activo dorado (en vez de morado) */
+html.force-dark .tabBtn[aria-selected="true"]{
+  background: rgba(198,161,91,.14) !important;
+  border-color: rgba(198,161,91,.28) !important;
+  color: rgba(198,161,91,.95) !important;
+}
+
+/* 2) Mapa del sitio: icono al lado izquierdo, no arriba */
+#mapa .sectionTitle{
+  align-items: center; /* evita que icono quede “flotando” */
+}
+#mapa .titleWithIcon{
+  display: inline-flex;      /* <-- clave */
+  align-items: center;       /* <-- clave */
+  gap: .65rem;
+}
+#mapa .titleIcon{
+  flex: 0 0 auto;
+}
+
+/* Icono dorado en modo oscuro */
+html.force-dark #mapa .titleIcon{
+  background: rgba(198,161,91,.12) !important;
+  border-color: rgba(198,161,91,.22) !important;
+}
+html.force-dark #mapa .titleIcon svg{
+  stroke: rgba(198,161,91,.95) !important;
+}
+
+/* 3) Header oscuro: el menú (Nosotros/Escenarios/Contacto) con mismo fondo del header */
+html.force-dark header{
+  background: rgba(11,18,32,.78) !important;
+}
+
+/* Menú desktop: sin “bloque negro”, transparente como el header */
+html.force-dark .menu{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Links del menú: estilo glass suave */
+html.force-dark .menu a{
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+html.force-dark .menu a:hover{
+  background: rgba(198,161,91,.10) !important;
+  border-color: rgba(198,161,91,.22) !important;
+}
+
+/* 4) Hamburguesa en mobile oscuro: que no sea blanca rara */
+html.force-dark .hamburger{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.16) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+
+/* Menú desplegable móvil en oscuro: igual al header (no negro puro) */
+@media (max-width: 820px){
+  html.force-dark .menu{
+    background: rgba(11,18,32,.78) !important; /* igual al header */
+    border: 1px solid rgba(255,255,255,.14) !important;
+    box-shadow: 0 26px 80px rgba(0,0,0,.45) !important;
+  }
+
+  html.force-dark .menu a{
+    background: rgba(255,255,255,.06) !important;
+  }
+}
+
+/* =========================================================
+   TEMA: acento inteligente (AUTO / CLARO / OSCURO)
+   - Auto: morado si sistema claro, dorado si sistema oscuro
+   - Force light: morado
+   - Force dark: dorado
+   - Ajusta header + botones de modales
+   (Pegar AL FINAL del CSS)
+========================================================= */
+
+/* 1) Acento por defecto (modo claro / auto claro) */
+:root{
+  --accent-ui: #6D28D9; /* morado */
+  --accent-ui-soft: rgba(109,40,217,.12);
+  --accent-ui-border: rgba(109,40,217,.22);
+}
+
+/* 2) Auto + sistema oscuro => dorado */
+@media (prefers-color-scheme: dark){
+  :root{
+    --accent-ui: rgba(198,161,91,.95); /* dorado */
+    --accent-ui-soft: rgba(198,161,91,.12);
+    --accent-ui-border: rgba(198,161,91,.22);
+  }
+}
+
+/* 3) Manual: claro => morado */
+html.force-light{
+  --accent-ui: #6D28D9;
+  --accent-ui-soft: rgba(109,40,217,.12);
+  --accent-ui-border: rgba(109,40,217,.22);
+}
+
+/* 4) Manual: oscuro => dorado */
+html.force-dark{
+  --accent-ui: rgba(198,161,91,.95);
+  --accent-ui-soft: rgba(198,161,91,.12);
+  --accent-ui-border: rgba(198,161,91,.22);
+}
+
+/* =========================================================
+   APLICAR ACENTO: donde antes se veía morado
+   (iconos, subtítulos, tabs activos, etc.)
+========================================================= */
+.subTitle,
+.subBadge,
+.tabBtn[aria-selected="true"],
+.moreBtn,
+.imgBtn.close{
+  color: var(--accent-ui) !important;
+}
+
+/* íconos outline */
+.logoSvg,
+.chipIcon svg,
+.kpiIcon svg,
+.titleIcon svg,
+.blockIcon svg,
+.icon svg{
+  stroke: var(--accent-ui) !important;
+}
+
+/* Tabs activo: fondo y borde */
+.tabBtn[aria-selected="true"]{
+  background: var(--accent-ui-soft) !important;
+  border-color: var(--accent-ui-border) !important;
+}
+
+/* Hover estilo uniforme: en vez de morado fijo */
+.chip.linkChip:hover,
+.slideBtn:hover,
+.siteLink:hover,
+.menu a:hover{
+  background: var(--accent-ui-soft) !important;
+  border-color: var(--accent-ui-border) !important;
+}
+
+/* =========================================================
+   HEADER: coherencia en Claro / Oscuro / Auto
+   - Desktop menu sin “bloque distinto”
+   - Mobile menu igual al header
+========================================================= */
+
+/* Desktop menu siempre “glass” (no negro) */
+.menu{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Links del menú con glass */
+.menu a{
+  background: color-mix(in srgb, var(--glass) 86%, transparent) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px;
+}
+
+/* Mobile dropdown: igual al header (se controla por tema real) */
+@media (max-width: 820px){
+  .menu{
+    background: color-mix(in srgb, var(--bg) 78%, transparent) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-glass) !important;
+  }
+}
+
+/* Hamburguesa: coherente */
+.hamburger{
+  background: color-mix(in srgb, var(--glass) 88%, transparent) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+}
+
+/* =========================================================
+   MODALES: botones coherentes en Claro/Oscuro/Auto
+========================================================= */
+
+/* Botón X (modal de equipo) */
+.modalClose{
+  background: color-mix(in srgb, var(--glass-strong) 92%, transparent) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+}
+.modalClose:hover{
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* Botones del modal de imagen (zoom) */
+.imgBtn{
+  background: color-mix(in srgb, var(--glass-strong) 92%, transparent) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+}
+.imgBtn:hover{
+  box-shadow: var(--shadow-soft) !important;
+  transform: translateY(-1px);
+}
+
+/* Botón close del modal imagen: acento */
+.imgBtn.close{
+  border-color: var(--accent-ui-border) !important;
+  color: var(--accent-ui) !important;
+}
+
+/* Back to top coherente */
+.backToTop{
+  background: color-mix(in srgb, var(--glass) 88%, transparent) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text) !important;
+}
+
+/* =========================================================
+   FIX: AUTO + sistema oscuro
+   - Modales (botones + fondos + texto)
+   - Títulos miniCards (Edad Antigua/Media/Moderna)
+========================================================= */
+
+/* Cuando el sistema está oscuro y NO hay force-light */
+@media (prefers-color-scheme: dark){
+
+  /* ===== MODALES (Auto oscuro) ===== */
+  html:not(.force-light) .modalCard,
+  html:not(.force-light) .imgModalCard{
+    background: rgba(255,255,255,.10) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    color: rgba(255,255,255,.92) !important;
+  }
+
+  html:not(.force-light) .modalHeader,
+  html:not(.force-light) .imgModalTop{
+    border-bottom-color: rgba(255,255,255,.14) !important;
+  }
+
+  html:not(.force-light) .modalHeader h3,
+  html:not(.force-light) .imgModalTitle{
+    color: rgba(255,255,255,.95) !important;
+  }
+
+  html:not(.force-light) .modalRole,
+  html:not(.force-light) .modalText p,
+  html:not(.force-light) #modalBody,
+  html:not(.force-light) .imgHint{
+    color: rgba(255,255,255,.78) !important;
+  }
+
+  /* Botón X (modal equipo) */
+  html:not(.force-light) .modalClose{
+    background: rgba(255,255,255,.10) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    color: rgba(255,255,255,.92) !important;
+  }
+
+  /* Botones del modal imagen (zoom) */
+  html:not(.force-light) .imgBtn{
+    background: rgba(255,255,255,.10) !important;
+    border-color: rgba(255,255,255,.16) !important;
+    color: rgba(255,255,255,.92) !important;
+  }
+
+  /* Botón close del modal imagen dorado */
+  html:not(.force-light) .imgBtn.close{
+    border-color: rgba(198,161,91,.28) !important;
+    color: rgba(198,161,91,.95) !important;
+  }
+
+  /* Viewport del modal imagen */
+  html:not(.force-light) .imgViewport{
+    background: rgba(255,255,255,.06) !important;
+  }
+
+  /* ===== MINI CARDS: títulos Edad Antigua/Media/Moderna (Auto oscuro) ===== */
+  html:not(.force-light) .miniCard h4{
+    color: rgba(198,161,91,.95) !important; /* dorado */
+  }
+
+  html:not(.force-light) .miniCard ul,
+  html:not(.force-light) .miniCard li,
+  html:not(.force-light) .miniCard p{
+    color: rgba(255,255,255,.78) !important;
+  }
+
+  /* Si algún <b> queda muy oscuro, lo aclaramos */
+  html:not(.force-light) .miniCard b{
+    color: rgba(255,255,255,.92) !important;
+  }
+}

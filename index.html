@@ -4,836 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Construcción Histórica de las Infancias</title>
-    <meta name="description" content="Página web del curso Infancias: Historias y Perspectivas. Escenario 1: El lugar de las infancias." />
+    <meta name="description" content="Página web del curso Infancias: Historias y Perspectivas." />
 
-    <style>
-      :root{
-        /* Paleta (igual a tu video) */
-        --bg: #F7F3EE;        /* marfil */
-        --text: #1F2937;      /* grafito */
-        --accent: #6D28D9;    /* morado */
-        --gold: #C6A15B;      /* dorado suave */
-        --card: #FFFFFF;      /* blanco */
-        --muted: rgba(31,41,55,.72);
-        --border: rgba(31,41,55,.10);
-        --shadow: 0 14px 30px rgba(17,24,39,.08);
-        --radius: 18px;
-        --maxw: 1100px;
-      }
-
-      *{ box-sizing:border-box; }
-      html{ scroll-behavior:smooth; }
-      body{
-        margin:0;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-        color:var(--text);
-        background: radial-gradient(1200px 600px at 10% -10%, rgba(109,40,217,.14), transparent 60%),
-                    radial-gradient(900px 500px at 90% 10%, rgba(198,161,91,.14), transparent 55%),
-                    var(--bg);
-        line-height:1.6;
-      }
-
-      /* Accesibilidad: foco visible */
-      a, button { outline: none; }
-      a:focus-visible, button:focus-visible, .skip:focus-visible{
-        outline: 3px solid rgba(109,40,217,.45);
-        outline-offset: 3px;
-        border-radius: 10px;
-      }
-
-      /* Skip link */
-      .skip{
-        position:absolute;
-        left:-999px;
-        top:10px;
-        background:var(--card);
-        padding:.6rem .9rem;
-        border:1px solid var(--border);
-        box-shadow: var(--shadow);
-        z-index:9999;
-      }
-      .skip:focus-visible{ left:10px; }
-
-      header{
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        backdrop-filter: blur(10px);
-        background: rgba(247,243,238,.72);
-        border-bottom: 1px solid var(--border);
-      }
-      .nav{
-        max-width: var(--maxw);
-        margin: 0 auto;
-        padding: .85rem 1rem;
-        display:flex;
-        gap: 1rem;
-        align-items:center;
-        justify-content: space-between;
-      }
-      .brand{
-        display:flex;
-        gap:.7rem;
-        align-items:center;
-        text-decoration:none;
-        color:inherit;
-        min-width: 220px;
-      }
-      .logo{
-        width: 38px;
-        height: 38px;
-        border-radius: 12px;
-        background:
-          radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
-          linear-gradient(135deg, var(--accent), rgba(198,161,91,.85));
-        box-shadow: 0 10px 22px rgba(109,40,217,.18);
-      }
-      .brand span{
-        font-weight: 750;
-        letter-spacing: .2px;
-      }
-      .menu{
-        display:flex;
-        gap:.45rem;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-      .menu a{
-        text-decoration:none;
-        color: var(--text);
-        font-weight: 600;
-        font-size: .93rem;
-        padding: .45rem .65rem;
-        border-radius: 12px;
-        border: 1px solid transparent;
-      }
-      .menu a:hover{
-        border-color: var(--border);
-        background: rgba(255,255,255,.55);
-      }
-
-      main{ max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 1rem 3.2rem; }
-
-      .hero{
-        padding: 2.1rem 0 1.2rem;
-        display:grid;
-        grid-template-columns: 1.2fr .8fr;
-        gap: 1.1rem;
-        align-items: center;
-      }
-      .hero h1{
-        font-size: clamp(2rem, 3.8vw, 3.2rem);
-        line-height: 1.1;
-        margin: 0 0 .6rem;
-        letter-spacing: -.6px;
-      }
-      .hero p{ margin: 0 0 1rem; color: var(--muted); font-size: 1.06rem; }
-      .chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
-      .chip{
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,.6);
-        padding: .35rem .6rem;
-        border-radius: 999px;
-        font-weight: 650;
-        font-size: .88rem;
-      }
-      .heroCard{
-        background: rgba(255,255,255,.66);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 1rem;
-      }
-      .heroCard .kpi{
-        display:grid;
-        gap:.7rem;
-      }
-      .kpiItem{
-        display:flex; gap:.75rem; align-items:flex-start;
-        padding:.65rem .7rem;
-        background: rgba(255,255,255,.65);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-      }
-      .icon{
-        width: 38px; height: 38px; border-radius: 14px;
-        background: rgba(109,40,217,.12);
-        border: 1px solid rgba(109,40,217,.18);
-        display:grid; place-items:center;
-        flex: 0 0 auto;
-      }
-      .icon svg{ width: 22px; height: 22px; stroke: var(--accent); }
-      .kpiItem b{ display:block; }
-      .kpiItem span{ color: var(--muted); font-size: .95rem; display:block; margin-top:.1rem; }
-
-      section{ margin-top: 1.8rem; }
-      .sectionTitle{
-        display:flex; align-items:flex-end; justify-content:space-between;
-        gap: 1rem;
-        margin-bottom: .85rem;
-      }
-      .sectionTitle h2{
-        margin:0;
-        font-size: 1.55rem;
-        letter-spacing: -.2px;
-      }
-      .sectionTitle .hint{
-        color: var(--muted);
-        font-size: .95rem;
-        margin: 0;
-      }
-
-      .card{
-        background: rgba(255,255,255,.70);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: 1.1rem;
-      }
-
-      /* Nosotros */
-      .teamGrid{
-        display:grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: .85rem;
-      }
-      .member{
-        background: rgba(255,255,255,.72);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: .85rem;
-        display:flex;
-        flex-direction: column;
-        gap: .65rem;
-        height: 100%;
-      }
-      .avatar{
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        border-radius: 14px;
-        background: linear-gradient(135deg, rgba(109,40,217,.18), rgba(198,161,91,.18));
-        border: 1px dashed rgba(31,41,55,.25);
-        display:grid; place-items:center;
-        overflow:hidden;
-      }
-      .avatar img{
-        width:100%; height:100%; object-fit: cover;
-      }
-      .member h3{
-        margin:0;
-        font-size: 1.05rem;
-        text-align: center;
-        line-height: 1.25;
-      }
-      .member p{
-        margin:0;
-        color: var(--muted);
-        font-size: .95rem;
-        text-align: center;
-        display: -webkit-box;
-        -webkit-line-clamp: 5;      /* limita a 5 líneas para que todo quede parejo */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-
-      /* === BIO EXPANDIBLE (Leer más) === */
-      .bio-short{ margin:0; }
-
-      .moreBtn{
-        margin-top: .55rem;
-        width: 100%;
-        border: 1px solid rgba(109,40,217,.22);
-        background: rgba(109,40,217,.08);
-        color: var(--accent);
-        font-weight: 750;
-        padding: .55rem .7rem;
-        border-radius: 12px;
-        cursor: pointer;
-      }
-      .moreBtn:hover{
-        transform: translateY(-1px);
-        background: rgba(109,40,217,.12);
-        border-color: rgba(109,40,217,.30);
-      }
-
-      .bio-long{
-        margin-top: .6rem;
-        border-top: 1px dashed rgba(31,41,55,.18);
-        padding-top: .6rem;
-        color: var(--muted);
-        font-size: .95rem;
-        text-align: left;
-      }
-      .bio-long p{ margin: 0; }
-
-
-      /* Escenarios */
-      .tabs{
-        display:grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: .6rem;
-        margin-bottom: .85rem;
-      }
-      .tabBtn{
-        cursor:pointer;
-        padding: .75rem .8rem;
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,.65);
-        font-weight: 750;
-        text-align: center;
-        color: var(--text);
-      }
-      .tabBtn[aria-selected="true"]{
-        background: rgba(109,40,217,.12);
-        border-color: rgba(109,40,217,.25);
-        color: var(--accent);
-      }
-      /*.panel{
-          display: block;            
-          max-height: 0;
-          overflow: hidden;
-          opacity: 0;
-          transform: translateY(6px);
-          transition: opacity .25s ease, transform .25s ease, max-height .35s ease;
-      }*/
-      /* ====== ESCENARIOS (TABS) con transición SIN perder texto ====== */
-      .panel{
-        display: none;               /* solo se ocultan los no activos */
-        opacity: 0;
-        transform: translateY(6px);
-      }
-      /*.panel.active{
-          display: block;
-          max-height: 2000px;         
-          opacity: 1;
-          transform: translateY(0);
-      }*/
-      .panel.active{
-        display: block;              /* el activo sí se muestra */
-        animation: panelIn .25s ease forwards;
-      }
-      @keyframes panelIn{
-        from { opacity: 0; transform: translateY(6px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-
-      /* Caja “contenido listo” */
-      .grid3{
-        display:grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: .85rem;
-        margin-top: .85rem;
-      }
-      .miniCard{
-        background: rgba(255,255,255,.72);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: .9rem;
-      }
-      .miniCard h4{ margin:.1rem 0 .4rem; color: var(--accent); }
-      .miniCard ul{ margin:.4rem 0 0 1rem; padding:0;   display: grid; gap: .35rem;}
-      .miniCard li{ margin:0; }
-
-      /* Footer */
-      footer{
-        margin-top: 2.4rem;
-        padding: 1.2rem 1rem 2rem;
-        border-top: 1px solid var(--border);
-        color: var(--muted);
-        text-align: center;
-      }
-
-      /* Responsive */
-      @media (max-width: 980px){
-        .hero{ grid-template-columns: 1fr; }
-        .teamGrid{ grid-template-columns: repeat(2, 1fr); }
-        .tabs{ grid-template-columns: 1fr 1fr; }
-        .grid3{ grid-template-columns: 1fr; }
-        .brand{ min-width: unset; }
-      }
-      @media (max-width: 520px){
-        .teamGrid{ grid-template-columns: 1fr; }
-        .menu a{ font-size: .9rem; padding: .4rem .55rem; }
-      }
-
-      /* ==== EFECTOS PRO (hover + micro-animaciones) ==== */
-
-      /* Suaviza animaciones (ligero) */
-      * { transition: background-color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
-
-      /* Cards: elevación suave al pasar */
-      .card:hover{
-        transform: translateY(-2px);
-        box-shadow: 0 18px 38px rgba(17,24,39,.10);
-      }
-
-      /* Foto miembro: hover elegante */
-      .member{
-        position: relative;
-        overflow: hidden;
-      }
-      .member:hover{
-        transform: translateY(-4px);
-        box-shadow: 0 18px 38px rgba(17,24,39,.12);
-      }
-      .member .avatar{
-        position: relative;
-      }
-      .member .avatar::after{
-        content:"";
-        position:absolute;
-        inset:0;
-        /*background: radial-gradient(700px 240px at 30% 20%, rgba(109,40,217,.22), transparent 55%),
-                    radial-gradient(700px 240px at 80% 80%, rgba(198,161,91,.18), transparent 60%); */
-        background: linear-gradient(135deg, rgba(109,40,217,.08), rgba(198,161,91,.06));
-        opacity: 0;
-        mix-blend-mode: soft-light;   /* clave: no “tinta” la foto */
-        transition: opacity .25s ease;
-      }
-      .member:hover .avatar::after{ opacity: .35; }
-      .member:hover .avatar img{ transform: scale(1.04); }
-
-      /* Chip clickable: que se note */
-      .chip{
-        cursor: default;
-        user-select: none;
-      }
-      .chip.linkChip{
-        cursor: pointer;
-      }
-      .chip.linkChip:hover{
-        transform: translateY(-2px);
-        background: rgba(109,40,217,.10);
-        border-color: rgba(109,40,217,.25);
-      }
-
-      /* Tab buttons: hover + selected */
-      .tabBtn:hover{
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(17,24,39,.08);
-      }
-
-      /* Transición de panel (escenarios) */
-      .panel{
-        opacity: 0;
-        transform: translateY(6px);
-        transition: opacity .25s ease, transform .25s ease;
-      }
-      .panel.active{
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Mini cards (escenario 1): hover */
-      .miniCard:hover{
-        transform: translateY(-3px);
-        box-shadow: 0 16px 34px rgba(17,24,39,.10);
-        border-color: rgba(109,40,217,.18);
-      }
-
-      /* Reduce animación para personas con sensibilidad */
-      @media (prefers-reduced-motion: reduce){
-        *{ transition:none !important; }
-        .panel{ opacity:1 !important; transform:none !important; }
-      }
-
-      /* ===== MODAL ELEGANTE (Nosotros) ===== */
-      .modalBackdrop{
-        position: fixed;
-        inset: 0;
-        display: none;
-        place-items: center;
-        padding: 1rem;
-        background: rgba(17,24,39,.45);
-        backdrop-filter: blur(8px);
-        z-index: 2000;
-      }
-
-      .modalBackdrop.open{
-        display: grid;
-      }
-
-      .modalCard{
-        width: min(920px, 100%);
-        background: rgba(255,255,255,.86);
-        border: 1px solid rgba(31,41,55,.12);
-        border-radius: 22px;
-        box-shadow: 0 28px 70px rgba(17,24,39,.25);
-        overflow: hidden;
-        transform: translateY(22px);
-        opacity: 0;
-        animation: modalIn .22s ease forwards;
-        position: relative;
-      }
-
-      @keyframes modalIn{
-          from { transform: translateY(22px); opacity: 0; }
-          to   { transform: translateY(0); opacity: 1; }
-      }
-
-      .modalClose{
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 40px;
-        height: 40px;
-        border-radius: 14px;
-        border: 1px solid rgba(31,41,55,.12);
-        background: rgba(255,255,255,.9);
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: 800;
-        color: var(--text);
-      }
-
-      .modalClose:hover{
-        transform: translateY(-1px);
-        box-shadow: 0 10px 20px rgba(17,24,39,.10);
-      }
-
-      .modalHeader{
-        padding: 1.1rem 1.2rem .2rem;
-        border-bottom: 1px solid rgba(31,41,55,.10);
-      }
-
-      .modalHeader h3{
-        margin: 0;
-        font-size: 1.35rem;
-        letter-spacing: -.2px;
-      }
-
-      .modalRole{
-        margin: .25rem 0 .7rem;
-        color: var(--muted);
-        font-weight: 650;
-      }
-
-      .modalContent{
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        gap: 1rem;
-        padding: 1.1rem 1.2rem 1.3rem;
-      }
-
-      .modalPhoto{
-        border-radius: 18px;
-        overflow: hidden;
-        border: 1px solid rgba(31,41,55,.10);
-        background: linear-gradient(135deg, rgba(109,40,217,.12), rgba(198,161,91,.10));
-        aspect-ratio: 1/1;
-      }
-
-      .modalPhoto img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .modalText{
-        color: var(--text);
-      }
-
-      .modalText p{
-        margin: 0;
-        color: rgba(31,41,55,.78);
-        line-height: 1.65;
-      }
-
-      /* Botón “Leer más” en tarjetas */
-      .moreBtn{
-        margin-top: .55rem;
-        width: 100%;
-        border: 1px solid rgba(109,40,217,.22);
-        background: rgba(109,40,217,.08);
-        color: var(--accent);
-        font-weight: 750;
-        padding: .55rem .7rem;
-        border-radius: 12px;
-        cursor: pointer;
-      }
-      .moreBtn:hover{
-        transform: translateY(-1px);
-        background: rgba(109,40,217,.12);
-        border-color: rgba(109,40,217,.30);
-        box-shadow: 0 10px 20px rgba(17,24,39,.08);
-      }
-
-      /* Responsive modal */
-      @media (max-width: 820px){
-        .modalContent{ grid-template-columns: 1fr; }
-        .modalPhoto{ max-width: 320px; }
-      }
-
-      /* Evita que el header sticky tape el contenido al ir a anclas */
-      section{ scroll-margin-top: 90px; }
-
-      /* ===== Menú hamburguesa (mobile) ===== */
-      .hamburger{
-        display: none;
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,.70);
-        border-radius: 12px;
-        padding: .45rem .7rem;
-        font-size: 1.1rem;
-        font-weight: 800;
-        cursor: pointer;
-      }
-
-      .hamburger:hover{
-        box-shadow: 0 10px 20px rgba(17,24,39,.10);
-        transform: translateY(-1px);
-      }
-
-      /* Mobile menu hidden by default */
-      @media (max-width: 820px){
-        .hamburger{ display: inline-flex; align-items:center; justify-content:center; }
-
-        .menu{
-          display: none;
-          position: absolute;
-          right: 1rem;
-          top: 64px;
-          width: min(260px, calc(100vw - 2rem));
-          flex-direction: column;
-          gap: .25rem;
-          padding: .6rem;
-          background: rgba(247,243,238,.96);
-          border: 1px solid var(--border);
-          border-radius: 16px;
-          box-shadow: 0 18px 40px rgba(17,24,39,.14);
-        }
-
-        .menu.open{ display: flex; }
-
-        .menu a{
-          display: block;
-          width: 100%;
-          padding: .65rem .75rem;
-          border-radius: 12px;
-          background: rgba(255,255,255,.70);
-          border: 1px solid rgba(31,41,55,.10);
-        }
-      }
-
-      /* Hero más cómodo en móviles */
-      @media (max-width: 820px){
-        .hero{
-          padding-top: 1.4rem;
-          gap: .9rem;
-        }
-        .heroCard{ padding: .9rem; }
-        .kpiItem{ padding: .6rem; }
-        .nav{ position: relative; } /* para que el menú desplegable se ubique bien */
-      }
-
-      /* ===== MATRIZ (preview centrado) ===== */
-      .matrixBlock{
-        margin-top: 1rem;
-      }
-      .matrixHeader h3{
-        margin: 0;
-        font-size: 1.2rem;
-        letter-spacing: -.2px;
-      }
-      .matrixHeader p{
-        margin: .25rem 0 .75rem;
-        color: var(--muted);
-      }
-
-      .matrixPreview{
-        width: 100%;
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,.68);
-        border-radius: 16px;
-        padding: .75rem;
-        cursor: zoom-in;
-        box-shadow: var(--shadow);
-        display: grid;
-        place-items: center;
-      }
-
-      .matrixPreview img{
-        width: min(980px, 100%);
-        height: auto;
-        border-radius: 12px;
-        display: block;
-      }
-
-      /* ===== MODAL IMAGEN (zoom + arrastre) ===== */
-      .imgModalBackdrop{
-        position: fixed;
-        inset: 0;
-        display: none;
-        place-items: center;
-        padding: 1rem;
-        background: rgba(17,24,39,.50);
-        backdrop-filter: blur(8px);
-        z-index: 3000;
-      }
-      .imgModalBackdrop.open{ display: grid; }
-
-      .imgModalCard{
-        width: min(1100px, 100%);
-        background: rgba(255,255,255,.90);
-        border: 1px solid rgba(31,41,55,.12);
-        border-radius: 22px;
-        box-shadow: 0 28px 70px rgba(17,24,39,.25);
-        overflow: hidden;
-        animation: imgSlideUp .22s ease forwards;
-      }
-      @keyframes imgSlideUp{
-        from { transform: translateY(22px); opacity: 0; }
-        to   { transform: translateY(0); opacity: 1; }
-      }
-
-      .imgModalTop{
-        display:flex;
-        align-items:center;
-        justify-content: space-between;
-        gap: .8rem;
-        padding: .8rem .9rem;
-        border-bottom: 1px solid rgba(31,41,55,.10);
-      }
-      .imgModalTitle{
-        font-weight: 800;
-        color: var(--text);
-      }
-      .imgModalControls{
-        display:flex;
-        gap: .4rem;
-        flex-wrap: wrap;
-      }
-      .imgBtn{
-        border: 1px solid rgba(31,41,55,.14);
-        background: rgba(255,255,255,.92);
-        border-radius: 12px;
-        padding: .45rem .6rem;
-        font-weight: 800;
-        cursor: pointer;
-      }
-      .imgBtn:hover{
-        transform: translateY(-1px);
-        box-shadow: 0 10px 20px rgba(17,24,39,.10);
-      }
-      .imgBtn.close{
-        border-color: rgba(109,40,217,.25);
-        color: var(--accent);
-      }
-
-      .imgViewport{
-        height: min(72vh, 760px);
-        background: rgba(247,243,238,.65);
-        overflow: hidden;
-        cursor: grab;
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-      }
-      .imgViewport:active{ cursor: grabbing; }
-
-      .imgViewport img{
-        user-select: none;
-        -webkit-user-drag: none;
-        transform-origin: 0 0;
-        will-change: transform;
-        display: block;
-        max-width: none;          /* importante para que el scale funcione */
-        height: auto;
-      }
-
-      .imgHint{
-        padding: .6rem .9rem .9rem;
-        color: var(--muted);
-        font-size: .92rem;
-      }
-
-      /* Mobile */
-      @media (max-width: 520px){
-        .imgViewport{ 
-          height: 60vh;
-          touch-action: none;
-        }
-        
-      }
-
-      /* ===== Subtítulos con vida (morado + detalle) ===== */
-      .subTitleRow{
-        display:flex;
-        align-items:center;
-        justify-content: space-between;
-        gap: .75rem;
-        flex-wrap: wrap;
-        margin-top: .4rem;
-      }
-      .subTitle{
-        margin: 0;
-        font-size: 1.25rem;
-        letter-spacing: -.2px;
-        color: var(--accent);
-        position: relative;
-        padding-left: .65rem;
-      }
-      .subTitle::before{
-        content:"";
-        position:absolute;
-        left:0; top:.2rem;
-        width: 4px; height: 1.15rem;
-        border-radius: 999px;
-        background: linear-gradient(180deg, var(--accent), rgba(198,161,91,.95));
-      }
-      .subBadge{
-        font-size: .85rem;
-        font-weight: 750;
-        padding: .25rem .55rem;
-        border-radius: 999px;
-        border: 1px solid rgba(109,40,217,.20);
-        background: rgba(109,40,217,.08);
-        color: var(--accent);
-      }
-      .subHint{
-        margin: .35rem 0 .75rem;
-        color: var(--muted);
-      }
-
-      /* ===== MATRIZ: vista previa elegante y contenida ===== */
-      .matrixPreview{
-        width: 100%;
-        border: 1px solid var(--border);
-        background: rgba(255,255,255,.68);
-        border-radius: 16px;
-        padding: .9rem;
-        cursor: zoom-in;
-        box-shadow: var(--shadow);
-        display: grid;
-        place-items: center;
-      }
-
-      .matrixPreview img{
-        width: 100%;
-        max-width: 980px;
-        max-height: 520px;        /* CLAVE: evita que “se coma” la pantalla */
-        height: auto;
-        object-fit: contain;       /* mantiene proporción */
-        border-radius: 12px;
-        display: block;
-        border: 1px solid rgba(31,41,55,.08);
-      }
-
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
   </head>
 
-<body>
+<body class="has-bg-image">
 <a class="skip" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="readingProgress" aria-hidden="true"><div id="readingProgress"></div></div>
 
 <header>
   <nav class="nav" aria-label="Navegación principal">
     <a class="brand" href="#inicio">
-      <div class="logo" aria-hidden="true"></div>
+      <div class="logo" aria-hidden="true"><svg class="logoSvg" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M6 2h14v20H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M9 7h8"/><path d="M9 11h8"/></svg></div>
       <span>Construcción Histórica de las Infancias</span>
     </a>
+
+    <!-- Theme switch (Auto / Oscuro / Claro) -->
+    <div class="themeSwitch" role="group" aria-label="Tema">
+      <button class="themeOpt is-active" type="button" data-theme="auto" aria-pressed="true" title="Tema automático">
+        <span aria-hidden="true">🌓</span><span class="themeTxt">Auto</span>
+      </button>
+      <button class="themeOpt" type="button" data-theme="dark" aria-pressed="false" title="Tema oscuro">
+        <span aria-hidden="true">🌙</span><span class="themeTxt">Oscuro</span>
+      </button>
+      <button class="themeOpt" type="button" data-theme="light" aria-pressed="false" title="Tema claro">
+        <span aria-hidden="true">☀️</span><span class="themeTxt">Claro</span>
+      </button>
+    </div>
 
     <button class="hamburger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
       ☰
@@ -849,69 +48,149 @@
 
 <main id="contenido">
   <!-- HERO -->
-  <section id="inicio" class="hero" aria-label="Portada">
-    <div>
-      <h1>Construcción Histórica de las Infancias</h1>
-      <p>
-        Recurso digital del curso <b>Infancias: Historias y Perspectivas</b>.
-        Aquí presentamos nuestra construcción del contenido de <b>“El lugar de las infancias”</b>.
-      </p>
-      <div class="chips" aria-label="Etiquetas del proyecto">
-        <a class="chip linkChip" href="#video-infografia" >Infografía + Línea de tiempo</a>
+
+  <section id="inicio" class="hero heroLayout" aria-label="Portada">
+
+    <!-- Banner Carrusel -->
+    <div class="heroCarousel" aria-label="Banner carrusel" tabindex="0">
+      <button class="carouselBtn prev" type="button" aria-label="Anterior">‹</button>
+
+      <div class="carouselViewport">
+        <div class="carouselTrack" id="carouselTrack">
+          
+          <!-- SLIDE 1 -->
+          <figure class="carouselSlide" aria-label="Diapositiva 1">
+            <img src="assets/img/hero.webp" alt="Infancias: atmósfera cálida y antigua" loading="lazy">
+
+            <div class="slideOverlay">
+              <h2 class="slideTitle">El lugar de las infancias</h2>
+              <p class="slideText"><br><br>Explora cómo cambian los significados de niño, niña, niñez e infancia a través del tiempo.</p>
+
+              <div class="slideActions">
+                <a class="slideBtn" href="#video-infografia">Ver video</a>
+                <a class="slideBtn" href="#matriz-historica">Ver matriz</a>
+                <button class="slideBtn ghost" type="button" data-zoom="assets/img/hero.webp">Zoom</button>
+              </div>
+            </div>
+          </figure>
+
+          <!-- SLIDE 2 -->
+          <figure class="carouselSlide" aria-label="Diapositiva 2">
+            <img src="assets/img/hero.webp" alt="Trayectos históricos: avances y cambios en la niñez" loading="lazy">
+
+            <div class="slideOverlay">
+              <h2 class="slideTitle">Trayectos históricos</h2>
+              <p class="slideText"><br><br>Próximamente: organización del contenido histórico, autores y transformaciones de la infancia.</p>
+
+              <div class="slideActions">
+                <a class="slideBtn" href="#escenarios">Ver estructura</a>
+                <a class="slideBtn" href="#contacto">Contactar</a>
+              </div>
+            </div>
+          </figure>
+
+          <!-- SLIDE 3 -->
+          <figure class="carouselSlide" aria-label="Diapositiva 3">
+            <img src="assets/img/hero.webp" alt="Desafíos y transformación: reflexiones sobre las infancias" loading="lazy">
+
+            <div class="slideOverlay">
+              <h2 class="slideTitle">Transformación y desafíos</h2>
+              <p class="slideText"><br><br>Próximamente: realidades actuales y desafíos para la acción pedagógica y social.</p>
+
+              <div class="slideActions">
+                <a class="slideBtn" href="#escenarios">Abrir pestañas</a>
+                <a class="slideBtn" href="#nosotros">Conocer equipo</a>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <button class="carouselBtn next" type="button" aria-label="Siguiente">›</button>
+
+      <div class="carouselDots" role="tablist" aria-label="Indicadores del carrusel">
+        <button class="dot is-active" type="button" data-index="0" aria-label="Ir a diapositiva 1"></button>
+        <button class="dot" type="button" data-index="1" aria-label="Ir a diapositiva 2"></button>
+        <button class="dot" type="button" data-index="2" aria-label="Ir a diapositiva 3"></button>
       </div>
     </div>
 
-    <aside class="heroCard" aria-label="Resumen rápido">
-      <div class="kpi">
-        <div class="kpiItem">
-          <div class="icon" aria-hidden="true">
-            <!-- icon outline -->
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M12 3v18"></path>
-              <path d="M5 8h14"></path>
-              <path d="M7 12h10"></path>
-              <path d="M9 16h6"></path>
-            </svg>
-          </div>
-          <div>
-            <b>Estructura por escenarios</b>
-            <span>Tendrás a dispocisión las 4 secciones del curso.</span>
-          </div>
-        </div>
-        <div class="kpiItem">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M4 7h16"></path>
-              <path d="M4 12h16"></path>
-              <path d="M4 17h10"></path>
-            </svg>
-          </div>
-          <div>
-            <b>El recorrido</b>
-            <span>Encontrarás los insumos para comprender como se han modificado conceptos asociados a la niñez con el paso del tiempo.</span>
-          </div>
-        </div>
-        <div class="kpiItem">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-              <path d="M12 21s7-4.5 7-10a4 4 0 0 0-7-2 4 4 0 0 0-7 2c0 5.5 7 10 7 10z"></path>
-            </svg>
-          </div>
-          <div>
-            <b>La web</b>
-            <span>Este espacio más que ser un paso en el curso, es un producto hecho con el corazón.</span>
-          </div>
-        </div>
+    <!-- Dashboard Card -->
+    <div class="heroDashCard card" aria-label="Presentación del proyecto">
+      <div class="heroTop">
+        <h1>Construcción Histórica de las Infancias</h1>
+        <p class="heroLead">
+          Recurso digital del curso <b>Infancias: Historias y Perspectivas</b>.
+          Aquí presentamos nuestra construcción de los escenarios, iniciando por <b>“El lugar de las infancias”</b>.
+        </p>
+
+        <div class="heroChips" aria-label="Accesos rápidos">
+          <a class="chip linkChip" href="#matriz-historica">
+            <span class="chipIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M3 5h18v14H3z"/><path d="M3 9h18"/><path d="M8 5v14"/><path d="M16 5v14"/>
+              </svg>
+            </span>
+            Matriz histórica
+          </a>
+
+          <a class="chip linkChip" href="#video-infografia">
+            <span class="chipIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M8 5v14l11-7-11-7z"/>
+              </svg>
+            </span>
+            Infografía + línea de tiempo
+          </a>
         </div>
       </div>
-    </aside>
+
+      <!-- KPI cards -->
+      <div class="heroKpis" aria-label="Resumen rápido">
+        <article class="kpiCard">
+          <div class="kpiIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M6 2h14v20H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Estructura por escenarios</h3>
+            <p>Tendrás a disposición las 4 secciones del curso.</p>
+          </div>
+        </article>
+
+        <article class="kpiCard">
+          <div class="kpiIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 12h10"/><path d="M9 16h6"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Recorrido histórico</h3>
+            <p>Comprende cómo cambian los conceptos de niñez e infancia con el paso del tiempo.</p>
+          </div>
+        </article>
+
+        <article class="kpiCard">
+          <div class="kpiIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M12 21s7-4.5 7-10a4 4 0 0 0-7-2 4 4 0 0 0-7 2c0 5.5 7 10 7 10z"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Hecho con propósito</h3>
+            <p>Un producto pensado para leer, consultar y socializar.</p>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
   <!-- NOSOTROS -->
   <section id="nosotros" aria-label="Sección Nosotros">
     <div class="sectionTitle">
       <h2>Nosotros</h2>
-      <p class="hint">Conoce un poco del equipo.</p>
+      <p class="hint">Conoce un poco del equipo y su rol.</p>
     </div>
 
     <div class="card">
@@ -920,7 +199,7 @@
         <article class="member">
           <div class="avatar">
             <span style="color:rgba(31,41,55,.55);font-weight:700;">
-              <img src="img/foto1.jpg" alt="Foto de Janeth Andrea Montalvo">
+              <img src="assets/img/foto1.jpg" alt="Foto de Janeth Andrea Montalvo">
             </span>
           </div>
           <h3>Jineth Andrea Montalvo Mesa</h3>
@@ -933,7 +212,7 @@
             type="button"
             data-name="Jineth Andrea Montalvo Mesa"
             data-role="Rol: Evaluadora"
-            data-img="img/foto1.jpg"
+            data-img="assets/img/foto1.jpg"
             data-full="Actualmente estudiante de Licenciatura en Educación Infantil de la UNAD. En esta actividad cumplo el rol de evaluadora: observo el desarrollo del trabajo y, cuando es necesario, propongo recomendaciones para apoyar el proceso colaborativo.">
             Leer más
           </button>
@@ -942,7 +221,7 @@
         <article class="member">
           <div class="avatar">
             <span style="color:rgba(31,41,55,.55);font-weight:700;">
-              <img src="img/foto2.jpg" alt="Foto de Nury Constanza Cobos Torres">
+              <img src="assets/img/foto2.jpg" alt="Foto de Nury Constanza Cobos Torres">
             </span>
           </div>
           <h3>Nury Constanza Cobos Torres</h3>
@@ -951,7 +230,7 @@
             <button class="moreBtn" type="button"
               data-name="Nury Constanza Cobos Torres"
               data-role="Rol: Relatora"
-              data-img="img/foto2.jpg"
+              data-img="assets/img/foto2.jpg"
               data-full="Soy madre comunitaria del municipio Salento y estudio Licenciatura en Educación Infantil en la UNAD UDR La Tebaida. Me considero respetuosa, honesta y trabajadora; lo más bonito de mí es que soy perseverante, alegre y sencilla. Como relatora, apoyo al equipo comunicando y organizando para que el grupo no se disperse y el trabajo avance con claridad.">
               Leer más
             </button>
@@ -960,7 +239,7 @@
         <article class="member">
           <div class="avatar">
             <span style="color:rgba(31,41,55,.55);font-weight:700;">
-                <img src="img/foto3.jpg" alt="Foto de Luisa Fernanda Londoño Marulanda">
+                <img src="assets/img/foto3.jpg" alt="Foto de Luisa Fernanda Londoño Marulanda">
             </span>
           </div>
           <h3>Luisa Fernanda Londoño Marulanda</h3>
@@ -969,7 +248,7 @@
           <button class="moreBtn" type="button"
             data-name="Luiza Fernanda Londoño Marulanda"
             data-role="Rol: Veedora de autenticidad"
-            data-img="img/foto3.jpg"
+            data-img="assets/img/foto3.jpg"
             data-full="Tengo 21 años, vivo en La Tebaida y hago tejidos en crochet, especialmente amigurumis, porque me permite ser creativa. Actualmente estudio en la UNAD (UDR La Tebaida). En el desarrollo de la actividad asumí el rol de veedora de autenticidad: estuve pendiente de que los aportes fueran originales y que, si se utilizaba información de alguna fuente, estuviera bien citada, buscando responsabilidad y cumplimiento de las normas académicas.">
             Leer más
           </button>
@@ -978,7 +257,7 @@
         <article class="member">
           <div class="avatar">
             <span style="color:rgba(31,41,55,.55);font-weight:700;">
-                <img src="img/foto4.jpg" alt="Foto de Diana Milena Tabares Arán">
+                <img src="assets/img/foto4.jpg" alt="Foto de Diana Milena Tabares Arán">
             </span>
           </div>
           <h3>Diana Milena Tabares Arango</h3>
@@ -987,7 +266,7 @@
           <button class="moreBtn" type="button"
             data-name="Diana Milena Tabares Arango"
             data-role="Rol: Utilera"
-            data-img="img/foto4.jpg"
+            data-img="assets/img/foto4.jpg"
             data-full="Tengo 35 años y soy estudiante de Licenciatura en Educación Infantil en la UNAD (UDR La Tebaida). En el trabajo asumí el rol de utilera: apoyé la organización y disposición de los recursos necesarios para construir la actividad, facilitando el acceso a materiales y aportes del equipo. Procuré mantener el orden y la disponibilidad de la información para avanzar en el trabajo colaborativo y lograr los objetivos propuestos.">
             Leer más
           </button>
@@ -995,7 +274,7 @@
 
         <article class="member">
           <div class="avatar">
-            <img src="img/foto5.jpg" alt="Foto de José de Jesús Franco Duque">
+            <img src="assets/img/foto5.jpg" alt="Foto de José de Jesús Franco Duque">
           </div>
           <h3>José de Jesús Franco Duque</h3>
           <p>Soy de Santa Rosa de Cabal, tengo 24 años y dos hijos. La carrera me ha ayudado a comprender el desarrollo infantil y a acompañar mejor a 
@@ -1003,7 +282,7 @@
           <button class="moreBtn" type="button"
             data-name="José de Jesús Franco Duque"
             data-role="Rol: Dinamizador"
-            data-img="img/foto5.jpg"
+            data-img="assets/img/foto5.jpg"
             data-full="Tengo 24 años, soy de Santa Rosa de Cabal (Risaralda) y tengo dos hijos. Estoy muy feliz de pertenecer a la Licenciatura en Educación Infantil porque me ha ayudado a comprender el desarrollo de cada niño, cómo vivieron su infancia y su transformación a lo largo de la historia; también me ha permitido entender mejor el crecimiento de mis hijos. Mi rol como dinamizador es apoyar la estructura del trabajo, validar que cada persona cumpla su labor y coordinar tareas para lograr un proceso eficaz y exitoso.">
             Leer más
           </button>
@@ -1016,12 +295,13 @@
   <section id="escenarios" aria-label="Escenarios del curso">
     <div class="sectionTitle">
       <h2>Escenarios del curso</h2>
-      <p class="hint">En este apartado encontrarás la información de cada escenario.</p>
+      <p class="hint">Encuentra la información de cada escenario.</p>
     </div>
 
     <div class="card">
       <!-- Tabs -->
       <div class="tabs" role="tablist" aria-label="Pestañas de escenarios">
+          <div class="tabIndicator" aria-hidden="true"></div>
         <button class="tabBtn" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">1. El Lugar de las Infancias</button>
         <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">2. Trayectos Históricos</button>
         <button class="tabBtn" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">3. Transformación de las Realidades</button>
@@ -1031,26 +311,26 @@
       <!-- Panel 1: contenido -->
       <div id="panel-1" class="panel active" role="tabpanel" aria-labelledby="tab-1">
         <p style="margin:0;color:var(--muted);">
-          A continuación se presenta la evolución de los conceptos de niño-niña-niñez e infancia desde la Edad Antigua, Media y Moderna.
+          A continuación se presenta la evolución de los conceptos de niño, niña, niñez e infancia desde la Edad Antigua, Media y Moderna.
         </p>
 
         <!-- MATRIZ PNG (vista previa centrada + clic para ampliar) -->
-        <div class="matrixBlock" aria-label="Matriz de revisión histórica">
+        <div id="matriz-historica" class="matrixBlock" aria-label="Matriz de revisión histórica">
           <div class="subTitleRow">
             <h3 class="subTitle">Matriz de revisión histórica</h3>
-            <span class="subBadge">Actividad 1 • Escenario 1</span>
+            <span class="subBadge">Producto visual</span>
           </div>
           <p class="subHint">Haz clic para ampliar. Se abrirá ajustada a la pantalla con zoom y arrastre.</p>
 
           <button class="matrixPreview" type="button"
-                  data-img="img/matriz_escenario1.webp"
+                  data-img="assets/img/matriz_escenario1.webp"
                   aria-label="Abrir matriz en pantalla completa">
-            <img src="img/matriz_escenario1.webp" alt="Matriz de revisión histórica del escenario 1" loading="lazy">
+            <img src="assets/img/matriz_escenario1.webp" alt="Matriz de revisión histórica del escenario 1" loading="lazy">
           </button>
         </div>
 
         <div class="grid3" aria-label="Bloques de contenido del escenario 1">
-          <div class="miniCard">
+          <div class="miniCard" data-era="antigua">
             <h4>Edad Antigua (3000 a. C.–476 d. C.)</h4>
             <ul>
               <li><b>Concepciones:</b> niño como “adulto pequeño”; Esparta: futuros soldados; propiedad del padre.</li>
@@ -1058,11 +338,11 @@
               <li><b>Contexto cultural:</b> sin protección institucional; formación para guerra/trabajo; infanticidio/abandono aceptados por algunas culturas.</li>
             </ul>
             <p style="margin:.6rem 0 0;color:var(--muted);font-size:.92rem;">
-              <b>Referentes (según matriz):</b> familia, autoridad paterna, jerarquías.
+              <b>Referentes:</b> Familia, autoridad paterna, jerarquías.
             </p>
           </div>
 
-          <div class="miniCard">
+          <div class="miniCard" data-era="media">
             <h4>Edad Media (476–1453 d. C.)</h4>
             <ul>
               <li><b>Concepciones:</b> disciplina rigurosa; obediencia; roles tempranos; infancia breve.</li>
@@ -1070,11 +350,11 @@
               <li><b>Contexto cultural:</b> educación limitada y religiosa; niño frágil; familia y comunidad como formadores; pecado original.</li>
             </ul>
             <p style="margin:.6rem 0 0;color:var(--muted);font-size:.92rem;">
-              <b>Referentes (según matriz):</b> religión, familia, comunidad.
+              <b>Referentes:</b> Religión, familia, comunidad.
             </p>
           </div>
 
-          <div class="miniCard">
+          <div class="miniCard" data-era="moderna">
             <h4>Edad Moderna (1453–1789 d. C.)</h4>
             <ul>
               <li><b>Concepciones:</b> inocencia; niñez como etapa diferente; vínculos afectivos; visión humanista y educación formal.</li>
@@ -1082,7 +362,7 @@
               <li><b>Contexto cultural:</b> niños como sujetos de derechos; mayor atención educativa; educación base del futuro; infancia con valor propio.</li>
             </ul>
             <p style="margin:.6rem 0 0;color:var(--muted);font-size:.92rem;">
-              <b>Referentes (según matriz):</b> escuela, enfoque educativo, derechos.
+              <b>Referentes:</b> Escuela, enfoque educativo, derechos.
             </p>
           </div>
         </div>
@@ -1096,12 +376,7 @@
           <p class="subHint" style="margin-top:.1rem;">
             Recurso de apoyo para comprender la evolución de los conceptos en las edades Antigua, Media y Moderna.
           </p>
-            <!-- <p class="hint" style="margin:0;">Si no se ve, abre el enlace directamente.</p> -->
-            <!-- OPCIÓN B: link directo por si no tienes embed -->
-            <p style="margin:.85rem 0 0;color:var(--muted);">
-              Si no se ve el video: <a href="https://youtu.be/7zRcJd8TPXY" target="_blank" rel="noopener">Haz clic aquí.</a>
-            </p>
-          </div>
+        
 
           <!-- OPCIÓN A: incrustar video (YouTube / Drive / Vimeo) -->
           <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,.55);">
@@ -1114,7 +389,11 @@
               allowfullscreen>
             </iframe>
           </div> <!-- /iframe wrapper -->
-
+          <!-- <p class="hint" style="margin:0;">Si no se ve, abre el enlace directamente.</p> -->
+          <!-- OPCIÓN B: link directo por si no tienes embed -->
+          <p style="margin:.85rem 0 0;color:var(--muted);">
+            Si no se ve el video: <a href="https://youtu.be/7zRcJd8TPXY" target="_blank" rel="noopener">Haz clic aquí.</a>
+          </p>
         </div> <!-- /#video-infografia -->
 
       </div> <!-- /#panel-1 -->
@@ -1122,20 +401,20 @@
       <!-- Panel 2-4: placeholder -->
       <div id="panel-2" class="panel" role="tabpanel" aria-labelledby="tab-2">
         <p style="margin:0;color:var(--muted);">
-          Este espacio se desarrollará en el <b>Escenario 3</b>: Trayectos históricos.
+          Este espacio se desarrollará en el <b>Escenario 2</b>: Trayectos históricos.
         </p>
-
+      </div>
 
       <div id="panel-3" class="panel" role="tabpanel" aria-labelledby="tab-3">
         <p style="margin:0;color:var(--muted);">
-          Este espacio se desarrollará en el <b>Escenario 4</b>: Transformación de las realidades.
+          Este espacio se desarrollará en el <b>Escenario 3</b>: Transformación de las realidades.
         </p>
       </div>
 
 
       <div id="panel-4" class="panel" role="tabpanel" aria-labelledby="tab-4">
         <p style="margin:0;color:var(--muted);">
-          Este espacio se desarrollará en el <b>Escenario 5</b>: Desafíos para la acción.
+          Este espacio se desarrollará en el <b>Escenario 4</b>: Desafíos para la acción.
         </p>
       </div>
 
@@ -1157,12 +436,41 @@
     </div>
   </section>
 
-</main>
+    <!-- MAPA DEL SITIO -->
+    <section id="mapa" aria-label="Mapa del sitio">
+      <div class="sectionTitle">
+        <h2 class="titleWithIcon">
+          <span class="titleIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <path d="M3 6l7-2 7 2 4-2v14l-4 2-7-2-7 2-3-1V6z"></path>
+              <path d="M10 4v16"></path>
+              <path d="M17 6v14"></path>
+            </svg>
+          </span>
+          Mapa del sitio
+        </h2>
+        <p class="hint">Accesos rápidos para navegar el contenido.</p>
+      </div>
+
+      <div class="card siteMap">
+        <a class="siteLink" href="#inicio">Inicio</a>
+        <a class="siteLink" href="#nosotros">Nosotros</a>
+        <a class="siteLink" href="#escenarios">Escenarios</a>
+        <a class="siteLink" href="#matriz-historica">Matriz</a>
+        <a class="siteLink" href="#video-infografia">Video</a>
+        <a class="siteLink" href="#contacto">Contacto</a>
+      </div>
+    </section>
+
+  </main>
 
 <footer>
-  <small>© <span id="year"></span> — Construcción histórica de las infancias · Proyecto universitario</small>
+  <small>© <span id="year"></span> — Construcción Histórica de las Infancias · Proyecto universitario</small>
 </footer>
 
+
+
+  <button class="backToTop" id="backToTop" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
 <!-- MODAL (una sola vez) -->
 <div class="modalBackdrop" id="teamModal" aria-hidden="true">
   <div class="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
@@ -1207,364 +515,6 @@
   </div>
 </div>
 
-<script>
-  // Año automático
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Tabs accesibles
-  const tabs = Array.from(document.querySelectorAll('.tabBtn'));
-  const panels = Array.from(document.querySelectorAll('.panel'));
-
-  //function activateTab(index){
-    //tabs.forEach((t,i)=>{
-      //const selected = i === index;
-      //t.setAttribute('aria-selected', selected ? 'true' : 'false');
-      //panels[i].classList.toggle('active', selected);
-      // Quita y pone active para que corra la transición
-      //panels[i].classList.remove('active');
-      //if(selected){
-        //requestAnimationFrame(()=> panels[i].classList.add('active'));
-      //}
-        //if(selected){
-          //panels[i].classList.add('active');
-        //} else {
-          //panels[i].classList.remove('active');
-        //}
-    //});
-    //tabs[index].focus();
-  //}
-
-  //tabs.forEach((btn, i)=>{
-    //btn.addEventListener('click', ()=> activateTab(i));
-    //btn.addEventListener('keydown', (e)=>{
-      //if(e.key === 'ArrowRight') activateTab((i+1)%tabs.length);
-      //if(e.key === 'ArrowLeft') activateTab((i-1+tabs.length)%tabs.length);
-    //});
-  //});
-  function activateTab(index, shouldFocus = false){
-    tabs.forEach((t,i)=>{
-      const selected = i === index;
-      t.setAttribute('aria-selected', selected ? 'true' : 'false');
-      panels[i].classList.toggle('active', selected);
-    });
-    if (shouldFocus) tabs[index].focus();
-  }
-
-  // Click + teclado
-  tabs.forEach((btn, i)=>{
-    btn.addEventListener('click', ()=> activateTab(i, true));
-    btn.addEventListener('keydown', (e)=>{
-      if(e.key === 'ArrowRight') { e.preventDefault(); activateTab((i+1)%tabs.length, true); }
-      if(e.key === 'ArrowLeft')  { e.preventDefault(); activateTab((i-1+tabs.length)%tabs.length, true); }
-    });
-  });
-
-  // Asegura que SIEMPRE haya un panel activo al cargar
-  activateTab(0);
-
-  // Leer más / Leer menos (Nosotros)
-  document.querySelectorAll('.moreBtn').forEach((btn)=>{
-    btn.addEventListener('click', ()=>{
-      const member = btn.closest('.member');
-      const longBox = member.querySelector('.bio-long');
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-
-      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      btn.textContent = expanded ? 'Leer más' : 'Leer menos';
-
-      if(expanded){
-        longBox.hidden = true;
-      } else {
-        longBox.hidden = false;
-      }
-    });
-  });
-
-  // ===== MODAL: Nosotros (Leer más) =====
-  const modal = document.getElementById('teamModal');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalRole = document.getElementById('modalRole');
-  const modalBody = document.getElementById('modalBody');
-  const modalImg = document.getElementById('modalImg');
-
-  let lastFocusedBtn = null;
-
-  function openModalFromButton(btn){
-    lastFocusedBtn = btn;
-
-    modalTitle.textContent = btn.dataset.name || 'Integrante';
-    modalRole.textContent = btn.dataset.role || '';
-    modalBody.textContent = btn.dataset.full || '';
-    const imgSrc = btn.dataset.img || '';
-    modalImg.src = imgSrc;
-    modalImg.alt = `Foto de ${btn.dataset.name || 'integrante'}`;
-
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-
-    // Evita scroll del fondo
-    document.body.style.overflow = 'hidden';
-
-    // Mueve foco al botón de cerrar (accesible)
-    modalCloseBtn.focus();
-  }
-
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-
-    // Devuelve foco al botón que abrió el modal
-    if(lastFocusedBtn) lastFocusedBtn.textContent = 'Leer más';
-    if(lastFocusedBtn) lastFocusedBtn.focus();
-  }
-
-  // Abrir modal
-  document.querySelectorAll('.moreBtn').forEach((btn)=>{
-    btn.addEventListener('click', ()=> openModalFromButton(btn));
-  });
-
-  // Cerrar con X
-  modalCloseBtn.addEventListener('click', closeModal);
-
-  // Cerrar con click fuera de la tarjeta
-  modal.addEventListener('click', (e)=>{
-    if(e.target === modal) closeModal();
-  });
-
-  // Cerrar con ESC
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-  });
-
-  // Forzar inicio al recargar, incluso si hay #hash (ej. #video-infografia)
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    }
-  });
-
-  // Menú hamburguesa (mobile)
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      hamburger.textContent = isOpen ? '✕' : '☰';
-    });
-
-    // Cierra el menú al hacer clic en un enlace
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.textContent = '☰';
-      });
-    });
-
-    // Cierra si haces clic fuera
-    document.addEventListener('click', (e) => {
-      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.textContent = '☰';
-      }
-    });
-  }
-
-  // ===== MATRIZ PNG: modal con zoom y arrastre =====
-  document.addEventListener('DOMContentLoaded', () => {
-    // ===== MATRIZ PNG: modal con zoom + arrastre + pinch =====
-    const imgModal = document.getElementById('imgModal');
-    const imgClose = document.getElementById('imgClose');
-    const imgEl = document.getElementById('imgModalEl');
-    const viewport = document.getElementById('imgViewport');
-    const zoomInBtn = document.getElementById('zoomIn');
-    const zoomOutBtn = document.getElementById('zoomOut');
-    const zoomResetBtn = document.getElementById('zoomReset');
-
-    if (!imgModal || !imgClose || !imgEl || !viewport || !zoomInBtn || !zoomOutBtn || !zoomResetBtn) {
-      console.warn('Modal de imagen: faltan elementos. Revisa IDs imgModal/imgClose/imgModalEl/imgViewport/zoomIn/zoomOut/zoomReset');
-      return;
-    }
-
-    let scale = 1;
-    let x = 0, y = 0;
-
-    // Mouse pan
-    let isPanning = false;
-    let startX = 0, startY = 0;
-
-    // Touch pinch
-    let isPinching = false;
-    let startDist = 0;
-    let startScale = 1;
-
-    function applyTransform() {
-      imgEl.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-    }
-
-    function clampScale(v) {
-      return Math.min(Math.max(v, 0.5), 4);
-    }
-
-    function fitImageToViewport() {
-      const vw = viewport.clientWidth;
-      const vh = viewport.clientHeight;
-
-      const iw = imgEl.naturalWidth;
-      const ih = imgEl.naturalHeight;
-      if (!iw || !ih) return;
-
-      const scaleX = vw / iw;
-      const scaleY = vh / ih;
-      scale = Math.min(scaleX, scaleY, 1);
-
-      x = Math.max(10, (vw - iw * scale) / 2);
-      y = Math.max(10, (vh - ih * scale) / 2);
-      applyTransform();
-    }
-
-    function openImageModal(src, alt) {
-      imgEl.src = src;
-      imgEl.alt = alt || 'Imagen ampliada';
-
-      imgModal.classList.add('open');
-      imgModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-
-      // reset
-      scale = 1; x = 0; y = 0;
-      applyTransform();
-
-      imgEl.onload = () => fitImageToViewport();
-      imgClose.focus();
-    }
-
-    function closeImageModal() {
-      imgModal.classList.remove('open');
-      imgModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    // Abrir desde preview
-    document.querySelectorAll('.matrixPreview').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const src = btn.dataset.img;
-        const alt = btn.querySelector('img')?.alt || 'Matriz';
-        openImageModal(src, alt);
-      });
-    });
-
-    // Botones zoom
-    zoomInBtn.addEventListener('click', () => {
-      scale = clampScale(scale + 0.25);
-      applyTransform();
-    });
-
-    zoomOutBtn.addEventListener('click', () => {
-      scale = clampScale(scale - 0.25);
-      applyTransform();
-    });
-
-    zoomResetBtn.addEventListener('click', () => {
-      fitImageToViewport();
-    });
-
-    // Mouse wheel zoom (desktop)
-    viewport.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      const delta = Math.sign(e.deltaY);
-      const next = delta > 0 ? scale - 0.15 : scale + 0.15;
-      scale = clampScale(next);
-      applyTransform();
-    }, { passive: false });
-
-    // Mouse drag pan (desktop)
-    viewport.addEventListener('mousedown', (e) => {
-      isPanning = true;
-      startX = e.clientX - x;
-      startY = e.clientY - y;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isPanning) return;
-      x = e.clientX - startX;
-      y = e.clientY - startY;
-      applyTransform();
-    });
-
-    window.addEventListener('mouseup', () => {
-      isPanning = false;
-    });
-
-    // === Touch: pan 1 dedo + pinch 2 dedos (mobile) ===
-    function distance(t1, t2) {
-      const dx = t2.clientX - t1.clientX;
-      const dy = t2.clientY - t1.clientY;
-      return Math.hypot(dx, dy);
-    }
-
-    viewport.addEventListener('touchstart', (e) => {
-      if (!imgModal.classList.contains('open')) return;
-
-      if (e.touches.length === 1) {
-        isPanning = true;
-        isPinching = false;
-        startX = e.touches[0].clientX - x;
-        startY = e.touches[0].clientY - y;
-      }
-
-      if (e.touches.length === 2) {
-        isPanning = false;
-        isPinching = true;
-        startDist = distance(e.touches[0], e.touches[1]);
-        startScale = scale;
-      }
-    }, { passive: false });
-
-    viewport.addEventListener('touchmove', (e) => {
-      if (!imgModal.classList.contains('open')) return;
-
-      // Evita scroll mientras interactúas
-      e.preventDefault();
-
-      if (isPanning && e.touches.length === 1) {
-        x = e.touches[0].clientX - startX;
-        y = e.touches[0].clientY - startY;
-        applyTransform();
-      }
-
-      if (isPinching && e.touches.length === 2) {
-        const newDist = distance(e.touches[0], e.touches[1]);
-        const ratio = newDist / startDist;
-        scale = clampScale(startScale * ratio);
-        applyTransform();
-      }
-    }, { passive: false });
-
-    viewport.addEventListener('touchend', () => {
-      isPanning = false;
-      isPinching = false;
-    });
-
-    // Cerrar modal
-    imgClose.addEventListener('click', closeImageModal);
-
-    imgModal.addEventListener('click', (e) => {
-      if (e.target === imgModal) closeImageModal();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && imgModal.classList.contains('open')) closeImageModal();
-    });
-  });
-  
-
-</script>
+<script src="assets/js/app.js" defer></script>
 </body>
 </html>
