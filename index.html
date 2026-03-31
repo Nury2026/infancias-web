@@ -7,6 +7,7 @@
     <meta name="description" content="Página web del curso Infancias: Historias y Perspectivas." />
 
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="data:,">
   </head>
 
 <body class="has-bg-image">
@@ -67,31 +68,30 @@
               <p class="slideText"><br><br>Explora cómo cambian los significados de niño, niña, niñez e infancia a través del tiempo.</p>
 
               <div class="slideActions">
-                <a class="slideBtn" href="#video-infografia">Ver video</a>
                 <a class="slideBtn" href="#matriz-historica">Ver matriz</a>
-                <button class="slideBtn ghost" type="button" data-zoom="assets/img/hero.webp">Zoom</button>
+                <a class="slideBtn" href="#video-infografia">Ver video</a>
               </div>
             </div>
           </figure>
 
           <!-- SLIDE 2 -->
           <figure class="carouselSlide" aria-label="Diapositiva 2">
-            <img src="assets/img/hero.webp" alt="Trayectos históricos: avances y cambios en la niñez" loading="lazy">
+            <img src="assets/img/hero2.webp" alt="Trayectos históricos: avances y cambios en la niñez" loading="lazy">
 
             <div class="slideOverlay">
               <h2 class="slideTitle">Trayectos históricos</h2>
               <p class="slideText"><br><br>Próximamente: organización del contenido histórico, autores y transformaciones de la infancia.</p>
 
               <div class="slideActions">
-                <a class="slideBtn" href="#escenarios">Ver estructura</a>
-                <a class="slideBtn" href="#contacto">Contactar</a>
+                <a class="slideBtn" href="#matriz-trayectos">Ver matriz</a>
+                <a class="slideBtn" href="#presentacion-trayectos">Ver presentación</a>
               </div>
             </div>
           </figure>
 
           <!-- SLIDE 3 -->
           <figure class="carouselSlide" aria-label="Diapositiva 3">
-            <img src="assets/img/hero.webp" alt="Desafíos y transformación: reflexiones sobre las infancias" loading="lazy">
+            <img src="assets/img/hero3.webp" alt="Desafíos y transformación: reflexiones sobre las infancias" loading="lazy">
 
             <div class="slideOverlay">
               <h2 class="slideTitle">Transformación y desafíos</h2>
@@ -311,7 +311,7 @@
       <!-- Panel 1: contenido -->
       <div id="panel-1" class="panel active" role="tabpanel" aria-labelledby="tab-1">
         <p style="margin:0;color:var(--muted);">
-          A continuación se presenta la evolución de los conceptos de niño, niña, niñez e infancia desde la Edad Antigua, Media y Moderna.
+          En este escenario revisamos cómo cambian las ideas sobre niño, niña, niñez e infancia desde la Edad Antigua, Media y Moderna, conectando contexto social, cultural y concepciones predominantes.
         </p>
 
         <!-- MATRIZ PNG (vista previa centrada + clic para ampliar) -->
@@ -398,11 +398,94 @@
 
       </div> <!-- /#panel-1 -->
 
-      <!-- Panel 2-4: placeholder -->
+      <!-- Panel 2: placeholder -->
       <div id="panel-2" class="panel" role="tabpanel" aria-labelledby="tab-2">
+
         <p style="margin:0;color:var(--muted);">
-          Este espacio se desarrollará en el <b>Escenario 2</b>: Trayectos históricos.
+          En este escenario analizamos aportes de autores contemporáneos y cómo sus planteamientos transforman la comprensión social de la infancia, fortaleciendo la mirada de niño y niña como sujetos históricos y de derechos.
         </p>
+
+        <!-- MATRIZ PDF (preview + modal con zoom) -->
+        <div id="matriz-trayectos" class="matrixBlock" aria-label="Matriz de aportes de autores" style="margin-top:1rem;">
+          <div class="subTitleRow">
+            <h3 class="subTitle">Matriz de lectura</h3>
+            <span class="subBadge">Producto visual</span>
+          </div>
+
+          <p class="subHint">
+            Esta matriz consolida los aportes del grupo relacionados con autores seleccionados, aporte teórico, aporte al concepto de niño/niña y aporte a la construcción del concepto de
+            infancia. Para ampliar, haz clic en la matriz, se abrirá en pantalla completa con zoom, arrastre y descarga.
+          </p>
+
+          <!-- <div class="pdfCard">
+            <div class="pdfActions">
+              <a class="chip linkChip" href="assets/docs/matriz_trayectos_historicos.pdf" target="_blank" rel="noopener">
+                Abrir PDF en otra pestaña
+              </a>
+              <a class="chip linkChip" href="assets/docs/matriz_trayectos_historicos.pdf" download>
+                Descargar PDF
+              </a>
+            </div>
+
+            <div class="pdfFrame">
+              <iframe
+                src="assets/docs/matriz_trayectos_historicos.pdf#view=FitH&toolbar=0&navpanes=0"
+                title="Matriz de lectura - Trayectos históricos"
+                loading="lazy"
+                style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+              ></iframe>
+            </div>
+
+            <p class="subHint" style="margin-top:.6rem;">
+              Si en algunos celulares el visor no carga, usa el botón “Abrir PDF en otra pestaña”.
+            </p>
+          </div> -->
+
+          <button class="pdfPreview" type="button"
+                  data-pdf="assets/docs/matriz_trayectos_historicos.pdf"
+                  aria-label="Abrir matriz en PDF (pantalla completa)">
+            <!-- Canvas preview (se dibuja con PDF.js) -->
+            <canvas class="pdfThumb" aria-hidden="true"></canvas>
+
+            <div class="pdfThumbOverlay" aria-hidden="true">
+              <span class="pdfPill">PDF</span>
+              <span class="pdfPill">Clic para ampliar</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- PRESENTACIÓN CANVA -->
+        <div id="presentacion-trayectos" class="card" style="margin-top:1rem;">
+          <div class="subTitleRow" style="margin:0 0 .25rem;">
+            <h3 class="subTitle">Presentación interactiva</h3>
+            <span class="subBadge">Producto audiovisual</span>
+          </div>
+
+          <p class="subHint" style="margin-top:.1rem;">
+            Presentación digital interactiva del grupo con autores contemporáneos y sus aportes al concepto de niño/niña e infancia. <br>
+            Nota: Por políticas del navegador, el audio suele requerir un clic del usuario para reproducirse.
+          </p>
+
+          <div class="canvaFrame">
+            <iframe
+              loading="lazy"
+              src="https://www.canva.com/design/DAHEoEhYf34/tK-ro_bYRAkN6e6fdQcV8A/view?embed"
+              title="Presentación: Trayectos históricos"
+              allowfullscreen
+              allow="autoplay; fullscreen">
+            </iframe>
+          </div>
+
+          <div class="pdfActions" style="margin-top:.8rem;">
+            <a class="chip linkChip"
+              href="https://www.canva.com/design/DAHEoEhYf34/tK-ro_bYRAkN6e6fdQcV8A/view?utm_content=DAHEoEhYf34&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+              target="_blank" rel="noopener">
+              Abrir presentación en Canva
+            </a>
+          </div>
+
+        </div>
+
       </div>
 
       <div id="panel-3" class="panel" role="tabpanel" aria-labelledby="tab-3">
@@ -515,6 +598,42 @@
   </div>
 </div>
 
+<!-- MODAL PDF (zoom + arrastre + descarga) -->
+<div class="pdfModalBackdrop" id="pdfModal" aria-hidden="true">
+  <div class="pdfModalCard" role="dialog" aria-modal="true" aria-label="Vista ampliada del PDF">
+    <div class="pdfModalTop">
+      <div class="pdfModalTitle" id="pdfModalTitle">Matriz • Trayectos históricos</div>
+
+      <div class="pdfModalControls">
+        <a class="imgBtn" id="pdfDownload" href="#" download="matriz_trayectos_historicos.pdf" aria-label="Descargar PDF">⬇</a>
+        <button type="button" class="imgBtn" id="pdfZoomOut" aria-label="Reducir zoom">−</button>
+        <button type="button" class="imgBtn" id="pdfZoomIn" aria-label="Aumentar zoom">+</button>
+        <button type="button" class="imgBtn" id="pdfZoomReset" aria-label="Reiniciar zoom">⟲</button>
+        <button type="button" class="imgBtn close" id="pdfClose" aria-label="Cerrar">✕</button>
+      </div>
+    </div>
+
+    <div class="pdfViewport" id="pdfViewport">
+      <canvas id="pdfCanvas"></canvas>
+    </div>
+
+    <div class="imgHint">
+      Tip: usa <b>+</b>/<b>−</b> para zoom, arrastra para moverte y presiona <b>ESC</b> para cerrar.
+    </div>
+  </div>
+</div>
+
+<!-- PDF.js (CDN estable) -->
+<script type="module">
+  import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+  // Exponemos pdfjsLib como global para que tu app.js lo use
+  window.pdfjsLib = pdfjsLib;
+</script>
+
+<!-- Tu JS -->
 <script src="assets/js/app.js" defer></script>
+
 </body>
 </html>

@@ -2576,3 +2576,432 @@ html.force-dark{
     color: rgba(255,255,255,.92) !important;
   }
 }
+
+.pdfCard{
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: .9rem;
+}
+
+.pdfActions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin-bottom:.8rem;
+}
+
+.pdfFrame{
+  position: relative;
+  width: 100%;
+  padding-top: 70%;           /* altura responsive */
+  border-radius: 16px;
+  overflow:hidden;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 80%, transparent);
+}
+
+.canvaFrame{
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;        /* 16:9 */
+  border-radius: 16px;
+  overflow:hidden;
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass) 80%, transparent);
+}
+
+.canvaFrame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+.canvaPlaceholder{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  padding: 1rem;
+  text-align:center;
+}
+
+/* ===== PDF preview (como matriz PNG) ===== */
+.pdfPreview{
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.68);
+  border-radius: 16px;
+  padding: .9rem;
+  cursor: zoom-in;
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+}
+
+.pdfThumb{
+  width: 100%;
+  max-width: 980px;
+  max-height: 520px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  border: 1px solid rgba(31,41,55,.08);
+  background: rgba(255,255,255,.55);
+}
+
+.pdfThumbOverlay{
+  position:absolute;
+  inset: .9rem;
+  display:flex;
+  align-items:flex-start;
+  justify-content: space-between;
+  pointer-events:none;
+}
+
+.pdfPill{
+  font-size: .82rem;
+  font-weight: 850;
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(31,41,55,.12);
+  color: var(--text);
+}
+
+/* ===== Modal PDF ===== */
+.pdfModalBackdrop{
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(17,24,39,.50);
+  backdrop-filter: blur(8px);
+  z-index: 3200;
+}
+.pdfModalBackdrop.open{ display: grid; }
+
+.pdfModalCard{
+  width: min(1100px, 100%);
+  background: rgba(255,255,255,.90);
+  border: 1px solid rgba(31,41,55,.12);
+  border-radius: 22px;
+  box-shadow: 0 28px 70px rgba(17,24,39,.25);
+  overflow: hidden;
+  animation: imgSlideUp .22s ease forwards;
+}
+
+.pdfModalTop{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .8rem .9rem;
+  border-bottom: 1px solid rgba(31,41,55,.10);
+}
+
+.pdfModalTitle{
+  font-weight: 900;
+  color: var(--text);
+}
+
+.pdfModalControls{
+  display:flex;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+
+/* viewport */
+.pdfViewport{
+  height: min(72vh, 760px);
+  background: rgba(247,243,238,.65);
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+}
+.pdfViewport:active{ cursor: grabbing; }
+
+#pdfCanvas{
+  user-select:none;
+  -webkit-user-drag:none;
+  transform-origin: 0 0;
+  will-change: transform;
+  display:block;
+  background: rgba(255,255,255,.35);
+  border-radius: 12px;
+}
+
+/* Dark: se alinea con tu sistema */
+@media (prefers-color-scheme: dark){
+  .pdfModalCard{
+    background: rgba(255,255,255,.10);
+    border-color: rgba(255,255,255,.16);
+  }
+  .pdfModalTitle{ color: rgba(255,255,255,.95); }
+  .pdfViewport{ background: rgba(255,255,255,.06); }
+}
+
+/* Manual themes */
+html.force-dark .pdfModalCard{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+html.force-dark .pdfModalTitle{ color: rgba(255,255,255,.95) !important; }
+html.force-dark .pdfViewport{ background: rgba(255,255,255,.06) !important; }
+
+/* =========================================================
+   PATCH FINAL (HEADER + MENU + MAPA DEL SITIO)
+   - Funciona en: AUTO (según sistema) + force-light + force-dark
+   - Corrige: header claro/auto, menú negro, hamburguesa, sitemap
+========================================================= */
+
+/* ===== Variables de header/menu por tema ===== */
+:root{
+  --header-bg: rgba(247,243,238,.78);
+  --header-border: rgba(31,41,55,.12);
+
+  --menu-link-bg: rgba(255,255,255,.60);
+  --menu-link-border: rgba(31,41,55,.14);
+
+  --dropdown-bg: rgba(247,243,238,.96);
+  --dropdown-shadow: 0 18px 40px rgba(17,24,39,.14);
+
+  --sitemap-card-bg: rgba(255,255,255,.70);
+  --sitemap-link-bg: rgba(255,255,255,.82);
+  --sitemap-link-border: rgba(31,41,55,.12);
+}
+
+/* AUTO + sistema oscuro => header/menú oscuros */
+@media (prefers-color-scheme: dark){
+  :root{
+    --header-bg: rgba(11,18,32,.78);
+    --header-border: rgba(255,255,255,.14);
+
+    --menu-link-bg: rgba(255,255,255,.06);
+    --menu-link-border: rgba(255,255,255,.12);
+
+    --dropdown-bg: rgba(11,18,32,.86);
+    --dropdown-shadow: 0 26px 80px rgba(0,0,0,.45);
+
+    --sitemap-card-bg: rgba(255,255,255,.08);
+    --sitemap-link-bg: rgba(255,255,255,.06);
+    --sitemap-link-border: rgba(255,255,255,.12);
+  }
+}
+
+/* Manual claro SIEMPRE claro */
+html.force-light{
+  --header-bg: rgba(247,243,238,.86);
+  --header-border: rgba(31,41,55,.12);
+
+  --menu-link-bg: rgba(255,255,255,.70);
+  --menu-link-border: rgba(31,41,55,.14);
+
+  --dropdown-bg: rgba(247,243,238,.96);
+  --dropdown-shadow: 0 18px 40px rgba(17,24,39,.14);
+
+  --sitemap-card-bg: rgba(255,255,255,.70);
+  --sitemap-link-bg: rgba(255,255,255,.82);
+  --sitemap-link-border: rgba(31,41,55,.12);
+}
+
+/* Manual oscuro SIEMPRE oscuro */
+html.force-dark{
+  --header-bg: rgba(11,18,32,.78);
+  --header-border: rgba(255,255,255,.14);
+
+  --menu-link-bg: rgba(255,255,255,.06);
+  --menu-link-border: rgba(255,255,255,.12);
+
+  --dropdown-bg: rgba(11,18,32,.86);
+  --dropdown-shadow: 0 26px 80px rgba(0,0,0,.45);
+
+  --sitemap-card-bg: rgba(255,255,255,.08);
+  --sitemap-link-bg: rgba(255,255,255,.06);
+  --sitemap-link-border: rgba(255,255,255,.12);
+}
+
+/* ===== Header consistente en Claro/Auto/Oscuro ===== */
+header{
+  background: var(--header-bg) !important;
+  border-bottom: 1px solid var(--header-border) !important;
+}
+
+/* En desktop: el contenedor .menu debe ser “transparente” (sin caja negra) */
+header .menu{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Links del menú (desktop) con “chip glass” */
+header .menu a{
+  background: var(--menu-link-bg) !important;
+  border: 1px solid var(--menu-link-border) !important;
+  color: var(--text) !important;
+}
+
+/* Hover del menú con tu acento inteligente (morado o dorado según corresponda) */
+header .menu a:hover{
+  background: var(--accent-ui-soft) !important;
+  border-color: var(--accent-ui-border) !important;
+}
+
+/* Hamburguesa coherente en todos los modos */
+.hamburger{
+  background: var(--menu-link-bg) !important;
+  border-color: var(--menu-link-border) !important;
+  color: var(--text) !important;
+}
+
+/* ===== Mobile dropdown (solo móvil): aquí SÍ debe verse “caja” ===== */
+@media (max-width: 820px){
+  header .menu{
+    background: var(--dropdown-bg) !important;
+    border: 1px solid var(--header-border) !important;
+    box-shadow: var(--dropdown-shadow) !important;
+  }
+
+  header .menu a{
+    width: 100%;
+    background: var(--menu-link-bg) !important;
+    border-color: var(--menu-link-border) !important;
+  }
+}
+
+/* =========================================================
+   MAPA DEL SITIO (claro/auto/oscuro) + icono a la izquierda
+========================================================= */
+
+/* Asegura icono al lado (no arriba) */
+#mapa .titleWithIcon{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .65rem !important;
+}
+
+/* Card del sitemap: que siempre se vea bien */
+#mapa .siteMap{
+  background: var(--sitemap-card-bg) !important;
+  border: 1px solid var(--header-border) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* Links sitemap: “chips” */
+#mapa .siteLink{
+  background: var(--sitemap-link-bg) !important;
+  border: 1px solid var(--sitemap-link-border) !important;
+  color: var(--text) !important;
+}
+
+#mapa .siteLink:hover{
+  background: var(--accent-ui-soft) !important;
+  border-color: var(--accent-ui-border) !important;
+}
+
+/* Icono del título del mapa usa el acento inteligente */
+#mapa .titleIcon{
+  background: color-mix(in srgb, var(--accent-ui) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--accent-ui) 22%, transparent) !important;
+}
+#mapa .titleIcon svg{
+  stroke: var(--accent-ui) !important;
+}
+
+/* ===== pdfPill legible en Claro / Oscuro / Auto ===== */
+.pdfPill{
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+
+  font-size: .82rem;
+  font-weight: 850;
+  letter-spacing: .01em;
+
+  padding: .25rem .55rem;
+  border-radius: 999px;
+
+  /* Fondo y borde adaptables al tema */
+  background: color-mix(in srgb, var(--glass-strong) 92%, transparent);
+  border: 1px solid var(--glass-border);
+
+  /* Texto siempre con buen contraste */
+  color: var(--text);
+
+  /* sutil relieve */
+  box-shadow: 0 8px 18px rgba(17,24,39,.10);
+}
+
+/* Si el modo oscuro está activo (auto oscuro o force-dark) */
+@media (prefers-color-scheme: dark){
+  .pdfPill{
+    background: rgba(255,255,255,.10);
+    border-color: rgba(255,255,255,.16);
+    color: rgba(255,255,255,.92);
+    box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  }
+}
+
+/* Manual overrides (por si el usuario fuerza tema) */
+html.force-dark .pdfPill{
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.16) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+
+html.force-light .pdfPill{
+  background: rgba(255,255,255,.78) !important;
+  border-color: rgba(31,41,55,.12) !important;
+  color: #1F2937 !important;
+}
+
+/* (Opcional) que el primer pill “PDF” tenga acento (morado en claro / dorado en oscuro) */
+.pdfThumbOverlay .pdfPill:first-child{
+  border-color: color-mix(in srgb, var(--accent-ui) 28%, var(--glass-border));
+}
+
+/* ===== pdfPill: fondo oscuro + texto blanco en oscuro/auto oscuro ===== */
+.pdfPill{
+  /* base (claro / auto claro / force-light) */
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(31,41,55,.12);
+  color: #1F2937;
+}
+
+/* Auto + sistema oscuro */
+@media (prefers-color-scheme: dark){
+  .pdfPill{
+    background: rgba(17,24,39,.62);         /* fondo oscuro */
+    border-color: rgba(255,255,255,.18);
+    color: rgba(255,255,255,.92);          /* texto blanco */
+    box-shadow: 0 12px 26px rgba(17,24,39,.62);
+  }
+}
+
+/* Manual oscuro (force-dark) */
+html.force-dark .pdfPill{
+  background: rgba(17,24,39,.62) !important;
+  border-color: rgba(255,255,255,.18) !important;
+  color: rgba(255,255,255,.92) !important;
+}
+
+/* Manual claro (force-light) */
+html.force-light .pdfPill{
+  background: rgba(255,255,255,.78) !important;
+  border-color: rgba(31,41,55,.12) !important;
+  color: #1F2937 !important;
+}
+
+/* (Opcional) destacar el primer pill “PDF” con el acento (dorado en oscuro / morado en claro) */
+.pdfThumbOverlay .pdfPill:first-child{
+  border-color: color-mix(in srgb, var(--accent-ui) 35%, rgba(255,255,255,.18));
+}

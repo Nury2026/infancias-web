@@ -243,8 +243,10 @@
     }
 
     // Abrir desde preview
-    document.querySelectorAll('.matrixPreview').forEach(btn => {
-      btn.addEventListener('click', () => {
+    document.querySelectorAll('.matrixPreview[data-img]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        // Evita que el click “suba” y dispare otros listeners
+        e.stopPropagation();
         const src = btn.dataset.img;
         const alt = btn.querySelector('img')?.alt || 'Matriz';
         openImageModal(src, alt);
@@ -569,4 +571,247 @@ document.addEventListener('click', (e) => {
   // Si ya tienes un modal de imagen (como el de la matriz) busca tu función openImageModal y úsala.
   // Si no existe, abre en nueva pestaña:
   window.open(src, '_blank');
+});
+
+// ===== PDF.js: Preview + Modal con zoom/arrastre/descarga (BLINDADO) =====
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1) Si no cargó PDF.js, dejamos descarga funcionando y mostramos fallback
+  /*if (!window.pdfjsLib) {
+    console.warn('PDF.js no cargó. Revisa que pdf.min.js esté antes de app.js');
+    document.querySelectorAll('.pdfPreview[data-pdf]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.pdf;
+        // Abre el modal pero solo con descarga (sin render)
+        const pdfModal = document.getElementById('pdfModal');
+        const download = document.getElementById('pdfDownload');
+        const pdfCanvas = document.getElementById('pdfCanvas');
+        const pdfViewport = document.getElementById('pdfViewport');
+        const pdfClose = document.getElementById('pdfClose');
+
+        if (!pdfModal || !download || !pdfCanvas || !pdfViewport || !pdfClose) return;
+
+        download.href = src;
+        pdfModal.classList.add('open');
+        pdfModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // mensaje visible en el canvas
+        const ctx = pdfCanvas.getContext('2d');
+        pdfCanvas.width = Math.max(600, pdfViewport.clientWidth);
+        pdfCanvas.height = Math.max(300, pdfViewport.clientHeight);
+        ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
+        ctx.font = '20px system-ui';
+        ctx.fillStyle = '#888';
+        ctx.fillText('No se pudo cargar el visor. Usa ⬇ para descargar.', 20, 40);
+
+        pdfClose.focus();
+      });
+    });
+    return;
+  }*/
+
+// Espera breve a que el module cargue y exponga window.pdfjsLib
+async function waitForPdfJsLib(ms = 1200){
+  const start = Date.now();
+  while (!window.pdfjsLib && (Date.now() - start) < ms) {
+    await new Promise(r => setTimeout(r, 50));
+    const pdfjsLib = window.pdfjsLib;
+  }
+  return window.pdfjsLib;
+}
+
+const lib = await waitForPdfJsLib();
+if (!lib) {
+  console.warn('PDF.js no cargó. Revisa que el script type="module" esté antes de app.js');
+  // aquí dejas tu fallback (modal con descarga)
+  return;
+}
+// y abajo en vez de pdfjsLib usa lib (o vuelve a usar window.pdfjsLib)
+
+  // Worker correcto
+  /*pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.js";*/
+
+  // Elements
+  const pdfModal = document.getElementById('pdfModal');
+  const pdfClose = document.getElementById('pdfClose');
+  const pdfCanvas = document.getElementById('pdfCanvas');
+  const pdfViewport = document.getElementById('pdfViewport');
+  const zoomIn = document.getElementById('pdfZoomIn');
+  const zoomOut = document.getElementById('pdfZoomOut');
+  const zoomReset = document.getElementById('pdfZoomReset');
+  const download = document.getElementById('pdfDownload');
+  const titleEl = document.getElementById('pdfModalTitle');
+
+  if (!pdfModal || !pdfClose || !pdfCanvas || !pdfViewport || !zoomIn || !zoomOut || !zoomReset || !download) {
+    console.warn('PDF modal: faltan elementos/IDs');
+    return;
+  }
+
+  let pdfDoc = null;
+  let scale = 1;
+  let baseScale = 1;
+  let x = 0, y = 0;
+
+  let isPanning = false;
+  let startX = 0, startY = 0;
+
+  function applyTransform() {
+    pdfCanvas.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+  }
+  function clampScale(v) { return Math.min(Math.max(v, 0.5), 4); }
+
+  function showLoading(text = 'Cargando PDF…') {
+    // pinta algo visible mientras carga (evita pantalla “vacía”)
+    const ctx = pdfCanvas.getContext('2d');
+    pdfCanvas.width = Math.max(600, pdfViewport.clientWidth);
+    pdfCanvas.height = Math.max(300, pdfViewport.clientHeight);
+    ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
+    ctx.font = '20px system-ui';
+    ctx.fillStyle = '#888';
+    ctx.fillText(text, 20, 40);
+    x = 10; y = 10; scale = 1; baseScale = 1;
+    applyTransform();
+  }
+
+  async function renderFirstPage(src) {
+    pdfDoc = await pdfjsLib.getDocument(src).promise;
+    const page = await pdfDoc.getPage(1);
+    const viewport1 = page.getViewport({ scale: 1 });
+
+    const ctx = pdfCanvas.getContext('2d');
+    pdfCanvas.width = Math.floor(viewport1.width);
+    pdfCanvas.height = Math.floor(viewport1.height);
+
+    await page.render({ canvasContext: ctx, viewport: viewport1 }).promise;
+
+    // Fit
+    const vw = pdfViewport.clientWidth;
+    const vh = pdfViewport.clientHeight;
+    const sx = vw / viewport1.width;
+    const sy = vh / viewport1.height;
+
+    baseScale = Math.min(sx, sy, 1);
+    scale = baseScale;
+
+    x = Math.max(10, (vw - viewport1.width * scale) / 2);
+    y = Math.max(10, (vh - viewport1.height * scale) / 2);
+    applyTransform();
+  }
+
+  function openModalBase(src) {
+    // abre modal SIEMPRE, así haya error
+    download.href = src;                 // descarga siempre funciona
+    if (titleEl) titleEl.textContent = 'Matriz • Trayectos históricos';
+    pdfModal.classList.add('open');
+    pdfModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    showLoading('Cargando PDF…');
+    pdfClose.focus();
+  }
+
+  function closeModal() {
+    pdfModal.classList.remove('open');
+    pdfModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Abrir desde preview
+  document.querySelectorAll('.pdfPreview[data-pdf]').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const src = btn.dataset.pdf;
+      openModalBase(src);
+
+      try {
+        await renderFirstPage(src);
+      } catch (err) {
+        console.warn('No se pudo cargar el PDF:', err);
+        showLoading('No se pudo cargar el PDF. Usa ⬇ para descargar.');
+      }
+    });
+  });
+
+  // Zoom
+  zoomIn.addEventListener('click', () => { scale = clampScale(scale + 0.25); applyTransform(); });
+  zoomOut.addEventListener('click', () => { scale = clampScale(scale - 0.25); applyTransform(); });
+  zoomReset.addEventListener('click', () => { scale = baseScale; applyTransform(); });
+
+  // Pan desktop
+  pdfViewport.addEventListener('mousedown', (e) => {
+    isPanning = true;
+    startX = e.clientX - x;
+    startY = e.clientY - y;
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isPanning) return;
+    x = e.clientX - startX;
+    y = e.clientY - startY;
+    applyTransform();
+  });
+  window.addEventListener('mouseup', () => { isPanning = false; });
+
+  // Wheel zoom
+  pdfViewport.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const delta = Math.sign(e.deltaY);
+    scale = clampScale(delta > 0 ? scale - 0.15 : scale + 0.15);
+    applyTransform();
+  }, { passive: false });
+
+  // Cerrar
+  pdfClose.addEventListener('click', closeModal);
+  pdfModal.addEventListener('click', (e) => { if (e.target === pdfModal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pdfModal.classList.contains('open')) closeModal(); });
+
+  // Preview thumb: dibuja primera página en cada canvas mini
+  const thumbs = Array.from(document.querySelectorAll('.pdfPreview[data-pdf] canvas.pdfThumb'));
+  for (const c of thumbs) {
+    const parent = c.closest('.pdfPreview');
+    const src = parent?.dataset.pdf;
+    if (!src) continue;
+
+    try {
+      const doc = await pdfjsLib.getDocument(src).promise;
+      const p = await doc.getPage(1);
+      const vp = p.getViewport({ scale: 0.9 });
+      c.width = Math.floor(vp.width);
+      c.height = Math.floor(vp.height);
+      const ctx = c.getContext('2d');
+      await p.render({ canvasContext: ctx, viewport: vp }).promise;
+    } catch (err) {
+      console.warn('PDF preview error:', err);
+      // Si falla el preview, no rompemos la UI
+    }
+  }
+});
+
+// ===== Cierre del modal PDF (siempre, con o sin PDF.js) =====
+document.addEventListener('DOMContentLoaded', () => {
+  const pdfModal = document.getElementById('pdfModal');
+  const pdfClose = document.getElementById('pdfClose');
+
+  if (!pdfModal || !pdfClose) return;
+
+  const closePdf = () => {
+    pdfModal.classList.remove('open');
+    pdfModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  pdfClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closePdf();
+  });
+
+  pdfModal.addEventListener('click', (e) => {
+    if (e.target === pdfModal) closePdf();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && pdfModal.classList.contains('open')) closePdf();
+  });
 });
