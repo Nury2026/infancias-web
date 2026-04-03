@@ -611,11 +611,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   }*/
 
 // Espera breve a que el module cargue y exponga window.pdfjsLib
-async function waitForPdfJsLib(ms = 1200){
+async function waitForPdfJsLib(ms = 6000){
   const start = Date.now();
   while (!window.pdfjsLib && (Date.now() - start) < ms) {
     await new Promise(r => setTimeout(r, 50));
-    const pdfjsLib = window.pdfjsLib;
   }
   return window.pdfjsLib;
 }
@@ -626,6 +625,9 @@ if (!lib) {
   // aquí dejas tu fallback (modal con descarga)
   return;
 }
+
+const pdfjsLib = lib; // ✅ CLAVE: ahora sí existe pdfjsLib para getDocument()
+
 // y abajo en vez de pdfjsLib usa lib (o vuelve a usar window.pdfjsLib)
 
   // Worker correcto
