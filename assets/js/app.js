@@ -818,63 +818,66 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ===== Fix anchors dentro de tabs: activa tab correcto y luego hace scroll =====
+// ===== Fix universal: enlaces hacia contenidos dentro de tabs =====
 document.addEventListener('DOMContentLoaded', () => {
-  // IDs que pertenecen al PANEL 2 (Trayectos históricos)
-  const panel2Anchors = new Set([
-    'matriz-trayectos',
-    'presentacion-trayectos'
-  ]);
+  const anchorMap = {
+    // Panel 1: El lugar de las infancias
+    'matriz-historica': 0,
+    'video-infografia': 0,
 
-  // Si tu función activateTab existe en este scope, úsala.
-  // Si está en otro scope, replicamos una versión segura aquí:
+    // Panel 2: Trayectos históricos
+    'matriz-trayectos': 1,
+    'presentacion-trayectos': 1,
+
+    // Panel 3: Transformación de las realidades
+    'transformacion-realidades': 2,
+    'simposio-esc4': 2,
+    'matriz-ponentes': 2,
+    'matriz-realidades': 2,
+    'reflexion-realidades': 2
+  };
+
   function safeActivateTab(index) {
     const tabs = Array.from(document.querySelectorAll('.tabBtn'));
     const panels = Array.from(document.querySelectorAll('.panel'));
-    if (!tabs.length || !panels.length) return;
 
-    tabs.forEach((t, i) => {
+    if (!tabs.length || !panels.length || !tabs[index] || !panels[index]) return;
+
+    tabs.forEach((tab, i) => {
       const selected = i === index;
-      t.setAttribute('aria-selected', selected ? 'true' : 'false');
-      panels[i]?.classList.toggle('active', selected);
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      panels[i].classList.toggle('active', selected);
     });
-    // ✅ AQUÍ va el focus del tab que activaste
-    tabs[index]?.focus();
-    // (equivalente a document.getElementById('tab-2')?.focus() cuando index=1)
   }
 
-  function scrollToId(id) {
+  function scrollToTarget(id) {
     const el = document.getElementById(id);
     if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const header = document.querySelector('header');
+    const headerHeight = header ? header.offsetHeight : 80;
+    const y = el.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
+
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
   }
 
-  // Intercepta clicks en links internos tipo #algo
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
 
-    const id = a.getAttribute('href').slice(1);
-    if (!id) return;
+    const id = link.getAttribute('href').replace('#', '');
+    if (!id || !(id in anchorMap)) return;
 
-    // Solo actuamos para anclas del panel 2
-    if (panel2Anchors.has(id)) {
-      e.preventDefault();
+    event.preventDefault();
 
-      // Activa tab 2 (index 1)
-      safeActivateTab(1);
+    const tabIndex = anchorMap[id];
+    safeActivateTab(tabIndex);
 
-      // Espera un momento para que el panel se muestre (por animación) y luego scroll
-      setTimeout(() => scrollToId(id), 80);
-    }
+    setTimeout(() => {
+      scrollToTarget(id);
+    }, 120);
   });
-
-  // Si alguien entra con URL con hash (ej: .../#matriz-trayectos), también lo manejamos
-  if (window.location.hash) {
-    const id = window.location.hash.replace('#', '');
-    if (panel2Anchors.has(id)) {
-      safeActivateTab(1);
-      setTimeout(() => scrollToId(id), 120);
-    }
-  }
 });

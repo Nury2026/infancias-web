@@ -96,11 +96,13 @@
 
             <div class="slideOverlay">
               <h2 class="slideTitle">Transformación de las realidades</h2>
-              <p class="slideText"><br><br>Próximamente: realidades actuales y desafíos para la acción pedagógica y social.</p>
-
+              <p class="slideText"><br><br>
+                Analiza situaciones sociales reales que afectan a las infancias y reflexiona sobre los derechos de niñas y niños desde una mirada crítica, pedagógica y transformadora.
+              </p>
               <div class="slideActions">
-                <a class="slideBtn" href="#escenarios">Abrir pestañas</a>
-                <a class="slideBtn" href="#nosotros">Conocer equipo</a>
+                <!-- <a class="slideBtn" href="#simposio-esc4">Ver simposio</a> -->
+                <a class="slideBtn" href="#matriz-ponentes">Matriz ponentes</a>
+                <a class="slideBtn" href="#matriz-realidades">Matriz realidades</a>
               </div>
             </div>
           </figure>
@@ -532,10 +534,213 @@
 
       </div>
 
+      <!-- Panel 3: Transformación de las realidades -->
       <div id="panel-3" class="panel" role="tabpanel" aria-labelledby="tab-3">
-        <p style="margin:0;color:var(--muted);">
-          Este espacio se desarrollará en el <b>Escenario 3</b>: Transformación de las realidades.
-        </p>
+
+        <!-- Introducción del escenario -->
+        <div id="transformacion-realidades" class="scenarioIntro">
+          <p class="subHint">
+            En este escenario se analizan diferentes realidades sociales que afectan a las infancias, reconociendo a niñas y niños como sujetos de derecho. A través del simposio, la
+            matriz comparativa de ponentes y la matriz de análisis social, se reflexiona sobre situaciones de vulneración, derechos implicados y acciones pedagógicas o comunitarias para
+            la protección integral.
+          </p>
+
+          <div class="scenarioQuickActions" aria-label="Accesos rápidos del escenario Transformación de las realidades">
+            <a class="chip linkChip" href="#simposio-esc4">
+              <span class="chipIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                  <path d="M8 5v14l11-7-11-7z"></path>
+                </svg>
+              </span>
+              Ver simposio
+            </a>
+
+            <a class="chip linkChip" href="#matriz-ponentes">
+              <span class="chipIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                  <path d="M4 4h16v16H4z"></path>
+                  <path d="M4 9h16"></path>
+                  <path d="M9 4v16"></path>
+                </svg>
+              </span>
+              Matriz ponentes
+            </a>
+
+            <a class="chip linkChip" href="#matriz-realidades">
+              <span class="chipIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                  <path d="M12 21s7-4.5 7-10a4 4 0 0 0-7-2 4 4 0 0 0-7 2c0 5.5 7 10 7 10z"></path>
+                </svg>
+              </span>
+              Matriz realidades
+            </a>
+
+            <a class="chip linkChip" href="#reflexion-realidades">
+              <span class="chipIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path>
+                  <path d="M8 7h8"></path>
+                  <path d="M8 11h8"></path>
+                </svg>
+              </span>
+              Reflexión
+            </a>
+          </div>
+        </div>
+
+        <!-- Video del simposio -->
+        <div id="simposio-esc4" class="card productBlock">
+          <div class="subTitleRow">
+            <h3 class="subTitle titleWithIcon">
+              Video base: Segundo Simposio Internacional
+            </h3>
+            <span class="subBadge">Recurso audiovisual</span>
+          </div>
+
+          <p class="subHint">
+            Este video sirve como recurso de apoyo para comprender diferentes perspectivas sobre las
+            infancias, las políticas públicas, la educación inicial y los retos que enfrentan niñas y niños
+            en contextos diversos.
+          </p>
+
+          <div class="videoFrame">
+            <iframe
+              src="https://www.youtube.com/embed/JF7HUh6fHEA"
+              title="Segundo Simposio Internacional"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <p class="videoHelp">
+            Si el video no carga correctamente:
+            <a href="https://www.youtube.com/watch?v=JF7HUh6fHEA" target="_blank" rel="noopener">
+              abrir en YouTube
+            </a>.
+          </p>
+        </div>
+
+        <!-- Matriz comparativa de ponentes -->
+        <div id="matriz-ponentes" class="matrixBlock productBlock" aria-label="Matriz comparativa de ponentes internacionales">
+          <div class="subTitleRow">
+            <h3 class="subTitle titleWithIcon">
+              Matriz comparativa de ponentes
+            </h3>
+            <span class="subBadge">Producto visual</span>
+          </div>
+
+          <p class="subHint">
+            Esta matriz compara los aportes de ponentes internacionales sobre la infancia, las políticas y programas relevantes, los desafíos identificados, los aportes innovadores y
+            la reflexión personal del grupo.
+          </p>
+
+          <button
+            class="pdfPreview"
+            type="button"
+            data-pdf="assets/docs/matriz_comparativa_ponentes.pdf"
+            data-title="Matriz comparativa de ponentes"
+            aria-label="Abrir matriz comparativa de ponentes en pantalla ampliada">
+
+            <canvas class="pdfThumb" aria-hidden="true"></canvas>
+
+            <div class="pdfThumbOverlay" aria-hidden="true">
+              <span class="pdfPill">PDF</span>
+              <span class="pdfPill">Clic para ampliar</span>
+            </div>
+          </button>
+
+          <div class="fileActions">
+            <a class="chip linkChip" href="assets/docs/matriz_comparativa_ponentes.pdf" download>
+              <span class="chipIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                  <path d="M12 3v12"></path>
+                  <path d="M7 10l5 5 5-5"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+              </span>
+              Descargar matriz
+            </a>
+          </div>
+        </div>
+
+        <!-- Matriz de análisis social -->
+        <div id="matriz-realidades" class="matrixBlock productBlock" aria-label="Matriz de análisis social sobre infancias y derechos">
+          <div class="subTitleRow">
+            <h3 class="subTitle titleWithIcon">
+              Matriz de análisis social: infancias y derechos
+            </h3>
+            <span class="subBadge">Producto visual</span>
+          </div>
+
+          <p class="subHint">
+            Esta matriz reúne cinco problemáticas sociales que afectan a niñas y niños, identificando
+            derechos vulnerados, acciones de prevención y atención, y reflexiones sobre el compromiso
+            docente o del agente educativo.
+          </p>
+
+          <button
+            class="matrixPreview"
+            type="button"
+            data-img="assets/img/matriz_analisis_social.png"
+            aria-label="Abrir matriz de análisis social en pantalla completa">
+            <img
+              src="assets/img/matriz_analisis_social.png"
+              alt="Matriz de análisis social sobre infancias y derechos"
+              loading="lazy">
+          </button>
+
+          <div class="fileActions">
+            <a class="chip linkChip" href="assets/img/matriz_analisis_social.png" download>
+              <span class="chipIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                  <path d="M12 3v12"></path>
+                  <path d="M7 10l5 5 5-5"></path>
+                  <path d="M5 21h14"></path>
+                </svg>
+              </span>
+              Descargar matriz
+            </a>
+          </div>
+        </div>
+
+        <!-- Reflexión conjunta -->
+        <div id="reflexion-realidades" class="card reflectionBlock productBlock">
+          <div class="subTitleRow">
+            <h3 class="subTitle titleWithIcon">
+              Reflexión conjunta
+            </h3>
+            <span class="subBadge">Producto de expresión</span>
+          </div>
+          <p>
+            El desarrollo de este escenario permitió reconocer que las infancias no viven una única
+            realidad, sino múltiples experiencias atravesadas por el contexto social, económico, cultural,
+            familiar y político. Las problemáticas analizadas evidencian que niñas y niños pueden verse
+            afectados por situaciones de desnutrición, violencia, reclutamiento, trabajo infantil, abandono,
+            negligencia o vulneración de su integridad, lo cual exige una mirada sensible, crítica y
+            corresponsable desde la educación.
+          </p>
+
+          <p>
+            A partir de las matrices realizadas, comprendemos que reconocer a los niños y las niñas como
+            sujetos de derecho implica ir más allá de nombrar sus derechos: significa identificar cuándo
+            estos son vulnerados, comprender las causas que originan dichas situaciones y proponer
+            acciones de prevención, protección y acompañamiento. En este sentido, la escuela, la familia,
+            la comunidad y el Estado tienen un papel fundamental en la construcción de entornos seguros,
+            afectivos e incluyentes.
+          </p>
+
+          <p>
+            Como futuros docentes o agentes educativos, este análisis fortalece nuestro compromiso con
+            una práctica pedagógica que observe, escuche y actúe frente a las realidades de las infancias.
+            Educar también significa proteger, orientar, activar rutas cuando sea necesario y promover
+            experiencias que dignifiquen la vida de niñas y niños. Transformar las realidades de las
+            infancias requiere sensibilidad, conocimiento, responsabilidad social y una educación centrada
+            en el cuidado, la justicia y la esperanza.
+          </p>
+        </div>
+
       </div>
 
 

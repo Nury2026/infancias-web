@@ -3065,3 +3065,203 @@ html.force-dark .alertNote{
 }
 html.force-dark .alertText{ color: rgba(255,255,255,.92) !important; }
 html.force-dark .alertMuted{ color: rgba(255,255,255,.72) !important; }
+
+/* =========================================================
+   Escenario: Transformación de las realidades
+========================================================= */
+
+.scenarioIntro{
+  padding: 1rem;
+  border-radius: var(--radius-lg, 24px);
+  border: 1px solid var(--glass-border, rgba(31,41,55,.14));
+  background: color-mix(in srgb, var(--glass, rgba(255,255,255,.70)) 88%, transparent);
+  box-shadow: var(--shadow-soft, 0 12px 30px rgba(17,24,39,.10));
+  margin-bottom: 1rem;
+}
+
+.scenarioQuickActions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: .9rem;
+}
+
+.productBlock{
+  margin-top: 1rem;
+}
+
+.videoFrame{
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border, rgba(31,41,55,.14));
+  background: rgba(255,255,255,.55);
+  box-shadow: var(--shadow-soft, 0 12px 30px rgba(17,24,39,.10));
+}
+
+.videoFrame iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.videoHelp{
+  margin: .75rem 0 0;
+  color: var(--muted);
+  font-size: .94rem;
+}
+
+.fileActions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: .75rem;
+}
+
+.reflectionBlock p{
+  color: var(--muted);
+  line-height: 1.75;
+  margin: .8rem 0 0;
+  text-align: justify;
+}
+
+/* Mejor lectura del PNG largo de la matriz social */
+#matriz-realidades .matrixPreview img{
+  width: 100%;
+  max-width: 1100px;
+  max-height: 520px;
+  object-fit: contain;
+}
+
+/* Ajuste visual para tarjetas de producto */
+.productBlock .subTitleRow,
+.scenarioIntro .subTitleRow,
+.reflectionBlock .subTitleRow{
+  margin-bottom: .35rem;
+}
+
+/* Auto oscuro */
+@media (prefers-color-scheme: dark){
+  .scenarioIntro,
+  .videoFrame{
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.14);
+  }
+
+  .reflectionBlock p,
+  .videoHelp{
+    color: rgba(255,255,255,.74);
+  }
+}
+
+/* Manual oscuro */
+html.force-dark .scenarioIntro,
+html.force-dark .videoFrame{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+
+html.force-dark .reflectionBlock p,
+html.force-dark .videoHelp{
+  color: rgba(255,255,255,.74) !important;
+}
+
+/* Manual claro */
+html.force-light .scenarioIntro,
+html.force-light .videoFrame{
+  background: rgba(255,255,255,.72) !important;
+  border-color: rgba(31,41,55,.14) !important;
+}
+
+html.force-light .reflectionBlock p,
+html.force-light .videoHelp{
+  color: rgba(31,41,55,.72) !important;
+}
+
+@media (max-width: 640px){
+  .reflectionBlock p{
+    text-align: left;
+  }
+}
+
+/* =========================================================
+   Ajuste visual: Reflexión conjunta separada como producto
+========================================================= */
+
+.reflectionBlock{
+  margin-top: 1.6rem;
+  padding: 1.1rem;
+  border-radius: var(--radius-lg, 24px);
+  border: 1px solid var(--glass-border, rgba(31,41,55,.14));
+  background: color-mix(in srgb, var(--glass, rgba(255,255,255,.70)) 88%, transparent);
+  box-shadow: var(--shadow-soft, 0 12px 30px rgba(17,24,39,.10));
+}
+
+.reflectionBlock .subTitleRow{
+  margin-bottom: .75rem;
+}
+
+.reflectionBlock p{
+  color: var(--muted);
+  line-height: 1.75;
+  margin: .85rem 0 0;
+  text-align: justify;
+}
+
+.reflectionBlock p:first-of-type{
+  margin-top: .4rem;
+}
+
+/* Separación especial cuando viene después de una matriz */
+#matriz-realidades + #reflexion-realidades,
+#matriz-realidades + .reflectionBlock{
+  margin-top: 1.8rem;
+}
+
+/* Modo oscuro automático */
+@media (prefers-color-scheme: dark){
+  .reflectionBlock{
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.14);
+  }
+
+  .reflectionBlock p{
+    color: rgba(255,255,255,.74);
+  }
+}
+
+/* Modo oscuro manual */
+html.force-dark .reflectionBlock{
+  background: rgba(255,255,255,.08) !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+
+html.force-dark .reflectionBlock p{
+  color: rgba(255,255,255,.74) !important;
+}
+
+/* Modo claro manual */
+html.force-light .reflectionBlock{
+  background: rgba(255,255,255,.72) !important;
+  border-color: rgba(31,41,55,.14) !important;
+}
+
+html.force-light .reflectionBlock p{
+  color: rgba(31,41,55,.72) !important;
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  .reflectionBlock{
+    margin-top: 1.4rem;
+    padding: .95rem;
+  }
+
+  .reflectionBlock p{
+    text-align: left;
+  }
+}
